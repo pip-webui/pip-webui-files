@@ -1,0 +1,39 @@
+<div>
+  <div class="pip-body p24-flex  pip-scroll">
+    <div class="layout-row">
+        <div style="width: 30px; height: 30px; border-radius: 50%;" class="rm16"
+         ng-class="{'color-badge-bg': vm.globalProgress() == 'fail',
+                    'bb-orange': vm.globalProgress() == 'start',
+                    'bb-green': vm.globalProgress() == 'upload' }">
+            <md-icon md-svg-icon="icons:check" class="m4" ng-if="vm.globalProgress() == 'upload'" style="color: #fff !important;"></md-icon>
+            <md-icon md-svg-icon="bootbarn-icons:play" class="m4"  ng-if="vm.globalProgress() == 'start'"  style="color: #fff !important;"></md-icon>
+            <md-icon md-svg-icon="icons:cross" class="m4"  ng-if="vm.globalProgress() == 'fail'"  style="color: #fff !important;"></md-icon>
+        </div>
+        <div style="width: 100%">
+            <h3 class="tm4 bm8" ng-if="vm.globalProgress() == 'start'">Uploading {{vm.type}}</h3>
+            <h3 class="tm4 bm8" ng-if="vm.globalProgress() == 'upload'">Uploaded {{vm.type}} successfully!</h3>
+            <h3 class="tm4 bm8" ng-if="vm.globalProgress() == 'fail'">Uploading {{vm.type}} failed with errors!</h3>
+            <div class="tm0 color-secondary-text bm8" style="word-break: break-word;">{{vm.name}}</div>
+            <div class="tm0 color-error" style="word-break: break-word;"
+                 ng-if="vm.globalProgress() == 'fail'">{{vm.errorFail()}}</div>
+
+            <div ng-if="vm.globalProgress() == 'start'">
+                <md-progress-linear md-mode="determinate" class="md-accent" value="{{vm.localProgress()}}" ng-if="vm.localProgress() < 100"></md-progress-linear>
+                <md-progress-linear md-mode="indeterminate" class="md-accent" ng-if="vm.localProgress() == 100"></md-progress-linear>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="pip-footer">
+        <div>
+            <md-button class="md-accent" ng-click="vm.onCancel()" ng-show="!vm.globalProgress() || vm.globalProgress() == 'fail'">Cancel</md-button>
+
+            <md-button class="md-accent" ng-click="vm.onRetry()" ng-show="vm.globalProgress() == 'fail'">
+                Retry
+            </md-button>
+            <md-button class="md-accent" ng-click="vm.abort()" ng-show="vm.globalProgress() == 'start'">
+                Abort
+            </md-button>
+        </div>
+    </div>  
+</div>

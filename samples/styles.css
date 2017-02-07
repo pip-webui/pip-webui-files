@@ -1,0 +1,32 @@
+pre {
+    border-radius: 4px;
+}
+
+.flat {
+    box-shadow: none !important;
+}
+
+.document-padding {
+    padding: 24px;
+}
+
+.header-margin {
+    margin-top: 0px;
+    margin-bottom: 24px;
+}
+
+.lm0 {
+    margin-left: 0px!important;
+}
+
+.tm8 {
+    margin-top: 8px!important;
+}
+
+.p16 {
+    padding: 16px;
+}
+
+.without-margin {
+    margin: 0px!important;
+}
