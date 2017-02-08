@@ -10,8 +10,8 @@ import {FileUploadService} from './service/FileUploadService';
         return {
             restrict: 'A',
             link: (scope, element, attrs) => {
-                var model = $parse(attrs.fileModel);
-                var modelSetter = model.assign;
+                let model = $parse(attrs.fileModel);
+                let modelSetter = model.assign;
                 
                 element.bind('change', () => {
                     scope.$apply(() => {

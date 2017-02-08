@@ -1,11 +1,17 @@
-export class FileUploadController {
+export interface IFileUploadController {
+    localFile: any;
+    onUploadButtonClick(): void ;
+    onDeleteButtonClick(): void;
+}
+
+export class FileUploadController implements IFileUploadController {
     public localFile: any;
     
-    constructor($scope) {
+    constructor($scope: ng.IScope) {
         "ngInject";
-        this.localFile = $scope.localFile;
+        this.localFile = $scope['localFile'];
         $scope.$watch('vm.localFile', (item) => {
-            $scope.localFile = item;
+            $scope['localFile'] = item;
         }) 
     }
 

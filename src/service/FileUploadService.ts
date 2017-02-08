@@ -1,3 +1,9 @@
+class GlobalProgress {
+    public static All: string[] = ['start', 'upload', 'fail'];
+    public static Start: string = 'start';
+    public static Upload: string = 'upload';
+    public static Fail: string = 'fail';
+}
 
 export interface IFileUploadService {
     progress: number;
@@ -33,8 +39,8 @@ export class FileUploadService implements IFileUploadService {
         fd.append('file', file);
         
         this.progress = 0;
-        this.transaction.begin('start');
-        this.globalProgress = 'start';
+        this.transaction.begin(GlobalProgress.Start);
+        this.globalProgress = GlobalProgress.Start;
         this._http.post(url, fd, <any>{
             uploadEventHandlers: {
                 progress: (e: any) => {
@@ -46,14 +52,14 @@ export class FileUploadService implements IFileUploadService {
             headers: { 'Content-Type': undefined }
         })    
         .success((response: any) => {
-            this.globalProgress = 'upload';
-            this.transaction.end('success');
+            this.globalProgress = GlobalProgress.Upload;
+            this.transaction.end(GlobalProgress.Upload);
 
             if (callback) callback(response, null);
         })    
         .error((response: any) => {
-            this.globalProgress = 'fail';
-            this.transaction.end('error');
+            this.globalProgress = GlobalProgress.Fail;
+            this.transaction.end(GlobalProgress.Fail);
             this.error = response.Error || response;
 
             if (callback) callback(null, response);

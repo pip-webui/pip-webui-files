@@ -3,25 +3,40 @@ import {
     IFileUploadService
 } from "../service/FileUploadService";
 
-export class FileProgressController {
+export interface IFileProgressController {
+    name: string;
+    type: string;
+    globalProgress(): string;
+    localProgress(): number;
+    onCancel(): void;
+    onCancel(): void;
+    abort(): void;
+}
+
+export class FileProgressController implements IFileProgressController {
     private _service: IFileUploadService;
     private _cancel: Function;
     private _retry: Function;
     
-    public name;
-    public type;
+    public name: string;
+    public type: string;
 
-    constructor($scope, pipFileUpload: IFileUploadService ) {
+    constructor(
+        $scope: ng.IScope, 
+        pipFileUpload: IFileUploadService
+    ) {
         "ngInject";
         
-        this.type = $scope.type || 'file';
-        this._cancel = $scope.cancel;
-        this._retry = $scope.retry;
+        // Init parameters
+        this.type = $scope['type'] || 'file';
+        this._cancel = $scope['cancel'];
+        this._retry = $scope['retry'];
+        this.name = $scope['name'];
+
         this._service = pipFileUpload;
-        this.name = $scope.name;
     }
 
-    public globalProgress():string {
+    public globalProgress(): string {
         return this._service.globalProgress;
     }
 
