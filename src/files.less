@@ -8,17 +8,20 @@
 @import "dependencies/selectable";
 
 
-.pip-dialog {
+.pip-files {
     .pip-footer {
         padding-left: 12px;
         padding-right: 10px;
+        border-top: @divider-border; 
+        position: relative;
+        .flex();
+        .flex-direction(row);
+        min-height: 56px;
+
+        .md-button {
+            min-width: 48px;
+            margin: 4px;
+        }
     }    
 
-    .md-button {
-        min-width: 24px;
-    }     
-
-    h3 {
-        font: @font-title;     
-    }  
 }
