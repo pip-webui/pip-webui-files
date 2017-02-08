@@ -384,6 +384,22 @@ button:focus {
   word-break: break-word;
   margin-top: 0;
 }
+.pip-file-upload .pip-hidden-form {
+  display: none;
+}
+.pip-file-upload .pip-button {
+  margin: 0;
+  width: 100%;
+}
+.pip-file-upload .pip-file {
+  height: 60px;
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.pip-file-upload .pip-file .pip-icon {
+  margin-right: 16px;
+  margin-left: 12px;
+}
 .pip-files .pip-footer {
   padding-left: 12px;
   padding-right: 10px;
