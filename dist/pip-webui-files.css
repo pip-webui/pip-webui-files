@@ -355,6 +355,35 @@ button:focus {
   background-color: rgba(158, 158, 158, 0.2);
   border-left: 5px solid rgba(33, 150, 243, 0.5) !important;
 }
+.pip-progress-files .pip-progress-body {
+  padding: 16px;
+}
+.pip-progress-files .pip-progress-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+.pip-progress-files .pip-progress-icon md-icon {
+  color: #fff !important;
+  margin: 4px;
+}
+.pip-progress-files .pip-progress-content {
+  width: 100%;
+}
+.pip-progress-files .pip-progress-content .pip-title {
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+.pip-progress-files .pip-progress-content .pip-subtitle {
+  word-break: break-word;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+.pip-progress-files .pip-progress-content .pip-error {
+  word-break: break-word;
+  margin-top: 0;
+}
 .pip-files .pip-footer {
   padding-left: 12px;
   padding-right: 10px;
