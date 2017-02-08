@@ -13,7 +13,7 @@
             'pipServices', 
             'pipTheme.Default', 'pipTheme.BootBarn', 'pipTheme', 
 
-            'pipFiles', 'pipFiles.Templates',  'pipButtons',
+            'pipFiles', 'pipFiles.Templates',  //'pipButtons',
 
             'appFiles.UploadFiles'
         ]
@@ -43,7 +43,7 @@
                 $stateProvider.state(contentItem.state, contentItem);
             }
 
-            $urlRouterProvider.otherwise('/files');
+            $urlRouterProvider.otherwise('/upload');
         }
     );
 
