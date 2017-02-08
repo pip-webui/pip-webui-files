@@ -1,7 +1,17 @@
-<div class="flex">
+<div class="flex" ng-if="!onGlobalProgress()">
     <pip-file-upload local-file="localFile"></pip-file-upload>
 </div>
+<div class="flex" style='border: 1px solid' ng-if="onGlobalProgress()">
+      <pip-file-progress  
+            pip-cancel="cancel" 
+            pip-retry="onOk" 
+            pip-name="localFile.name"> </pip-file-progress>
+</div>
 
-<md-button>
+<md-button ng-click="onOk()">
     Upload
 </md-button>
+
+<div>
+    {{message}}
+</div>
