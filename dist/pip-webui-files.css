@@ -355,13 +355,24 @@ button:focus {
   background-color: rgba(158, 158, 158, 0.2);
   border-left: 5px solid rgba(33, 150, 243, 0.5) !important;
 }
-.pip-dialog .pip-footer {
+.pip-files .pip-footer {
   padding-left: 12px;
   padding-right: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  position: relative;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-direction: row;
+  -moz-box-flex-direction: row;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  min-height: 56px;
 }
-.pip-dialog .md-button {
-  min-width: 24px;
-}
-.pip-dialog h3 {
-  font: normal 500 20px Roboto, 'Helvetica Neue', sans-serif;
+.pip-files .pip-footer .md-button {
+  min-width: 48px;
+  margin: 4px;
 }
