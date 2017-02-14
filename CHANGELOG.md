@@ -1,17 +1,10 @@
-# Pip.WebUI.Controls Changelog
+# Pip.WebUI.Files Changelog
 
-## <a name="1.5.0"></a> 1.5.0 (2016-10-12)
-
-Moved dialogs from controls into a separate module
-
-## <a name="1.0.0"></a> 1.0.0 (2016-07-30)
-
-Initial release with collection of basic controls.
+## <a name="1.5.0"></a> 1.5.0 (2017-02-14)
 
 ### Features
-* **information**: information dialog
-* **confirmation**: confirmation dialog
-* **options**: options dialog
+* **upload**: directive for upload files
+* **progress**: directive for progress
 
 ### Breaking Changes
 No breaking changes in this version
