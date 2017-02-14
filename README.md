@@ -10,15 +10,15 @@ Pip.WebUI.Files modules provides directives for upload files
     <img src="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-files-upload-start.png"/>
 </a>
 
-<a href="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-file-upload-choose.png" style="border: 3px ridge #c8d2df; display: inline-block">
-    <img src="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-file-upload-choose.png"/>
+<a href="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-files-upload-choose.png" style="border: 3px ridge #c8d2df; display: inline-block">
+    <img src="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-files-upload-choose.png"/>
 </a>
 
 
 **File Progress** control for differents state of progress
 
-<a href="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-file-progress.png" style="border: 3px ridge #c8d2df; display: inline-block">
-    <img src="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-file-progress.png"/>
+<a href="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-files-progress.png" style="border: 3px ridge #c8d2df; display: inline-block">
+    <img src="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-files-progress.png"/>
 </a>
 
 
