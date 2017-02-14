@@ -26,11 +26,11 @@ See online sample [here...](http://webui.pipdevs.com/pip-webui-files/index.html#
 
 ## Learn more about the module
 
-- [User's guide](https://github.com/pip-webui/pip-webui-controls/blob/master/doc/UsersGuide.md)
-- [Online samples](http://webui.pipdevs.com/pip-webui-controls/index.html)
-- [API reference](http://webui-api.pipdevs.com/pip-webui-controls/index.html)
-- [Developer's guide](https://github.com/pip-webui/pip-webui-controls/blob/master/doc/DevelopersGuide.md)
-- [Changelog](https://github.com/pip-webui/pip-webui-controls/blob/master/CHANGELOG.md)
+- [User's guide](https://github.com/pip-webui/pip-webui-files/blob/master/doc/UsersGuide.md)
+- [Online samples](http://webui.pipdevs.com/pip-webui-files/index.html)
+- [API reference](http://webui-api.pipdevs.com/pip-webui-files/index.html)
+- [Developer's guide](https://github.com/pip-webui/pip-webui-files/blob/master/doc/DevelopersGuide.md)
+- [Changelog](https://github.com/pip-webui/pip-webui-files/blob/master/CHANGELOG.md)
 - [Pip.WebUI project website](http://www.pipwebui.org)
 - [Pip.WebUI project wiki](https://github.com/pip-webui/pip-webui/wiki)
 - [Pip.WebUI discussion forum](https://groups.google.com/forum/#!forum/pip-webui)
