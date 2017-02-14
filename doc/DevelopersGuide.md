@@ -1,4 +1,4 @@
-# Pip.WebUI.Dialogs Developer's Guide
+# Pip.WebUI.Files Developer's Guide
 
 ## <a name="contents"></a> Contents
 
@@ -23,7 +23,7 @@ npm install mocha -g
 3\. Clone the project from github repository.
 
 ```bash
-git clone https://github.com/pip-webui/pip-webui-dialogs.git
+git clone https://github.com/pip-webui/pip-webui-files.git
 ```
 
 4\. Install project dependencies.
