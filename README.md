@@ -6,8 +6,8 @@ Pip.WebUI.Files modules provides directives for upload files
 
 **File Upload** control allows to select file before loading this file in server
 
-<a href="https://github.com/pip-webui/pip-webui-files/raw/master/doc/images/img-file-upload-start.png" style="border: 3px ridge #c8d2df; display: inline-block">
-    <img src="https://github.com/pip-webui/pip-webui-files/raw/master/doc/images/img-file-upload-start.png"/>
+<a href="https://github.com/pip-webui/pip-webui-files/doc/images/img-file-upload-start.png" style="border: 3px ridge #c8d2df; display: inline-block">
+    <img src="https://github.com/pip-webui/pip-webui-files/doc/images/img-file-upload-start.png"/>
 </a>
 
 <a href="https://github.com/pip-webui/pip-webui-files/raw/master/doc/images/img-file-upload-choose.png" style="border: 3px ridge #c8d2df; display: inline-block">
