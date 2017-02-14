@@ -1,4 +1,4 @@
-class GlobalProgress {
+export class GlobalProgress {
     public static All: string[] = ['start', 'upload', 'fail'];
     public static Start: string = 'start';
     public static Upload: string = 'upload';

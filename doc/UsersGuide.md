@@ -2,10 +2,9 @@
 
 ## <a name="contents"></a> Contents
 - [Installing](#install)
-- [pipInformationDialog](#information_dialog)
-- [pipConfirmationDialog](#confirmation_dialog)
-- [pipErrorDialog](#error_dialog)
-- [pipOptionsDialog](#error_dialog)
+- [pipFileUpload](#file_upload)
+- [pipFileProgress](#file_progress)
+- [pipFileUploadService](#file_upload_service)
 - [Questions and bugs](#issues)
 
 
@@ -39,111 +38,102 @@ Include **pip-webui** files into your web application.
 <script src=".../pip-webui.min.js"></script>
 ```
 
-Register **pipDialogs** module in angular module dependencies.
+Register **pipFiles** module in angular module dependencies.
 ```javascript
-angular.module('myApp',[..., 'pipDialogs']);
+angular.module('myApp',[..., 'pipFiles']);
 ```
 
-## <a name="information_dialog"></a> pipInformationDialog
+## <a name="file_upload"></a> pipFileUpload
 
-**pipInformationDialog** show dialog with information message and OK button.
+**pipFileUpload** control allows to select file before loading this file in server.
 
 ### Usage
-```javascript
- pipInformationDialog.show(
-        {
-            event: event,
-            title: 'Good!',
-            message: 'Stuff %s was really good',
-            item: 'Loooooong naaaaaaaaaaaaaame',
-            ok: 'Take It'
-        },
-        function () {
-            console.log('Taken');
-        }
-    );
+```html
+     <pip-file-upload local-file="localFile"></pip-file-upload>
 ```
 
-<img src="images/img-info-dialog.png"/>
+<img src="images/img-files-upload-start.png"/>
+<img src="images/img-files-upload-choose.png"/>
 
-### Methods
-* **show** - open information dialog
+### Arguments
+* **local-file** - file
 
 ## <a name="confirmation_dialog"></a> pipConfirmationDialog
 
 **pipConfirmationDialog** shows message with question and YES and NO buttons.
 
 ### Usage
-```javascript
- pipConfirmationDialog.show(
-        {
-            event: event,
-            title: 'Agree?',
-            ok: 'Agree',
-            cancel: 'Disagree'
-        },
-        function () {
-            console.log('You agreed');
-        },
-        function () {
-            console.log('You disagreed');
-        }
-    );
+```html
+  <pip-file-progress  
+             pip-cancel="cancel" 
+             pip-retry="onOk" 
+             pip-name="localFile.name"> </pip-file-progress>
 ```
 
-### Methods
-* **show** - open confirmation dialog
+### Arguments
+* **pip-cancel** - function for cancel button
+* **pip-retry** - function for retry button 
+* **pip-name** - name file (argument with type string)
 
-## <a name="error_dialog"></a> pipErrorDialog
+## <a name="file_upload_service"></a> File upload service
 
-**pipErrorDialog** shows error message with collapsible details.
+**pipFileUpload** service for uploading files and managing progress.
 
 ### Usage
 ```javascript
- pipErrorDetailsDialog.show(
-     {
-         error: $scope.error,
-         ok: 'Ok'
-     },
-     function () {},
-     function () {}
- );
+  thisModule.controller('UploadController',
+         function ($scope,..., pipFileUpload) {
+ 
+             $scope.onOk = () => {
+ 
+                 pipFileUpload.upload(
+                     "...", // server url 
+                     $scope.localFile, // some file
+                     (data, err) => {
+                         if (data) {
+                             // success 
+                         } else {
+                            // error
+                         }
+                     }
+                 );
+             }
+ 
+             $scope.onGlobalProgress = () => {
+                 return pipFileUpload.globalProgress;
+             }
+             
+         });
 ```
 
-<img src="images/img-errors-dialog.png"/>
+### Arguments
+* **globalProgress** - the line is equivalent to one state of 'start', 'upload', 'fail'
+* **progress** - number of progress 
+* **error** - error string
+* **transaction** - pip.services.Transaction
 
 ### Methods
-* **show** - open errors details dialog
+* **upload(url: string, file: any, callback?: (data: any, err: any) => void): void** - upload file
+* **abort(): void** - abort transaction and change progress in null value
 
-## <a name="options_dialog"></a> pipOptionsDialog
 
-**pipOptionsDialog** allows to pick one from several available options.
+### Interface 
 
-### Usage
+**pipFileUpload** service implements **IFileUploadService**
+
+### Classes 
+
+if you need you can export **GlobalProgress** class with options for *globalProgress*
+
 ```javascript
- pipOptionsDialog.show(
-        {
-            event: event,
-            title: 'Choose Option',
-            options: [
-                { icon: 'star', name: 'option_1', title: 'Option 1', active: true },
-                { icon: 'star', name: 'option_2', title: 'Option 2' },
-                { icon: 'star', name: 'option_3', title: 'Option 3' },
-                { name: 'option_4', title: 'Option 4' },
-                { name: 'option_5', title: 'Option 5' }
-            ]
-        },
-        function(option) {
-            var optionName = option ? option.name : null;
-            console.log('Selected option: ' + optionName);
-        }
-    );
+    export class GlobalProgress {
+        public static All: string[] = ['start', 'upload', 'fail'];
+        public static Start: string = 'start';
+        public static Upload: string = 'upload';
+        public static Fail: string = 'fail';
+    }
 ```
 
-<img src="images/img-options-dialog.png"/>
-
-### Methods
-* **show** - open options dialog
 
 ## <a name="issues"></a> Questions and bugs
 
