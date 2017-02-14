@@ -15,7 +15,7 @@ Pip.WebUI.Files modules provides directives for upload files
 </a>
 
 
-**File Progress** control for differents state of progress
+**File Progress** control for different states of progress
 
 <a href="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-files-progress.png" style="border: 3px ridge #c8d2df; display: inline-block">
     <img src="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-files-progress.png"/>

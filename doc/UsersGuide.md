@@ -58,9 +58,9 @@ angular.module('myApp',[..., 'pipFiles']);
 ### Arguments
 * **local-file** - file
 
-## <a name="confirmation_dialog"></a> pipConfirmationDialog
+## <a name="file_progress"></a> pipFileProgress
 
-**pipConfirmationDialog** shows message with question and YES and NO buttons.
+**pipFileProgress** control for different states of progress
 
 ### Usage
 ```html
@@ -69,6 +69,9 @@ angular.module('myApp',[..., 'pipFiles']);
              pip-retry="onOk" 
              pip-name="localFile.name"> </pip-file-progress>
 ```
+
+
+<img src="images/img-files-progress.png"/>
 
 ### Arguments
 * **pip-cancel** - function for cancel button
