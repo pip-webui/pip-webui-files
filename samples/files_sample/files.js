@@ -4,7 +4,7 @@
     var thisModule = angular.module('appFiles.UploadFiles', []);
 
     thisModule.controller('UploadController',
-        function ($scope, $timeout, $injector, pipFileUpload) {
+        function ($scope, $timeout, $injector, pipFileSelect) {
 
             $scope.onOk = () => {
                  if ($scope.localFile == null) {
@@ -14,7 +14,7 @@
                     uploadUrl += '?collection=Test';
                     uploadUrl += '&description=text';
 
-                pipFileUpload.upload(
+                pipFileSelect.upload(
                 uploadUrl,
                     $scope.localFile,
                     (data, err) => {
@@ -28,12 +28,12 @@
             }
 
             $scope.onGlobalProgress = () => {
-                return pipFileUpload.globalProgress;
+                return pipFileSelect.globalProgress;
             }
 
             $scope.cancel = () => {
                 $scope.message = 'stop';
-                pipFileUpload.globalProgress = null;
+                pipFileSelect.globalProgress = null;
             }
 
             $timeout(function() {

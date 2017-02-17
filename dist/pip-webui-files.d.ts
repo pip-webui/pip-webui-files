@@ -16,7 +16,7 @@ export class FileProgressController implements IFileProgressController {
     private _retry;
     name: string;
     type: string;
-    constructor($scope: ng.IScope, pipFileUpload: IFileUploadService);
+    constructor($scope: ng.IScope, pipFileSelect: IFileSelectService);
     globalProgress(): string;
     errorFail(): string;
     localProgress(): number;
@@ -25,7 +25,13 @@ export class FileProgressController implements IFileProgressController {
     abort(): void;
 }
 
-export interface IFileUploadService {
+export class GlobalProgress {
+    static All: string[];
+    static Start: string;
+    static Upload: string;
+    static Fail: string;
+}
+export interface IFileSelectService {
     progress: number;
     globalProgress: string;
     error: string;
@@ -33,7 +39,7 @@ export interface IFileUploadService {
     upload(url: string, file: any, callback?: (data: any, err: any) => void): void;
     abort(): void;
 }
-export class FileUploadService implements IFileUploadService {
+export class FileSelectService implements IFileSelectService {
     private _http;
     progress: number;
     globalProgress: string;
@@ -44,12 +50,12 @@ export class FileUploadService implements IFileUploadService {
     abort(): void;
 }
 
-export interface IFileUploadController {
+export interface IFileSelectController {
     localFile: any;
     onUploadButtonClick(): void;
     onDeleteButtonClick(): void;
 }
-export class FileUploadController implements IFileUploadController {
+export class FileSelectController implements IFileSelectController {
     localFile: any;
     constructor($scope: ng.IScope);
     onUploadButtonClick(): void;

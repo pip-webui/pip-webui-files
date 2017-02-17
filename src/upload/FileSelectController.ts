@@ -1,10 +1,10 @@
-export interface IFileUploadController {
+export interface IFileSelectController {
     localFile: any;
     onUploadButtonClick(): void ;
     onDeleteButtonClick(): void;
 }
 
-export class FileUploadController implements IFileUploadController {
+export class FileSelectController implements IFileSelectController {
     public localFile: any;
     
     constructor($scope: ng.IScope) {

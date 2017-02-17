@@ -12,9 +12,9 @@
 })();
 },{}],2:[function(require,module,exports){
 "use strict";
-var FileUploadController_1 = require("./upload/FileUploadController");
+var FileSelectController_1 = require("./upload/FileSelectController");
 var FileProgressController_1 = require("./progress/FileProgressController");
-var FileUploadService_1 = require("./service/FileUploadService");
+var FileSelectService_1 = require("./service/FileSelectService");
 (function () {
     fileModelDirective.$inject = ['$parse'];
     function fileModelDirective($parse) {
@@ -32,16 +32,16 @@ var FileUploadService_1 = require("./service/FileUploadService");
             }
         };
     }
-    function fileUploadDirective() {
+    function fileSelectDirective() {
         return {
             restrict: 'E',
             replace: true,
             scope: {
                 localFile: '='
             },
-            controller: FileUploadController_1.FileUploadController,
+            controller: FileSelectController_1.FileSelectController,
             controllerAs: 'vm',
-            templateUrl: 'upload/FileUpload.html'
+            templateUrl: 'upload/FileSelect.html'
         };
     }
     function fileProgressDirective() {
@@ -62,21 +62,21 @@ var FileUploadService_1 = require("./service/FileUploadService");
     angular
         .module('pipFiles', [])
         .directive('fileModel', fileModelDirective)
-        .directive('pipFileUpload', fileUploadDirective)
+        .directive('pipFileSelect', fileSelectDirective)
         .directive('pipFileProgress', fileProgressDirective)
-        .service('pipFileUpload', FileUploadService_1.FileUploadService);
+        .service('pipFileSelect', FileSelectService_1.FileSelectService);
 })();
-},{"./progress/FileProgressController":3,"./service/FileUploadService":4,"./upload/FileUploadController":5}],3:[function(require,module,exports){
+},{"./progress/FileProgressController":3,"./service/FileSelectService":4,"./upload/FileSelectController":5}],3:[function(require,module,exports){
 "use strict";
 var FileProgressController = (function () {
-    FileProgressController.$inject = ['$scope', 'pipFileUpload'];
-    function FileProgressController($scope, pipFileUpload) {
+    FileProgressController.$inject = ['$scope', 'pipFileSelect'];
+    function FileProgressController($scope, pipFileSelect) {
         "ngInject";
         this.type = $scope['type'] || 'file';
         this._cancel = $scope['cancel'];
         this._retry = $scope['retry'];
         this.name = $scope['name'];
-        this._service = pipFileUpload;
+        this._service = pipFileSelect;
     }
     FileProgressController.prototype.globalProgress = function () {
         return this._service.globalProgress;
@@ -114,15 +114,16 @@ GlobalProgress.All = ['start', 'upload', 'fail'];
 GlobalProgress.Start = 'start';
 GlobalProgress.Upload = 'upload';
 GlobalProgress.Fail = 'fail';
-var FileUploadService = (function () {
-    FileUploadService.$inject = ['$http', 'pipTransaction'];
-    function FileUploadService($http, pipTransaction) {
+exports.GlobalProgress = GlobalProgress;
+var FileSelectService = (function () {
+    FileSelectService.$inject = ['$http', 'pipTransaction'];
+    function FileSelectService($http, pipTransaction) {
         "ngInject";
         this.error = null;
         this._http = $http;
         this.transaction = pipTransaction.create('upload file');
     }
-    FileUploadService.prototype.upload = function (url, file, callback) {
+    FileSelectService.prototype.upload = function (url, file, callback) {
         var _this = this;
         var fd = new FormData();
         fd.append('file', file);
@@ -153,34 +154,34 @@ var FileUploadService = (function () {
                 callback(null, response);
         });
     };
-    FileUploadService.prototype.abort = function () {
+    FileSelectService.prototype.abort = function () {
         this.transaction.abort();
     };
-    return FileUploadService;
+    return FileSelectService;
 }());
-exports.FileUploadService = FileUploadService;
+exports.FileSelectService = FileSelectService;
 },{}],5:[function(require,module,exports){
 "use strict";
-var FileUploadController = (function () {
-    FileUploadController.$inject = ['$scope'];
-    function FileUploadController($scope) {
+var FileSelectController = (function () {
+    FileSelectController.$inject = ['$scope'];
+    function FileSelectController($scope) {
         "ngInject";
         this.localFile = $scope['localFile'];
         $scope.$watch('vm.localFile', function (item) {
             $scope['localFile'] = item;
         });
     }
-    FileUploadController.prototype.onUploadButtonClick = function () {
+    FileSelectController.prototype.onUploadButtonClick = function () {
         $('#inp_file').click();
     };
-    FileUploadController.prototype.onDeleteButtonClick = function () {
+    FileSelectController.prototype.onDeleteButtonClick = function () {
         this.localFile = null;
         var forml = document.getElementById('inp_form');
         forml.reset();
     };
-    return FileUploadController;
+    return FileSelectController;
 }());
-exports.FileUploadController = FileUploadController;
+exports.FileSelectController = FileSelectController;
 },{}],6:[function(require,module,exports){
 (function(module) {
 try {
@@ -190,70 +191,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('progress/FileProgress.html',
-    '<div class="pip-files pip-progress-files">\n' +
-    '  <div class="pip-body pip-scroll pip-progress-body"> \n' +
-    '    <div class="layout-row">\n' +
-    '        <div class="pip-progress-icon"\n' +
-    '         ng-class="{\'color-badge-bg\': vm.globalProgress() == \'fail\',\n' +
-    '                    \'bb-orange\': vm.globalProgress() == \'start\',\n' +
-    '                    \'bb-green\': vm.globalProgress() == \'upload\' }">\n' +
-    '            <md-icon md-svg-icon="icons:check" ng-if="vm.globalProgress() == \'upload\'"></md-icon>\n' +
-    '            <md-icon md-svg-icon="bootbarn-icons:play" ng-if="vm.globalProgress() == \'start\'"></md-icon>\n' +
-    '            <md-icon md-svg-icon="icons:cross" ng-if="vm.globalProgress() == \'fail\'"></md-icon>\n' +
-    '        </div>\n' +
-    '        <div class="pip-progress-content">\n' +
-    '            <h3 class="pip-title" ng-if="vm.globalProgress() == \'start\'">\n' +
-    '                Uploading {{vm.type}}\n' +
-    '            </h3>\n' +
-    '            <h3 class="pip-title" ng-if="vm.globalProgress() == \'upload\'">\n' +
-    '                Uploaded {{vm.type}} successfully!\n' +
-    '            </h3>\n' +
-    '            <h3 class="pip-title" ng-if="vm.globalProgress() == \'fail\'">\n' +
-    '                Uploading {{vm.type}} failed with errors!\n' +
-    '            </h3>\n' +
-    '            <div class="color-secondary-text pip-subtitle">\n' +
-    '                {{vm.name}}\n' +
-    '            </div>\n' +
-    '            <div class="color-error pip-error"\n' +
-    '                 ng-if="vm.globalProgress() == \'fail\'">\n' +
-    '                 {{vm.errorFail()}}\n' +
-    '            </div>\n' +
-    '\n' +
-    '            <div ng-if="vm.globalProgress() == \'start\'">\n' +
-    '                <md-progress-linear md-mode="determinate" \n' +
-    '                    class="md-accent" \n' +
-    '                    value="{{vm.localProgress()}}" \n' +
-    '                    ng-if="vm.localProgress() < 100">\n' +
-    '                </md-progress-linear>\n' +
-    '                <md-progress-linear md-mode="indeterminate" \n' +
-    '                    class="md-accent" \n' +
-    '                    ng-if="vm.localProgress() == 100">\n' +
-    '                </md-progress-linear>\n' +
-    '            </div>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '  </div>\n' +
-    '  <div class="pip-footer layout-row layout-align-end-center">\n' +
-    '        <div>\n' +
-    '            <md-button class="md-accent" \n' +
-    '                       ng-click="vm.onCancel()" \n' +
-    '                       ng-show="!vm.globalProgress() || vm.globalProgress() == \'fail\'">\n' +
-    '                Cancel\n' +
-    '            </md-button>\n' +
-    '\n' +
-    '            <md-button class="md-accent" \n' +
-    '                       ng-click="vm.onRetry()"\n' +
-    '                       ng-show="vm.globalProgress() == \'fail\'">\n' +
-    '                Retry\n' +
-    '            </md-button>\n' +
-    '            <md-button class="md-accent" \n' +
-    '                       ng-click="vm.abort()"\n' +
-    '                       ng-show="vm.globalProgress() == \'start\'">\n' +
-    '                Abort\n' +
-    '            </md-button>\n' +
-    '        </div>\n' +
-    '    </div>  \n' +
-    '</div>');
+    '<div class="pip-files pip-progress-files"><div class="pip-body pip-scroll pip-progress-body"><div class="layout-row"><div class="pip-progress-icon" ng-class="{\'color-badge-bg\': vm.globalProgress() == \'fail\', \'bb-orange\': vm.globalProgress() == \'start\', \'bb-green\': vm.globalProgress() == \'upload\' }"><md-icon md-svg-icon="icons:check" ng-if="vm.globalProgress() == \'upload\'"></md-icon><md-icon md-svg-icon="bootbarn-icons:play" ng-if="vm.globalProgress() == \'start\'"></md-icon><md-icon md-svg-icon="icons:cross" ng-if="vm.globalProgress() == \'fail\'"></md-icon></div><div class="pip-progress-content"><h3 class="pip-title" ng-if="vm.globalProgress() == \'start\'">Uploading {{vm.type}}</h3><h3 class="pip-title" ng-if="vm.globalProgress() == \'upload\'">Uploaded {{vm.type}} successfully!</h3><h3 class="pip-title" ng-if="vm.globalProgress() == \'fail\'">Uploading {{vm.type}} failed with errors!</h3><div class="color-secondary-text pip-subtitle">{{vm.name}}</div><div class="color-error pip-error" ng-if="vm.globalProgress() == \'fail\'">{{vm.errorFail()}}</div><div ng-if="vm.globalProgress() == \'start\'"><md-progress-linear md-mode="determinate" class="md-accent" value="{{vm.localProgress()}}" ng-if="vm.localProgress() < 100"></md-progress-linear><md-progress-linear md-mode="indeterminate" class="md-accent" ng-if="vm.localProgress() == 100"></md-progress-linear></div></div></div></div><div class="pip-footer layout-row layout-align-end-center"><div><md-button class="md-accent" ng-click="vm.onCancel()" ng-show="!vm.globalProgress() || vm.globalProgress() == \'fail\'">Cancel</md-button><md-button class="md-accent" ng-click="vm.onRetry()" ng-show="vm.globalProgress() == \'fail\'">Retry</md-button><md-button class="md-accent" ng-click="vm.abort()" ng-show="vm.globalProgress() == \'start\'">Abort</md-button></div></div></div>');
 }]);
 })();
 
@@ -264,27 +202,8 @@ try {
   module = angular.module('pipFiles.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('upload/FileUpload.html',
-    '<div class="pip-file-upload">\n' +
-    '      <form id="inp_form" class="pip-hidden-form">\n' +
-    '        <input type="file" file-model="vm.localFile" id="inp_file" ng-model="vm.localFile"></input>\n' +
-    '      </form>\n' +
-    '        <md-button class="md-raised md-accent pip-button"\n' +
-    '                   ng-click="vm.onUploadButtonClick()" \n' +
-    '                   ng-if="!vm.localFile">Choose File</md-button>\n' +
-    '        <div ng-if="vm.localFile.name" class="pip-file layout-row layout-align-start-center">\n' +
-    '          <md-icon md-svg-icon="icons:document" class="pip-icon"></md-icon>\n' +
-    '            <div class="flex">\n' +
-    '                <div class="text-body2 text-overflow">\n' +
-    '                    {{vm.localFile.name}}\n' +
-    '                </div>\n' +
-    '                <div ng-if="vm.localFile.size" class="color-secondary-text">{{vm.localFile.size}}</div>\n' +
-    '            </div>\n' +
-    '            <md-button ng-click="vm.onDeleteButtonClick()" class="md-icon-button">\n' +
-    '              <md-icon md-svg-icon="icons:cross-circle"></md-icon>\n' +
-    '            </md-button>\n' +
-    '        </div>\n' +
-    '</div>');
+  $templateCache.put('upload/FileSelect.html',
+    '<div class="pip-file-upload"><form id="inp_form" class="pip-hidden-form"><input type="file" file-model="vm.localFile" id="inp_file" ng-model="vm.localFile"></form><md-button class="md-raised md-accent pip-button" ng-click="vm.onUploadButtonClick()" ng-if="!vm.localFile">Choose File</md-button><div ng-if="vm.localFile.name" class="pip-file layout-row layout-align-start-center"><md-icon md-svg-icon="icons:document" class="pip-icon"></md-icon><div class="flex"><div class="text-body2 text-overflow">{{vm.localFile.name}}</div><div ng-if="vm.localFile.size" class="color-secondary-text">{{vm.localFile.size}}</div></div><md-button ng-click="vm.onDeleteButtonClick()" class="md-icon-button"><md-icon md-svg-icon="icons:cross-circle"></md-icon></md-button></div></div>');
 }]);
 })();
 
