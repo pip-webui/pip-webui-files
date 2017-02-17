@@ -12,7 +12,7 @@
 })();
 },{}],2:[function(require,module,exports){
 "use strict";
-var FileSelectController_1 = require("./upload/FileSelectController");
+var FileSelectController_1 = require("./select/FileSelectController");
 var FileProgressController_1 = require("./progress/FileProgressController");
 var FileSelectService_1 = require("./service/FileSelectService");
 (function () {
@@ -41,7 +41,7 @@ var FileSelectService_1 = require("./service/FileSelectService");
             },
             controller: FileSelectController_1.FileSelectController,
             controllerAs: 'vm',
-            templateUrl: 'upload/FileSelect.html'
+            templateUrl: 'select/FileSelect.html'
         };
     }
     function fileProgressDirective() {
@@ -66,7 +66,7 @@ var FileSelectService_1 = require("./service/FileSelectService");
         .directive('pipFileProgress', fileProgressDirective)
         .service('pipFileSelect', FileSelectService_1.FileSelectService);
 })();
-},{"./progress/FileProgressController":3,"./service/FileSelectService":4,"./upload/FileSelectController":5}],3:[function(require,module,exports){
+},{"./progress/FileProgressController":3,"./select/FileSelectController":4,"./service/FileSelectService":5}],3:[function(require,module,exports){
 "use strict";
 var FileProgressController = (function () {
     FileProgressController.$inject = ['$scope', 'pipFileSelect'];
@@ -104,6 +104,28 @@ var FileProgressController = (function () {
 }());
 exports.FileProgressController = FileProgressController;
 },{}],4:[function(require,module,exports){
+"use strict";
+var FileSelectController = (function () {
+    FileSelectController.$inject = ['$scope'];
+    function FileSelectController($scope) {
+        "ngInject";
+        this.localFile = $scope['localFile'];
+        $scope.$watch('vm.localFile', function (item) {
+            $scope['localFile'] = item;
+        });
+    }
+    FileSelectController.prototype.onUploadButtonClick = function () {
+        $('#inp_file').click();
+    };
+    FileSelectController.prototype.onDeleteButtonClick = function () {
+        this.localFile = null;
+        var forml = document.getElementById('inp_form');
+        forml.reset();
+    };
+    return FileSelectController;
+}());
+exports.FileSelectController = FileSelectController;
+},{}],5:[function(require,module,exports){
 "use strict";
 var GlobalProgress = (function () {
     function GlobalProgress() {
@@ -160,28 +182,6 @@ var FileSelectService = (function () {
     return FileSelectService;
 }());
 exports.FileSelectService = FileSelectService;
-},{}],5:[function(require,module,exports){
-"use strict";
-var FileSelectController = (function () {
-    FileSelectController.$inject = ['$scope'];
-    function FileSelectController($scope) {
-        "ngInject";
-        this.localFile = $scope['localFile'];
-        $scope.$watch('vm.localFile', function (item) {
-            $scope['localFile'] = item;
-        });
-    }
-    FileSelectController.prototype.onUploadButtonClick = function () {
-        $('#inp_file').click();
-    };
-    FileSelectController.prototype.onDeleteButtonClick = function () {
-        this.localFile = null;
-        var forml = document.getElementById('inp_form');
-        forml.reset();
-    };
-    return FileSelectController;
-}());
-exports.FileSelectController = FileSelectController;
 },{}],6:[function(require,module,exports){
 (function(module) {
 try {
@@ -202,8 +202,8 @@ try {
   module = angular.module('pipFiles.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('upload/FileSelect.html',
-    '<div class="pip-file-upload"><form id="inp_form" class="pip-hidden-form"><input type="file" file-model="vm.localFile" id="inp_file" ng-model="vm.localFile"></form><md-button class="md-raised md-accent pip-button" ng-click="vm.onUploadButtonClick()" ng-if="!vm.localFile">Choose File</md-button><div ng-if="vm.localFile.name" class="pip-file layout-row layout-align-start-center"><md-icon md-svg-icon="icons:document" class="pip-icon"></md-icon><div class="flex"><div class="text-body2 text-overflow">{{vm.localFile.name}}</div><div ng-if="vm.localFile.size" class="color-secondary-text">{{vm.localFile.size}}</div></div><md-button ng-click="vm.onDeleteButtonClick()" class="md-icon-button"><md-icon md-svg-icon="icons:cross-circle"></md-icon></md-button></div></div>');
+  $templateCache.put('select/FileSelect.html',
+    '<div class="pip-file-select"><form id="inp_form" class="pip-hidden-form"><input type="file" file-model="vm.localFile" id="inp_file" ng-model="vm.localFile"></form><md-button class="md-raised md-accent pip-button" ng-click="vm.onUploadButtonClick()" ng-if="!vm.localFile">Choose File</md-button><div ng-if="vm.localFile.name" class="pip-file layout-row layout-align-start-center"><md-icon md-svg-icon="icons:document" class="pip-icon"></md-icon><div class="flex"><div class="text-body2 text-overflow">{{vm.localFile.name}}</div><div ng-if="vm.localFile.size" class="color-secondary-text">{{vm.localFile.size}}</div></div><md-button ng-click="vm.onDeleteButtonClick()" class="md-icon-button"><md-icon md-svg-icon="icons:cross-circle"></md-icon></md-button></div></div>');
 }]);
 })();
 

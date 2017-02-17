@@ -1,5 +1,5 @@
 ﻿
-import {FileSelectController} from './upload/FileSelectController';
+import {FileSelectController} from './select/FileSelectController';
 import {FileProgressController} from './progress/FileProgressController';
 import {FileSelectService} from './service/FileSelectService';
 
@@ -31,7 +31,7 @@ import {FileSelectService} from './service/FileSelectService';
             },
             controller: FileSelectController,
             controllerAs: 'vm',
-            templateUrl: 'upload/FileSelect.html'
+            templateUrl: 'select/FileSelect.html'
         };
     }
 
