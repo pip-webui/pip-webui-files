@@ -2,9 +2,9 @@
 
 ![](https://img.shields.io/badge/license-MIT-blue.svg)
 
-Pip.WebUI.Files modules provides directives for upload files 
+Pip.WebUI.Files module provides controls to select files on local disk and upload them to server using form multi-part protocol. 
 
-**File Upload** control allows to select file before loading this file in server
+**File Select** control allows to select file on load disk
 
 <a href="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-files-upload-start.png" style="border: 3px ridge #c8d2df; display: inline-block">
     <img src="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-files-upload-start.png"/>
@@ -15,7 +15,7 @@ Pip.WebUI.Files modules provides directives for upload files
 </a>
 
 
-**File Progress** control for different states of progress
+**File Upload** control visualizes uploading progress, allows to abort it and show upload error
 
 <a href="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-files-progress.png" style="border: 3px ridge #c8d2df; display: inline-block">
     <img src="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-files-progress.png"/>
