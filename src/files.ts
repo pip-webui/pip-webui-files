@@ -1,6 +1,6 @@
 ﻿
 import {FileSelectController} from './select/FileSelectController';
-import {FileProgressController} from './progress/FileProgressController';
+import {FileUploadController} from './upload/FileUploadController';
 import {FileUploadService} from './service/FileUploadService';
 
 (() => {
@@ -35,11 +35,11 @@ import {FileUploadService} from './service/FileUploadService';
         };
     }
 
-     function fileProgressDirective() {
+     function fileUploadDirective() {
         return {
             restrict: 'E',
             replace: true,
-            controller: FileProgressController,
+            controller: FileUploadController,
             controllerAs: 'vm',
             scope: {
                 cancel: '=pipCancel',
@@ -49,7 +49,7 @@ import {FileUploadService} from './service/FileUploadService';
                 type: '=?pipType',
                 progress: '=pipProgress'
             },
-            templateUrl: 'progress/FileProgress.html'
+            templateUrl: 'upload/FileUpload.html'
         };
     }
 
@@ -57,7 +57,7 @@ import {FileUploadService} from './service/FileUploadService';
         .module('pipFiles', [])
         .directive('fileModel', fileModelDirective)
         .directive('pipFileSelect', fileSelectDirective)
-        .directive('pipFileProgress', fileProgressDirective)
+        .directive('pipFileUpload', fileUploadDirective)
         .service('pipFileUpload', FileUploadService);
 
 

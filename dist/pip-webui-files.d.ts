@@ -1,28 +1,6 @@
 declare module pip.files {
 
 
-export interface IFileProgressController {
-    name: string;
-    type: string;
-    onCancel(): void;
-    onCancel(): void;
-    abort(): void;
-}
-export class FileProgressController implements IFileProgressController {
-    private _service;
-    private _cancel;
-    private _retry;
-    name: string;
-    type: string;
-    state: string;
-    progress: number;
-    constructor($scope: ng.IScope, pipFileUpload: IFileUploadService);
-    errorFail(): string;
-    onCancel(): void;
-    onRetry(): void;
-    abort(): void;
-}
-
 export interface IFileSelectController {
     localFile: any;
     onUploadButtonClick(): void;
@@ -57,6 +35,28 @@ export class FileUploadService implements IFileUploadService {
     transaction: any;
     constructor($http: ng.IHttpService, pipTransaction: any);
     upload(url: string, file: any, callback?: (data: any, err: any) => void): void;
+    abort(): void;
+}
+
+export interface IFileUploadController {
+    name: string;
+    type: string;
+    onCancel(): void;
+    onCancel(): void;
+    abort(): void;
+}
+export class FileUploadController implements IFileUploadController {
+    private _service;
+    private _cancel;
+    private _retry;
+    name: string;
+    type: string;
+    state: string;
+    progress: number;
+    constructor($scope: ng.IScope, pipFileUpload: IFileUploadService);
+    errorFail(): string;
+    onCancel(): void;
+    onRetry(): void;
     abort(): void;
 }
 

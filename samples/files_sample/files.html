@@ -2,12 +2,12 @@
     <pip-file-select local-file="localFile"></pip-file-upload>
 </div>
 <div class="flex" style='border: 1px solid rgba(0, 0, 0, 0.12);' ng-if="onGlobalProgress()">
-      <pip-file-progress  
+      <pip-file-upload  
             pip-state="onGlobalProgress()"
             pip-progress="onLocalProgress()"
             pip-cancel="cancel" 
             pip-retry="onOk" 
-            pip-name="localFile.name"> </pip-file-progress>
+            pip-name="localFile.name"> </pip-file-upload>
 </div>
 
 <md-button ng-click="onOk()">

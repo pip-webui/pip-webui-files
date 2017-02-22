@@ -3,7 +3,7 @@ import {
     IFileUploadService
 } from "../service/FileUploadService";
 
-export interface IFileProgressController {
+export interface IFileUploadController {
     name: string;
     type: string;
     onCancel(): void;
@@ -11,7 +11,7 @@ export interface IFileProgressController {
     abort(): void;
 }
 
-export class FileProgressController implements IFileProgressController {
+export class FileUploadController implements IFileUploadController {
     private _service: IFileUploadService;
     private _cancel: Function;
     private _retry: Function;
