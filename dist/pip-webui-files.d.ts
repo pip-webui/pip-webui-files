@@ -23,6 +23,18 @@ export class FileProgressController implements IFileProgressController {
     abort(): void;
 }
 
+export interface IFileSelectController {
+    localFile: any;
+    onUploadButtonClick(): void;
+    onDeleteButtonClick(): void;
+}
+export class FileSelectController implements IFileSelectController {
+    localFile: any;
+    constructor($scope: ng.IScope);
+    onUploadButtonClick(): void;
+    onDeleteButtonClick(): void;
+}
+
 export class GlobalProgress {
     static All: string[];
     static Start: string;
@@ -46,18 +58,6 @@ export class FileUploadService implements IFileUploadService {
     constructor($http: ng.IHttpService, pipTransaction: any);
     upload(url: string, file: any, callback?: (data: any, err: any) => void): void;
     abort(): void;
-}
-
-export interface IFileSelectController {
-    localFile: any;
-    onUploadButtonClick(): void;
-    onDeleteButtonClick(): void;
-}
-export class FileSelectController implements IFileSelectController {
-    localFile: any;
-    constructor($scope: ng.IScope);
-    onUploadButtonClick(): void;
-    onDeleteButtonClick(): void;
 }
 
 }

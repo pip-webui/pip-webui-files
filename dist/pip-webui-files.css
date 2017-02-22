@@ -355,6 +355,12 @@ button:focus {
   background-color: rgba(158, 158, 158, 0.2);
   border-left: 5px solid rgba(33, 150, 243, 0.5) !important;
 }
+.pip-progress-files .bb-green {
+  background-color: #7f945c;
+}
+.pip-progress-files .bb-orange {
+  background-color: #ff9800;
+}
 .pip-progress-files .pip-progress-body {
   padding: 16px;
 }
@@ -366,7 +372,7 @@ button:focus {
 }
 .pip-progress-files .pip-progress-icon md-icon {
   color: #fff !important;
-  margin: 4px;
+  margin: 3px;
 }
 .pip-progress-files .pip-progress-content {
   width: 100%;
