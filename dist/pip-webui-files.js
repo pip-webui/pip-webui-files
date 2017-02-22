@@ -92,16 +92,16 @@ var FileSelectController = (function () {
 exports.FileSelectController = FileSelectController;
 },{}],4:[function(require,module,exports){
 "use strict";
-var GlobalProgress = (function () {
-    function GlobalProgress() {
+var FileUploadState = (function () {
+    function FileUploadState() {
     }
-    return GlobalProgress;
+    return FileUploadState;
 }());
-GlobalProgress.All = ['start', 'upload', 'fail'];
-GlobalProgress.Start = 'start';
-GlobalProgress.Upload = 'upload';
-GlobalProgress.Fail = 'fail';
-exports.GlobalProgress = GlobalProgress;
+FileUploadState.All = ['start', 'upload', 'fail'];
+FileUploadState.Start = 'start';
+FileUploadState.Upload = 'upload';
+FileUploadState.Fail = 'fail';
+exports.FileUploadState = FileUploadState;
 var FileUploadService = (function () {
     FileUploadService.$inject = ['$http', 'pipTransaction'];
     function FileUploadService($http, pipTransaction) {
@@ -115,8 +115,8 @@ var FileUploadService = (function () {
         var fd = new FormData();
         fd.append('file', file);
         this.progress = 0;
-        this.transaction.begin(GlobalProgress.Start);
-        this.globalProgress = GlobalProgress.Start;
+        this.transaction.begin(FileUploadState.Start);
+        this.state = FileUploadState.Start;
         this._http.post(url, fd, {
             uploadEventHandlers: {
                 progress: function (e) {
@@ -128,14 +128,14 @@ var FileUploadService = (function () {
             headers: { 'Content-Type': undefined }
         })
             .success(function (response) {
-            _this.globalProgress = GlobalProgress.Upload;
-            _this.transaction.end(GlobalProgress.Upload);
+            _this.state = FileUploadState.Upload;
+            _this.transaction.end(FileUploadState.Upload);
             if (callback)
                 callback(response, null);
         })
             .error(function (response) {
-            _this.globalProgress = GlobalProgress.Fail;
-            _this.transaction.end(GlobalProgress.Fail);
+            _this.state = FileUploadState.Fail;
+            _this.transaction.end(FileUploadState.Fail);
             _this.error = response.Error || response;
             if (callback)
                 callback(null, response);

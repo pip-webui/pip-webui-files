@@ -13,7 +13,7 @@ export class FileSelectController implements IFileSelectController {
     onDeleteButtonClick(): void;
 }
 
-export class GlobalProgress {
+export class FileUploadState {
     static All: string[];
     static Start: string;
     static Upload: string;
@@ -21,7 +21,7 @@ export class GlobalProgress {
 }
 export interface IFileUploadService {
     progress: number;
-    globalProgress: string;
+    state: string;
     error: string;
     transaction: any;
     upload(url: string, file: any, callback?: (data: any, err: any) => void): void;
@@ -30,7 +30,7 @@ export interface IFileUploadService {
 export class FileUploadService implements IFileUploadService {
     private _http;
     progress: number;
-    globalProgress: string;
+    state: string;
     error: string;
     transaction: any;
     constructor($http: ng.IHttpService, pipTransaction: any);

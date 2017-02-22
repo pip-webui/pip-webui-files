@@ -1,4 +1,4 @@
-export class GlobalProgress {
+export class FileUploadState {
     public static All: string[] = ['start', 'upload', 'fail'];
     public static Start: string = 'start';
     public static Upload: string = 'upload';
@@ -7,7 +7,7 @@ export class GlobalProgress {
 
 export interface IFileUploadService {
     progress: number;
-    globalProgress: string;
+    state: string;
     error: string;
     transaction;//: pip.services.Transaction;
     upload(url: string, file: any, callback?: (data: any, err: any) => void): void;
@@ -18,7 +18,7 @@ export class FileUploadService implements IFileUploadService {
     private _http: ng.IHttpService;
 
     public progress: number;
-    public globalProgress: string;
+    public state: string;
     public error: string = null;
     public transaction;//: pip.services.Transaction;
 
@@ -39,8 +39,8 @@ export class FileUploadService implements IFileUploadService {
         fd.append('file', file);
         
         this.progress = 0;
-        this.transaction.begin(GlobalProgress.Start);
-        this.globalProgress = GlobalProgress.Start;
+        this.transaction.begin(FileUploadState.Start);
+        this.state = FileUploadState.Start;
         this._http.post(url, fd, <any>{
             uploadEventHandlers: {
                 progress: (e: any) => {
@@ -52,14 +52,14 @@ export class FileUploadService implements IFileUploadService {
             headers: { 'Content-Type': undefined }
         })    
         .success((response: any) => {
-            this.globalProgress = GlobalProgress.Upload;
-            this.transaction.end(GlobalProgress.Upload);
+            this.state = FileUploadState.Upload;
+            this.transaction.end(FileUploadState.Upload);
 
             if (callback) callback(response, null);
         })    
         .error((response: any) => {
-            this.globalProgress = GlobalProgress.Fail;
-            this.transaction.end(GlobalProgress.Fail);
+            this.state = FileUploadState.Fail;
+            this.transaction.end(FileUploadState.Fail);
             this.error = response.Error || response;
 
             if (callback) callback(null, response);
@@ -68,7 +68,7 @@ export class FileUploadService implements IFileUploadService {
 
     public abort(): void {
         this.transaction.abort();
-        //this.globalProgress = null;
+        //this.state = null;
     }
 
 
