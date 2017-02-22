@@ -25,6 +25,7 @@
                 controller: 'UploadController', templateUrl: 'files_sample/files.html' 
             }
         ];
+        
 
     // Configure application services before start
     thisModule.config(
@@ -33,6 +34,7 @@
 
             $compileProvider.debugInfoEnabled(false);
             $httpProvider.useApplyAsync(true);
+
 
             var contentItem, i;
 

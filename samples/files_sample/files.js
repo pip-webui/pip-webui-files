@@ -1,7 +1,14 @@
 (function (angular) {
     'use strict';
 
-    var thisModule = angular.module('appFiles.UploadFiles', []);
+    var thisModule = angular.module('appFiles.UploadFiles', ['ngMockE2E']);
+
+    thisModule.run(function($httpBackend) {
+        $httpBackend.expect("POST", "https://test");
+        $httpBackend.when("POST", "https://test").respond("ok");
+        $httpBackend.whenGET(/^files_sample\//).passThrough();
+        $httpBackend.whenGET(/^images\//).passThrough();
+    });
 
     thisModule.controller('UploadController',
         function ($scope, $timeout, $injector, pipFileUpload) {
@@ -10,9 +17,7 @@
                  if ($scope.localFile == null) {
                     $scope.message = 'File empty';
                 }
-                let uploadUrl = "https://facadewebapi.bootbarn-app-env.p.azurewebsites.net/api/files/file";
-                    uploadUrl += '?collection=Test';
-                    uploadUrl += '&description=text';
+                let uploadUrl = "https://test";
 
                 pipFileUpload.upload(
                 uploadUrl,
