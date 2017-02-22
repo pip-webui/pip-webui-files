@@ -30,12 +30,12 @@
             <div ng-if="vm.state == 'start'">
                 <md-progress-linear md-mode="determinate" 
                     class="md-accent" 
-                    value="{{vm.localProgress()}}" 
-                    ng-if="vm.localProgress() < 100">
+                    value="{{vm.progress}}" 
+                    ng-if="vm.progress < 100">
                 </md-progress-linear>
                 <md-progress-linear md-mode="indeterminate" 
                     class="md-accent" 
-                    ng-if="vm.localProgress() == 100">
+                    ng-if="vm.progress == 100">
                 </md-progress-linear>
             </div>
         </div>

@@ -31,6 +31,10 @@
                 return pipFileUpload.globalProgress;
             }
 
+            $scope.onLocalProgress = () => {
+                return pipFileUpload.progress;
+            }
+
             $scope.cancel = () => {
                 $scope.message = 'stop';
                 pipFileUpload.globalProgress = null;

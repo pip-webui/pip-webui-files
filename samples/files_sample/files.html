@@ -4,6 +4,7 @@
 <div class="flex" style='border: 1px solid rgba(0, 0, 0, 0.12);' ng-if="onGlobalProgress()">
       <pip-file-progress  
             pip-state="onGlobalProgress()"
+            pip-progress="onLocalProgress()"
             pip-cancel="cancel" 
             pip-retry="onOk" 
             pip-name="localFile.name"> </pip-file-progress>
