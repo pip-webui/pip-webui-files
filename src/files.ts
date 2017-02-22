@@ -45,6 +45,7 @@ import {FileUploadService} from './service/FileUploadService';
                 cancel: '=pipCancel',
                 retry: '=pipRetry' ,
                 name: '=pipName',
+                state: '=pipState',
                 type: '=?pipType'
             },
             templateUrl: 'progress/FileProgress.html'

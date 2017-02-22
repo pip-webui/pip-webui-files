@@ -6,7 +6,6 @@ import {
 export interface IFileProgressController {
     name: string;
     type: string;
-    globalProgress(): string;
     localProgress(): number;
     onCancel(): void;
     onCancel(): void;
@@ -20,6 +19,7 @@ export class FileProgressController implements IFileProgressController {
     
     public name: string;
     public type: string;
+    public state: string;
 
     constructor(
         $scope: ng.IScope, 
@@ -32,12 +32,13 @@ export class FileProgressController implements IFileProgressController {
         this._cancel = $scope['cancel'];
         this._retry = $scope['retry'];
         this.name = $scope['name'];
+        this.state = $scope['state'];
+
+        $scope.$watch('state', (state: string) => {
+            this.state = state;
+        })
 
         this._service = pipFileUpload;
-    }
-
-    public globalProgress(): string {
-        return this._service.globalProgress;
     }
 
     public errorFail(): string {

@@ -4,7 +4,6 @@ declare module pip.files {
 export interface IFileProgressController {
     name: string;
     type: string;
-    globalProgress(): string;
     localProgress(): number;
     onCancel(): void;
     onCancel(): void;
@@ -16,8 +15,8 @@ export class FileProgressController implements IFileProgressController {
     private _retry;
     name: string;
     type: string;
+    state: string;
     constructor($scope: ng.IScope, pipFileUpload: IFileUploadService);
-    globalProgress(): string;
     errorFail(): string;
     localProgress(): number;
     onCancel(): void;
