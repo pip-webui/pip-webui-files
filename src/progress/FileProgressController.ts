@@ -1,7 +1,7 @@
 
 import {
-    IFileSelectService
-} from "../service/FileSelectService";
+    IFileUploadService
+} from "../service/FileUploadService";
 
 export interface IFileProgressController {
     name: string;
@@ -14,7 +14,7 @@ export interface IFileProgressController {
 }
 
 export class FileProgressController implements IFileProgressController {
-    private _service: IFileSelectService;
+    private _service: IFileUploadService;
     private _cancel: Function;
     private _retry: Function;
     
@@ -23,7 +23,7 @@ export class FileProgressController implements IFileProgressController {
 
     constructor(
         $scope: ng.IScope, 
-        pipFileSelect: IFileSelectService
+        pipFileUpload: IFileUploadService
     ) {
         "ngInject";
         
@@ -33,7 +33,7 @@ export class FileProgressController implements IFileProgressController {
         this._retry = $scope['retry'];
         this.name = $scope['name'];
 
-        this._service = pipFileSelect;
+        this._service = pipFileUpload;
     }
 
     public globalProgress(): string {

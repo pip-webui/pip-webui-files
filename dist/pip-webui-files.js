@@ -14,7 +14,7 @@
 "use strict";
 var FileSelectController_1 = require("./select/FileSelectController");
 var FileProgressController_1 = require("./progress/FileProgressController");
-var FileSelectService_1 = require("./service/FileSelectService");
+var FileUploadService_1 = require("./service/FileUploadService");
 (function () {
     fileModelDirective.$inject = ['$parse'];
     function fileModelDirective($parse) {
@@ -64,19 +64,19 @@ var FileSelectService_1 = require("./service/FileSelectService");
         .directive('fileModel', fileModelDirective)
         .directive('pipFileSelect', fileSelectDirective)
         .directive('pipFileProgress', fileProgressDirective)
-        .service('pipFileSelect', FileSelectService_1.FileSelectService);
+        .service('pipFileUpload', FileUploadService_1.FileUploadService);
 })();
-},{"./progress/FileProgressController":3,"./select/FileSelectController":4,"./service/FileSelectService":5}],3:[function(require,module,exports){
+},{"./progress/FileProgressController":3,"./select/FileSelectController":4,"./service/FileUploadService":5}],3:[function(require,module,exports){
 "use strict";
 var FileProgressController = (function () {
-    FileProgressController.$inject = ['$scope', 'pipFileSelect'];
-    function FileProgressController($scope, pipFileSelect) {
+    FileProgressController.$inject = ['$scope', 'pipFileUpload'];
+    function FileProgressController($scope, pipFileUpload) {
         "ngInject";
         this.type = $scope['type'] || 'file';
         this._cancel = $scope['cancel'];
         this._retry = $scope['retry'];
         this.name = $scope['name'];
-        this._service = pipFileSelect;
+        this._service = pipFileUpload;
     }
     FileProgressController.prototype.globalProgress = function () {
         return this._service.globalProgress;
@@ -137,15 +137,15 @@ GlobalProgress.Start = 'start';
 GlobalProgress.Upload = 'upload';
 GlobalProgress.Fail = 'fail';
 exports.GlobalProgress = GlobalProgress;
-var FileSelectService = (function () {
-    FileSelectService.$inject = ['$http', 'pipTransaction'];
-    function FileSelectService($http, pipTransaction) {
+var FileUploadService = (function () {
+    FileUploadService.$inject = ['$http', 'pipTransaction'];
+    function FileUploadService($http, pipTransaction) {
         "ngInject";
         this.error = null;
         this._http = $http;
         this.transaction = pipTransaction.create('upload file');
     }
-    FileSelectService.prototype.upload = function (url, file, callback) {
+    FileUploadService.prototype.upload = function (url, file, callback) {
         var _this = this;
         var fd = new FormData();
         fd.append('file', file);
@@ -176,12 +176,12 @@ var FileSelectService = (function () {
                 callback(null, response);
         });
     };
-    FileSelectService.prototype.abort = function () {
+    FileUploadService.prototype.abort = function () {
         this.transaction.abort();
     };
-    return FileSelectService;
+    return FileUploadService;
 }());
-exports.FileSelectService = FileSelectService;
+exports.FileUploadService = FileUploadService;
 },{}],6:[function(require,module,exports){
 (function(module) {
 try {

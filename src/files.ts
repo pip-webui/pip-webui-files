@@ -1,7 +1,7 @@
 ﻿
 import {FileSelectController} from './select/FileSelectController';
 import {FileProgressController} from './progress/FileProgressController';
-import {FileSelectService} from './service/FileSelectService';
+import {FileUploadService} from './service/FileUploadService';
 
 (() => {
     function fileModelDirective($parse: any) {
@@ -56,7 +56,7 @@ import {FileSelectService} from './service/FileSelectService';
         .directive('fileModel', fileModelDirective)
         .directive('pipFileSelect', fileSelectDirective)
         .directive('pipFileProgress', fileProgressDirective)
-        .service('pipFileSelect', FileSelectService);
+        .service('pipFileUpload', FileUploadService);
 
 
 })();

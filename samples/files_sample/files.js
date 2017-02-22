@@ -4,7 +4,7 @@
     var thisModule = angular.module('appFiles.UploadFiles', []);
 
     thisModule.controller('UploadController',
-        function ($scope, $timeout, $injector, pipFileSelect) {
+        function ($scope, $timeout, $injector, pipFileUpload) {
 
             $scope.onOk = () => {
                  if ($scope.localFile == null) {
@@ -14,7 +14,7 @@
                     uploadUrl += '?collection=Test';
                     uploadUrl += '&description=text';
 
-                pipFileSelect.upload(
+                pipFileUpload.upload(
                 uploadUrl,
                     $scope.localFile,
                     (data, err) => {
@@ -28,15 +28,15 @@
             }
 
             $scope.onGlobalProgress = () => {
-                return pipFileSelect.globalProgress;
+                return pipFileUpload.globalProgress;
             }
 
             $scope.cancel = () => {
                 $scope.message = 'stop';
-                pipFileSelect.globalProgress = null;
+                pipFileUpload.globalProgress = null;
             }
 
-            $timeout(function() {
+            $timeout(() => {
                 $('pre code').each(function(i, block) {
                     if (Prism) {
                         Prism.highlightElement(block);

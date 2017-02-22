@@ -5,7 +5,7 @@ export class GlobalProgress {
     public static Fail: string = 'fail';
 }
 
-export interface IFileSelectService {
+export interface IFileUploadService {
     progress: number;
     globalProgress: string;
     error: string;
@@ -14,7 +14,7 @@ export interface IFileSelectService {
     abort(): void;
 }
 
-export class FileSelectService implements IFileSelectService {
+export class FileUploadService implements IFileUploadService {
     private _http: ng.IHttpService;
 
     public progress: number;

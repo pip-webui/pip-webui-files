@@ -2,7 +2,7 @@
 
 ## <a name="contents"></a> Contents
 - [Installing](#install)
-- [pipFileUpload](#file_upload)
+- [pipFileSelect](#file_select)
 - [pipFileProgress](#file_progress)
 - [pipFileUploadService](#file_upload_service)
 - [Questions and bugs](#issues)
@@ -43,13 +43,13 @@ Register **pipFiles** module in angular module dependencies.
 angular.module('myApp',[..., 'pipFiles']);
 ```
 
-## <a name="file_upload"></a> pipFileUpload
+## <a name="file_select"></a> pipFileSelect
 
-**pipFileUpload** control allows to select file before loading this file in server.
+**pipFileSelect** control allows to select file before loading this file in server.
 
 ### Usage
 ```html
-     <pip-file-upload local-file="localFile"></pip-file-upload>
+     <pip-file-select local-file="localFile"></pip-file-select>
 ```
 
 <img src="images/img-files-upload-start.png"/>
