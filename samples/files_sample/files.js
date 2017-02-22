@@ -6,22 +6,26 @@
     thisModule.run(function($httpBackend) {
         $httpBackend.expect("POST", "https://test");
         $httpBackend.when("POST", "https://test").respond("ok");
+        //$httpBackend.expect("POST", "https://test");
+        //$httpBackend.when("POST", "https://test").respond("", "error");
         $httpBackend.whenGET(/^files_sample\//).passThrough();
         $httpBackend.whenGET(/^images\//).passThrough();
     });
 
     thisModule.controller('UploadController',
-        function ($scope, $timeout, $injector, pipFileUpload) {
+        function ($scope, $timeout, $injector, pipFileUpload, pipTransaction) {
 
+            $scope.transaction = pipTransaction.create('upload file');
             $scope.onOk = () => {
                  if ($scope.localFile == null) {
                     $scope.message = 'File empty';
                 }
-                let uploadUrl = "https://test";
+                const uploadUrl = "https://test";
 
                 pipFileUpload.upload(
-                uploadUrl,
+                    uploadUrl,
                     $scope.localFile,
+                    $scope.transaction,
                     (data, err) => {
                         if (data) {
                             $scope.message = data;
@@ -45,8 +49,13 @@
                 pipFileUpload.state = null;
             }
 
+            $scope.abort = () => {
+                $scope.transaction.abort();
+                //this.state = null;
+            }
+
             $timeout(() => {
-                $('pre code').each(function(i, block) {
+                $('pre code').each((i, block) => {
                     if (Prism) {
                         Prism.highlightElement(block);
                     }

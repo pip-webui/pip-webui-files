@@ -6,15 +6,18 @@ import {
 export interface IFileUploadController {
     name: string;
     type: string;
+    state: string;
+    progress: number;
     onCancel(): void;
-    onCancel(): void;
-    abort(): void;
+    onRetry(): void;
+    onAbort(): void;
 }
 
 export class FileUploadController implements IFileUploadController {
     private _service: IFileUploadService;
     private _cancel: Function;
     private _retry: Function;
+    private _abort: Function;
     
     public name: string;
     public type: string;
@@ -31,6 +34,7 @@ export class FileUploadController implements IFileUploadController {
         this.type = $scope['type'] || 'file';
         this._cancel = $scope['cancel'];
         this._retry = $scope['retry'];
+        this._abort = $scope['abort'];
         this.name = $scope['name'];
         this.state = $scope['state'];
         this.progress = $scope['progress'];
@@ -58,9 +62,8 @@ export class FileUploadController implements IFileUploadController {
         if (this._retry) this._retry();
     }
 
-    public abort() {
-        this._service.abort();
-        if (this._cancel) this._cancel();
+    public onAbort() {
+        if (this._abort) this._abort();
     }
 
 }

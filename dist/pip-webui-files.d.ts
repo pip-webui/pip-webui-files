@@ -23,32 +23,29 @@ export interface IFileUploadService {
     progress: number;
     state: string;
     error: string;
-    transaction: any;
-    upload(url: string, file: any, callback?: (data: any, err: any) => void): void;
-    abort(): void;
+    upload(url: string, file: any, transaction: any, callback?: (data: any, err: any) => void): void;
 }
 export class FileUploadService implements IFileUploadService {
     private _http;
     progress: number;
     state: string;
     error: string;
-    transaction: any;
-    constructor($http: ng.IHttpService, pipTransaction: any);
-    upload(url: string, file: any, callback?: (data: any, err: any) => void): void;
-    abort(): void;
+    constructor($http: ng.IHttpService);
+    upload(url: string, file: any, transaction: any, callback?: (data: any, err: any) => void): void;
 }
 
 export interface IFileUploadController {
     name: string;
     type: string;
     onCancel(): void;
-    onCancel(): void;
-    abort(): void;
+    onRetry(): void;
+    onAbort(): void;
 }
 export class FileUploadController implements IFileUploadController {
     private _service;
     private _cancel;
     private _retry;
+    private _abort;
     name: string;
     type: string;
     state: string;
@@ -57,7 +54,7 @@ export class FileUploadController implements IFileUploadController {
     errorFail(): string;
     onCancel(): void;
     onRetry(): void;
-    abort(): void;
+    onAbort(): void;
 }
 
 }
