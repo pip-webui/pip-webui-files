@@ -12,6 +12,7 @@
 })();
 },{}],2:[function(require,module,exports){
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var FileSelectController_1 = require("./select/FileSelectController");
 var FileUploadController_1 = require("./upload/FileUploadController");
 var FileUploadService_1 = require("./service/FileUploadService");
@@ -71,6 +72,7 @@ var FileUploadService_1 = require("./service/FileUploadService");
 })();
 },{"./select/FileSelectController":3,"./service/FileUploadService":4,"./upload/FileUploadController":5}],3:[function(require,module,exports){
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var FileSelectController = (function () {
     FileSelectController.$inject = ['$scope'];
     function FileSelectController($scope) {
@@ -93,6 +95,7 @@ var FileSelectController = (function () {
 exports.FileSelectController = FileSelectController;
 },{}],4:[function(require,module,exports){
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var FileUploadState = (function () {
     function FileUploadState() {
     }
@@ -146,6 +149,7 @@ var FileUploadService = (function () {
 exports.FileUploadService = FileUploadService;
 },{}],5:[function(require,module,exports){
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var FileUploadController = (function () {
     FileUploadController.$inject = ['$scope', 'pipFileUpload'];
     function FileUploadController($scope, pipFileUpload) {
@@ -193,7 +197,26 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('select/FileSelect.html',
-    '<div class="pip-file-select"><form id="inp_form" class="pip-hidden-form"><input type="file" file-model="vm.localFile" id="inp_file" ng-model="vm.localFile"></form><md-button class="md-raised md-accent pip-button" ng-click="vm.onUploadButtonClick()" ng-if="!vm.localFile">Choose File</md-button><div ng-if="vm.localFile.name" class="pip-file layout-row layout-align-start-center"><md-icon md-svg-icon="icons:document" class="pip-icon"></md-icon><div class="flex"><div class="text-body2 text-overflow">{{vm.localFile.name}}</div><div ng-if="vm.localFile.size" class="color-secondary-text">{{vm.localFile.size}}</div></div><md-button ng-click="vm.onDeleteButtonClick()" class="md-icon-button"><md-icon md-svg-icon="icons:cross-circle"></md-icon></md-button></div></div>');
+    '<div class="pip-file-select">\n' +
+    '      <form id="inp_form" class="pip-hidden-form">\n' +
+    '        <input type="file" file-model="vm.localFile" id="inp_file" ng-model="vm.localFile"></input>\n' +
+    '      </form>\n' +
+    '        <md-button class="md-raised md-accent pip-button"\n' +
+    '                   ng-click="vm.onUploadButtonClick()" \n' +
+    '                   ng-if="!vm.localFile">Choose File</md-button>\n' +
+    '        <div ng-if="vm.localFile.name" class="pip-file layout-row layout-align-start-center">\n' +
+    '          <md-icon md-svg-icon="icons:document" class="pip-icon"></md-icon>\n' +
+    '            <div class="flex">\n' +
+    '                <div class="text-body2 text-overflow">\n' +
+    '                    {{vm.localFile.name}}\n' +
+    '                </div>\n' +
+    '                <div ng-if="vm.localFile.size" class="color-secondary-text">{{vm.localFile.size}}</div>\n' +
+    '            </div>\n' +
+    '            <md-button ng-click="vm.onDeleteButtonClick()" class="md-icon-button">\n' +
+    '              <md-icon md-svg-icon="icons:cross-circle"></md-icon>\n' +
+    '            </md-button>\n' +
+    '        </div>\n' +
+    '</div>');
 }]);
 })();
 
@@ -205,7 +228,70 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('upload/FileUpload.html',
-    '<div class="pip-files pip-progress-files"><div class="pip-body pip-scroll pip-progress-body"><div class="layout-row"><div class="pip-progress-icon" ng-class="{\'color-badge-bg\': vm.state == \'fail\', \'bb-orange\': vm.state == \'start\', \'bb-green\': vm.state == \'upload\' }"><md-icon md-svg-icon="icons:check" ng-if="vm.state == \'upload\'"></md-icon><md-icon md-svg-icon="icons:play" ng-if="vm.state == \'start\'"></md-icon><md-icon md-svg-icon="icons:cross" ng-if="vm.state == \'fail\'"></md-icon></div><div class="pip-progress-content"><h3 class="pip-title" ng-if="vm.state == \'start\'">Uploading {{vm.type}}</h3><h3 class="pip-title" ng-if="vm.state == \'upload\'">Uploaded {{vm.type}} successfully!</h3><h3 class="pip-title" ng-if="vm.state == \'fail\'">Uploading {{vm.type}} failed with errors!</h3><div class="color-secondary-text pip-subtitle">{{vm.name}}</div><div class="color-error pip-error" ng-if="vm.state == \'fail\'">{{vm.errorFail()}}</div><div ng-if="vm.state == \'start\'"><md-progress-linear md-mode="determinate" class="md-accent" value="{{vm.progress}}" ng-if="vm.progress < 100"></md-progress-linear><md-progress-linear md-mode="indeterminate" class="md-accent" ng-if="vm.progress == 100"></md-progress-linear></div></div></div></div><div class="pip-footer layout-row layout-align-end-center"><div><md-button class="md-accent" ng-click="vm.onCancel()" ng-show="!vm.state || vm.state == \'fail\'">Cancel</md-button><md-button class="md-accent" ng-click="vm.onRetry()" ng-show="vm.state == \'fail\'">Retry</md-button><md-button class="md-accent" ng-click="vm.onAbort()" ng-show="vm.state == \'start\'">Abort</md-button></div></div></div>');
+    '<div class="pip-files pip-progress-files">\n' +
+    '  <div class="pip-body pip-scroll pip-progress-body"> \n' +
+    '    <div class="layout-row">\n' +
+    '        <div class="pip-progress-icon"\n' +
+    '         ng-class="{\'color-badge-bg\': vm.state == \'fail\',\n' +
+    '                    \'bb-orange\': vm.state == \'start\',\n' +
+    '                    \'bb-green\': vm.state == \'upload\' }">\n' +
+    '            <md-icon md-svg-icon="icons:check" ng-if="vm.state == \'upload\'"></md-icon>\n' +
+    '            <md-icon md-svg-icon="icons:play" ng-if="vm.state == \'start\'"></md-icon>\n' +
+    '            <md-icon md-svg-icon="icons:cross" ng-if="vm.state == \'fail\'"></md-icon>\n' +
+    '        </div>\n' +
+    '        <div class="pip-progress-content">\n' +
+    '            <h3 class="pip-title" ng-if="vm.state == \'start\'">\n' +
+    '                Uploading {{vm.type}}\n' +
+    '            </h3>\n' +
+    '            <h3 class="pip-title" ng-if="vm.state == \'upload\'">\n' +
+    '                Uploaded {{vm.type}} successfully!\n' +
+    '            </h3>\n' +
+    '            <h3 class="pip-title" ng-if="vm.state == \'fail\'">\n' +
+    '                Uploading {{vm.type}} failed with errors!\n' +
+    '            </h3>\n' +
+    '            <div class="color-secondary-text pip-subtitle">\n' +
+    '                {{vm.name}}\n' +
+    '            </div>\n' +
+    '            <div class="color-error pip-error"\n' +
+    '                 ng-if="vm.state == \'fail\'">\n' +
+    '                 {{vm.errorFail()}}\n' +
+    '            </div>\n' +
+    '\n' +
+    '            <div ng-if="vm.state == \'start\'">\n' +
+    '                <md-progress-linear md-mode="determinate" \n' +
+    '                    class="md-accent" \n' +
+    '                    value="{{vm.progress}}" \n' +
+    '                    ng-if="vm.progress < 100">\n' +
+    '                </md-progress-linear>\n' +
+    '                <md-progress-linear md-mode="indeterminate" \n' +
+    '                    class="md-accent" \n' +
+    '                    ng-if="vm.progress == 100">\n' +
+    '                </md-progress-linear>\n' +
+    '            </div>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '  <div class="pip-footer layout-row layout-align-end-center">\n' +
+    '        <div>\n' +
+    '            <md-button class="md-accent" \n' +
+    '                       ng-click="vm.onCancel()" \n' +
+    '                       ng-show="!vm.state || vm.state == \'fail\'">\n' +
+    '                Cancel\n' +
+    '            </md-button>\n' +
+    '\n' +
+    '            <md-button class="md-accent" \n' +
+    '                       ng-click="vm.onRetry()"\n' +
+    '                       ng-show="vm.state == \'fail\'">\n' +
+    '                Retry\n' +
+    '            </md-button>\n' +
+    '            <md-button class="md-accent" \n' +
+    '                       ng-click="vm.onAbort()"\n' +
+    '                       ng-show="vm.state == \'start\'">\n' +
+    '                Abort\n' +
+    '            </md-button>\n' +
+    '        </div>\n' +
+    '    </div>  \n' +
+    '</div>');
 }]);
 })();
 

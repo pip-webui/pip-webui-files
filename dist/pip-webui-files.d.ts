@@ -37,6 +37,8 @@ export class FileUploadService implements IFileUploadService {
 export interface IFileUploadController {
     name: string;
     type: string;
+    state: string;
+    progress: number;
     onCancel(): void;
     onRetry(): void;
     onAbort(): void;
