@@ -1,19 +1,10 @@
 (function (angular) {
     'use strict';
 
-    var thisModule = angular.module('appFiles.UploadFiles', ['ngMockE2E']);
+    var thisModule = angular.module('appFiles.Progress', ['ngMockE2E']);
 
-    thisModule.run(function($httpBackend) {
-        $httpBackend.expect("POST", "https://test");
-        $httpBackend.when("POST", "https://test").respond("ok");
-        //$httpBackend.expect("POST", "https://test");
-        //$httpBackend.when("POST", "https://test").respond("", "error");
-        $httpBackend.whenGET(/^files_sample\//).passThrough();
-        $httpBackend.whenGET(/^files_upload\//).passThrough();
-        $httpBackend.whenGET(/^images\//).passThrough();
-    });
 
-    thisModule.controller('UploadController',
+    thisModule.controller('ProgressController',
         function ($scope, $timeout, $injector, pipFileUpload, pipTransaction) {
 
             $scope.transaction = pipTransaction.create('upload file');

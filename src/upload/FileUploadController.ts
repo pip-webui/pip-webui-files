@@ -13,16 +13,21 @@ export interface IFileUploadController {
     onAbort(): void;
 }
 
+export class FileUploadButtons {
+    retry: Function;
+    cancel: Function;
+    abort: Function;
+}
+
 export class FileUploadController implements IFileUploadController {
     private _service: IFileUploadService;
-    private _cancel: Function;
-    private _retry: Function;
-    private _abort: Function;
+    private _buttonFunction: FileUploadButtons;
     
     public name: string;
     public type: string;
     public state: string;
     public progress: number;
+    public buttons: boolean;
 
     constructor(
         $scope: ng.IScope, 
@@ -31,10 +36,9 @@ export class FileUploadController implements IFileUploadController {
         "ngInject";
         
         // Init parameters
+        this._buttonFunction = $scope['buttonFunction'] || new FileUploadButtons();
+        this.buttons = $scope['buttons'] || false;
         this.type = $scope['type'] || 'file';
-        this._cancel = $scope['cancel'];
-        this._retry = $scope['retry'];
-        this._abort = $scope['abort'];
         this.name = $scope['name'];
         this.state = $scope['state'];
         this.progress = $scope['progress'];
@@ -55,15 +59,15 @@ export class FileUploadController implements IFileUploadController {
     }
 
     public onCancel(): void {
-        if (this._cancel) this._cancel();
+        if (this._buttonFunction.cancel) this._buttonFunction.cancel();
     }
 
     public onRetry(): void {
-        if (this._retry) this._retry();
+        if (this._buttonFunction.retry) this._buttonFunction.retry();
     }
 
     public onAbort() {
-        if (this._abort) this._abort();
+        if (this._buttonFunction.abort) this._buttonFunction.abort();
     }
 
 }

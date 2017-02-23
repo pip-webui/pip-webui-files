@@ -52,9 +52,8 @@ var FileUploadService_1 = require("./service/FileUploadService");
             controller: FileUploadController_1.FileUploadController,
             controllerAs: 'vm',
             scope: {
-                cancel: '=pipCancel',
-                retry: '=pipRetry',
-                abort: '=pipAbort',
+                buttonFunction: '=?pipButtonFunctions',
+                buttons: '=?pipButtons',
                 name: '=pipName',
                 state: '=pipState',
                 type: '=?pipType',
@@ -150,15 +149,20 @@ exports.FileUploadService = FileUploadService;
 },{}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var FileUploadButtons = (function () {
+    function FileUploadButtons() {
+    }
+    return FileUploadButtons;
+}());
+exports.FileUploadButtons = FileUploadButtons;
 var FileUploadController = (function () {
     FileUploadController.$inject = ['$scope', 'pipFileUpload'];
     function FileUploadController($scope, pipFileUpload) {
         "ngInject";
         var _this = this;
+        this._buttonFunction = $scope['buttonFunction'] || new FileUploadButtons();
+        this.buttons = $scope['buttons'] || false;
         this.type = $scope['type'] || 'file';
-        this._cancel = $scope['cancel'];
-        this._retry = $scope['retry'];
-        this._abort = $scope['abort'];
         this.name = $scope['name'];
         this.state = $scope['state'];
         this.progress = $scope['progress'];
@@ -174,16 +178,16 @@ var FileUploadController = (function () {
         return this._service.error;
     };
     FileUploadController.prototype.onCancel = function () {
-        if (this._cancel)
-            this._cancel();
+        if (this._buttonFunction.cancel)
+            this._buttonFunction.cancel();
     };
     FileUploadController.prototype.onRetry = function () {
-        if (this._retry)
-            this._retry();
+        if (this._buttonFunction.retry)
+            this._buttonFunction.retry();
     };
     FileUploadController.prototype.onAbort = function () {
-        if (this._abort)
-            this._abort();
+        if (this._buttonFunction.abort)
+            this._buttonFunction.abort();
     };
     return FileUploadController;
 }());
@@ -271,7 +275,7 @@ module.run(['$templateCache', function($templateCache) {
     '        </div>\n' +
     '    </div>\n' +
     '  </div>\n' +
-    '  <div class="pip-footer layout-row layout-align-end-center">\n' +
+    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons">\n' +
     '        <div>\n' +
     '            <md-button class="md-accent" \n' +
     '                       ng-click="vm.onCancel()" \n' +

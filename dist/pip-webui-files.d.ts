@@ -43,15 +43,19 @@ export interface IFileUploadController {
     onRetry(): void;
     onAbort(): void;
 }
+export class FileUploadButtons {
+    retry: Function;
+    cancel: Function;
+    abort: Function;
+}
 export class FileUploadController implements IFileUploadController {
     private _service;
-    private _cancel;
-    private _retry;
-    private _abort;
+    private _buttonFunction;
     name: string;
     type: string;
     state: string;
     progress: number;
+    buttons: boolean;
     constructor($scope: ng.IScope, pipFileUpload: IFileUploadService);
     errorFail(): string;
     onCancel(): void;

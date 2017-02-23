@@ -42,9 +42,8 @@ import {FileUploadService} from './service/FileUploadService';
             controller: FileUploadController,
             controllerAs: 'vm',
             scope: {
-                cancel: '=pipCancel',
-                retry: '=pipRetry',
-                abort: '=pipAbort',
+                buttonFunction: '=?pipButtonFunctions',
+                buttons: '=?pipButtons',
                 name: '=pipName',
                 state: '=pipState',
                 type: '=?pipType',
