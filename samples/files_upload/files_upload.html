@@ -1,5 +1,16 @@
 States of File Upload directive:
 
+Start state with name and footer:
+
+<div class="flex" style='border: 1px solid rgba(0, 0, 0, 0.12);'>
+    <pip-file-upload  
+        pip-state="'start'"
+        pip-progress="'100'"
+        pip-buttons="true"
+        pip-button-functions="buttonFunctions"
+        pip-name="'File name'"> </pip-file-upload>
+</div>
+
 Start state with name:
 
 <div class="flex" style='border: 1px solid rgba(0, 0, 0, 0.12);'>
@@ -18,6 +29,16 @@ Start state without name:
         pip-button-functions="buttonFunctions"> </pip-file-upload>
 </div>
 
+Upload state with name and footer:
+
+<div class="flex" style='border: 1px solid rgba(0, 0, 0, 0.12);'>
+    <pip-file-upload  
+        pip-state="'upload'"
+        pip-progress="'100'"
+        pip-buttons="true"
+        pip-button-functions="buttonFunctions"
+        pip-name="'File Name'"> </pip-file-upload>
+</div>
 
 Upload state with name:
 
@@ -38,6 +59,17 @@ Upload state without name:
         pip-button-functions="buttonFunctions"> </pip-file-upload>
 </div>
 
+
+Fail state with name and footer:
+
+<div class="flex" style='border: 1px solid rgba(0, 0, 0, 0.12);'>
+    <pip-file-upload  
+        pip-state="'fail'"
+        pip-progress="'100'"
+        pip-buttons="true"
+        pip-button-functions="buttonFunctions"
+        pip-name="'File Name'"> </pip-file-upload>
+</div>
 Fail state with name:
 
 <div class="flex" style='border: 1px solid rgba(0, 0, 0, 0.12);'>
