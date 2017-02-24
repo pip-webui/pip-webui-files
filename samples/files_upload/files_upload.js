@@ -5,52 +5,31 @@
 
 
     thisModule.controller('ProgressController',
-        function ($scope, $timeout, $injector, pipFileUpload, pipTransaction) {
+        function ($scope,$interval,  $timeout, $injector, pipTransaction) {
 
-            $scope.transaction = pipTransaction.create('upload file');
-            $scope.onOk = () => {
-                 if ($scope.localFile == null) {
-                    $scope.message = 'File empty';
+            $scope.progress = 0;
+            $scope.state = 'start';
+            $scope.state2 = 'start';
+
+            $interval(() => {
+                if ($scope.state == 'start') {
+                    $scope.state = 'upload';
+                    $scope.progress = 0;
+                } else {
+                    $scope.state = 'start';
+                    $scope.progress = 0;
                 }
-                const uploadUrl = "https://test";
 
-                pipFileUpload.upload(
-                    uploadUrl,
-                    $scope.localFile,
-                    $scope.transaction,
-                    (data, err) => {
-                        if (data) {
-                            $scope.message = data;
-                        } else {
-                            $scope.message = err;
-                        }
+                $scope.state2 = $scope.state2 == 'start' ? 'fail': 'start';
+            }, 2000);
+
+            $interval(() => {
+                if ($scope.state == 'start') {
+                    if ($scope.progress < 100) {
+                        $scope.progress += 20;
                     }
-                );
-            }
-
-            $scope.onGlobalProgress = () => {
-                return pipFileUpload.state;
-            }
-
-            $scope.onLocalProgress = () => {
-                return pipFileUpload.progress;
-            }
-
-            $scope.cancel = () => {
-                $scope.message = 'stop';
-                pipFileUpload.state = null;
-            }
-
-            $scope.abort = () => {
-                $scope.transaction.abort();
-                //this.state = null;
-            }
-
-            $scope.buttonFunctions = {
-                cancel: $scope.abort,
-                retry: $scope.onOk,
-                abort: $scope.abort
-            }
+                }
+            }, 200);
 
             $timeout(() => {
                 $('pre code').each((i, block) => {
