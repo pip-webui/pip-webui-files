@@ -20,7 +20,6 @@ export class FileUploadButtons {
 }
 
 export class FileUploadController implements IFileUploadController {
-    private _service: IFileUploadService;
     private _buttonFunction: FileUploadButtons;
     
     public name: string;
@@ -28,10 +27,10 @@ export class FileUploadController implements IFileUploadController {
     public state: string;
     public progress: number;
     public buttons: boolean;
+    public error: string = null;
 
     constructor(
-        $scope: ng.IScope, 
-        pipFileUpload: IFileUploadService
+        $scope: ng.IScope
     ) {
         "ngInject";
         
@@ -41,21 +40,20 @@ export class FileUploadController implements IFileUploadController {
         this.type = $scope['type'] || 'file';
         this.name = $scope['name'];
         this.state = $scope['state'];
+        this.error = $scope['error'];
         this.progress = $scope['progress'];
 
         $scope.$watch('state', (state: string) => {
             this.state = state;
         })
 
+        $scope.$watch('error', (error: string) => {
+            this.error = error;
+        })
+
         $scope.$watch('progress', (progress: number) => {
             this.progress = progress;
         })
-
-        this._service = pipFileUpload;
-    }
-
-    public errorFail(): string {
-        return this._service.error;
     }
 
     public onCancel(): void {

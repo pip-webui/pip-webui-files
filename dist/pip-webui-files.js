@@ -54,6 +54,7 @@ var FileUploadService_1 = require("./service/FileUploadService");
             scope: {
                 buttonFunction: '=?pipButtonFunctions',
                 buttons: '=?pipButtons',
+                error: '=?pipError',
                 name: '=pipName',
                 state: '=pipState',
                 type: '=?pipType',
@@ -156,27 +157,28 @@ var FileUploadButtons = (function () {
 }());
 exports.FileUploadButtons = FileUploadButtons;
 var FileUploadController = (function () {
-    FileUploadController.$inject = ['$scope', 'pipFileUpload'];
-    function FileUploadController($scope, pipFileUpload) {
+    FileUploadController.$inject = ['$scope'];
+    function FileUploadController($scope) {
         "ngInject";
         var _this = this;
+        this.error = null;
         this._buttonFunction = $scope['buttonFunction'] || new FileUploadButtons();
         this.buttons = $scope['buttons'] || false;
         this.type = $scope['type'] || 'file';
         this.name = $scope['name'];
         this.state = $scope['state'];
+        this.error = $scope['error'];
         this.progress = $scope['progress'];
         $scope.$watch('state', function (state) {
             _this.state = state;
         });
+        $scope.$watch('error', function (error) {
+            _this.error = error;
+        });
         $scope.$watch('progress', function (progress) {
             _this.progress = progress;
         });
-        this._service = pipFileUpload;
     }
-    FileUploadController.prototype.errorFail = function () {
-        return this._service.error;
-    };
     FileUploadController.prototype.onCancel = function () {
         if (this._buttonFunction.cancel)
             this._buttonFunction.cancel();
@@ -245,10 +247,10 @@ module.run(['$templateCache', function($templateCache) {
     '        </div>\n' +
     '        <div class="pip-progress-content">\n' +
     '            <h3 class="pip-title" ng-if="vm.state == \'start\'">\n' +
-    '                Uploading {{vm.type}}\n' +
+    '                Uploading {{::vm.type}}\n' +
     '            </h3>\n' +
     '            <h3 class="pip-title" ng-if="vm.state == \'upload\'">\n' +
-    '                Uploaded {{vm.type}} successfully!\n' +
+    '                Uploaded {{::vm.type}} successfully!\n' +
     '            </h3>\n' +
     '            <h3 class="pip-title" ng-if="vm.state == \'fail\'">\n' +
     '                Uploading {{vm.type}} failed with errors!\n' +
@@ -258,7 +260,7 @@ module.run(['$templateCache', function($templateCache) {
     '            </div>\n' +
     '            <div class="color-error pip-error"\n' +
     '                 ng-if="vm.state == \'fail\'">\n' +
-    '                 {{vm.errorFail()}}\n' +
+    '                 {{vm.error}}\n' +
     '            </div>\n' +
     '\n' +
     '            <div ng-if="vm.state == \'start\'">\n' +

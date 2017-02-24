@@ -11,10 +11,10 @@
         </div>
         <div class="pip-progress-content">
             <h3 class="pip-title" ng-if="vm.state == 'start'">
-                Uploading {{vm.type}}
+                Uploading {{::vm.type}}
             </h3>
             <h3 class="pip-title" ng-if="vm.state == 'upload'">
-                Uploaded {{vm.type}} successfully!
+                Uploaded {{::vm.type}} successfully!
             </h3>
             <h3 class="pip-title" ng-if="vm.state == 'fail'">
                 Uploading {{vm.type}} failed with errors!
@@ -24,7 +24,7 @@
             </div>
             <div class="color-error pip-error"
                  ng-if="vm.state == 'fail'">
-                 {{vm.errorFail()}}
+                 {{vm.error}}
             </div>
 
             <div ng-if="vm.state == 'start'">

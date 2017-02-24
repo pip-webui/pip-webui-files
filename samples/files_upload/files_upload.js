@@ -21,6 +21,7 @@
                 }
 
                 $scope.state2 = $scope.state2 == 'start' ? 'fail': 'start';
+                $scope.error = $scope.state2 == 'fail' ? 'Error string': null;
             }, 2000);
 
             $interval(() => {

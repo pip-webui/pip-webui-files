@@ -44,6 +44,7 @@ import {FileUploadService} from './service/FileUploadService';
             scope: {
                 buttonFunction: '=?pipButtonFunctions',
                 buttons: '=?pipButtons',
+                error: '=?pipError',
                 name: '=pipName',
                 state: '=pipState',
                 type: '=?pipType',

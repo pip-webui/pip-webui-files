@@ -49,15 +49,14 @@ export class FileUploadButtons {
     abort: Function;
 }
 export class FileUploadController implements IFileUploadController {
-    private _service;
     private _buttonFunction;
     name: string;
     type: string;
     state: string;
     progress: number;
     buttons: boolean;
-    constructor($scope: ng.IScope, pipFileUpload: IFileUploadService);
-    errorFail(): string;
+    error: string;
+    constructor($scope: ng.IScope);
     onCancel(): void;
     onRetry(): void;
     onAbort(): void;
