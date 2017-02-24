@@ -1,6 +1,7 @@
 ﻿
 import {FileSelectController} from './select/FileSelectController';
 import {FileUploadController} from './upload/FileUploadController';
+import {FileSuccessController} from './success/FileSuccessController';
 import {FileUploadService} from './service/FileUploadService';
 
 (() => {
@@ -54,11 +55,27 @@ import {FileUploadService} from './service/FileUploadService';
         };
     }
 
+     function fileSuccessDirective() {
+        return {
+            restrict: 'E',
+            replace: true,
+            controller: FileSuccessController,
+            controllerAs: 'vm',
+            scope: {
+                buttons: '=?pipButtons',
+                name: '=pipName',
+                type: '=?pipType',
+            },
+            templateUrl: 'success/FileSuccess.html'
+        };
+    }
+
     angular
         .module('pipFiles', [])
         .directive('fileModel', fileModelDirective)
         .directive('pipFileSelect', fileSelectDirective)
         .directive('pipFileUpload', fileUploadDirective)
+        .directive('pipSuccesUpload', fileSuccessDirective)
         .service('pipFileUpload', FileUploadService);
 
 

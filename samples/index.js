@@ -15,7 +15,7 @@
 
             'pipFiles', 'pipFiles.Templates',  //'pipButtons',
 
-            'appFiles.UploadFiles', 'appFiles.Progress'
+            'appFiles.UploadFiles', 'appFiles.Progress', 'appFiles.SuccessUpload'
         ]
     );
 
@@ -26,6 +26,9 @@
             },{ 
                 title: 'Progress', state: 'progress', url: '/progress',
                 controller: 'ProgressController', templateUrl: 'files_upload/files_upload.html' 
+            },{ 
+                title: 'Success upload', state: 'success', url: '/success',
+                controller: 'SuccessUploadController', templateUrl: 'files_success/files_success.html' 
             }
         ];
         

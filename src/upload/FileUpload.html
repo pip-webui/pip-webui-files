@@ -1,4 +1,11 @@
-<div class="pip-files pip-progress-files">
+<div>
+    <pip-succes-upload 
+        ng-if="vm.state == 'upload'"
+        pip-name="vm.name" 
+        pip-type="vm.type" 
+        pip-buttons="vm.buttons"></pip-succes-upload>
+
+<div class="pip-files pip-progress-files" ng-if="vm.state == 'start' || vm.state == 'fail'" >
   <div class="pip-body pip-scroll pip-progress-body"> 
     <div class="layout-row">
         <div class="pip-progress-icon"
@@ -61,4 +68,5 @@
             </md-button>
         </div>
     </div>  
+</div>
 </div>
