@@ -25,16 +25,18 @@
                     $scope.message = 'File empty';
                 }
                 const uploadUrl = "https://test";
+                $scope.transaction.begin('start');
 
                 pipFileUpload.upload(
                     uploadUrl,
                     $scope.localFile,
-                    $scope.transaction,
                     (data, err) => {
                         if (data) {
                             $scope.message = data;
+                            $scope.transaction.end('a');
                         } else {
                             $scope.message = err;
+                            $scope.transaction.end('');
                         }
                     }
                 );

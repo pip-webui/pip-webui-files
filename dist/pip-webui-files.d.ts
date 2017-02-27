@@ -50,7 +50,7 @@ export class FileUploadService implements IFileUploadService {
     state: string;
     error: string;
     constructor($http: ng.IHttpService);
-    upload(url: string, file: any, transaction: any, callback?: (data: any, err: any) => void): void;
+    upload(url: string, file: any, callback?: (data: any, err: any) => void): void;
 }
 
 export interface IFileStartController {

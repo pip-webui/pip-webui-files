@@ -191,12 +191,11 @@ var FileUploadService = (function () {
         this.error = null;
         this._http = $http;
     }
-    FileUploadService.prototype.upload = function (url, file, transaction, callback) {
+    FileUploadService.prototype.upload = function (url, file, callback) {
         var _this = this;
         var fd = new FormData();
         fd.append('file', file);
         this.progress = 0;
-        transaction.begin(FileUploadState.Start);
         this.state = FileUploadState.Start;
         this._http.post(url, fd, {
             uploadEventHandlers: {
@@ -210,13 +209,11 @@ var FileUploadService = (function () {
         })
             .success(function (response) {
             _this.state = FileUploadState.Upload;
-            transaction.end(FileUploadState.Upload);
             if (callback)
                 callback(response, null);
         })
             .error(function (response) {
             _this.state = FileUploadState.Fail;
-            transaction.end(FileUploadState.Fail);
             _this.error = response.Error || response;
             if (callback)
                 callback(null, response);

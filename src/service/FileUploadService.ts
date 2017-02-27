@@ -27,14 +27,13 @@ export class FileUploadService implements IFileUploadService {
         this._http = $http;
     }
 
-    public upload(url: string, file: any, transaction: any, callback?: (data: any, err: any) => void): void {
+    public upload(url: string, file: any, callback?: (data: any, err: any) => void): void {
         //console.log(file); 
 
         let fd = new FormData();
         fd.append('file', file);
         
         this.progress = 0;
-        transaction.begin(FileUploadState.Start);
         this.state = FileUploadState.Start;
         this._http.post(url, fd, <any>{
             uploadEventHandlers: {
@@ -48,19 +47,14 @@ export class FileUploadService implements IFileUploadService {
         })    
         .success((response: any) => {
             this.state = FileUploadState.Upload;
-            transaction.end(FileUploadState.Upload);
 
             if (callback) callback(response, null);
         })    
         .error((response: any) => {
             this.state = FileUploadState.Fail;
-            transaction.end(FileUploadState.Fail);
             this.error = response.Error || response;
 
             if (callback) callback(null, response);
         });
     }
-
-
-
 }
