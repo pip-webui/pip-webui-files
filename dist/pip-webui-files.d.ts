@@ -53,6 +53,20 @@ export class FileUploadService implements IFileUploadService {
     upload(url: string, file: any, transaction: any, callback?: (data: any, err: any) => void): void;
 }
 
+export interface IFileStartController {
+    name: string;
+    type: string;
+    progress: number;
+    buttons: ButtonsUpload[];
+}
+export class FileStartController implements IFileStartController {
+    name: string;
+    progress: number;
+    type: string;
+    buttons: ButtonsUpload[];
+    constructor($scope: ng.IScope);
+}
+
 export interface IFileSuccessController {
     name: string;
     type: string;
