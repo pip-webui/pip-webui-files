@@ -27,8 +27,7 @@
             },{ 
                 title: 'Progress', state: 'progress', url: '/progress',
                 controller: 'ProgressController', templateUrl: 'files_upload/files_upload.html' 
-            },
-            { 
+            },{ 
                 title: 'Start upload', state: 'start', url: '/start',
                 controller: 'FailStartController', templateUrl: 'files_start/files_start.html' 
             },{ 
