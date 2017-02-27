@@ -15,9 +15,12 @@
         </div>
     </div>
   </div>
-  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons">
+  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons && vm.buttons.length > 0">
         <div>
-            
+           <md-button class="md-accent" 
+                       ng-repeat="start in vm.buttons" ng-click="start.click()">
+                {{start.title}}
+            </md-button> 
         </div>
     </div>  
 </div>
