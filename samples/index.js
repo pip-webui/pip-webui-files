@@ -16,7 +16,7 @@
             'pipFiles', 'pipFiles.Templates',  //'pipButtons',
 
             'appFiles.UploadFiles', 'appFiles.Progress', 'appFiles.SuccessUpload',
-             'appFiles.FailUpload'
+             'appFiles.FailUpload', 'appFiles.StartUpload'
         ]
     );
 
@@ -25,6 +25,9 @@
                 title: 'Upload', state: 'upload', url: '/upload',
                 controller: 'UploadController', templateUrl: 'files_sample/files.html' 
             },{ 
+                title: 'Start upload', state: 'start', url: '/start',
+                controller: 'FailStartController', templateUrl: 'files_start/files_start.html' 
+            }, { 
                 title: 'Progress', state: 'progress', url: '/progress',
                 controller: 'ProgressController', templateUrl: 'files_upload/files_upload.html' 
             },{ 
