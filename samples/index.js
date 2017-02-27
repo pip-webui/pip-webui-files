@@ -25,11 +25,12 @@
                 title: 'Upload', state: 'upload', url: '/upload',
                 controller: 'UploadController', templateUrl: 'files_sample/files.html' 
             },{ 
-                title: 'Start upload', state: 'start', url: '/start',
-                controller: 'FailStartController', templateUrl: 'files_start/files_start.html' 
-            }, { 
                 title: 'Progress', state: 'progress', url: '/progress',
                 controller: 'ProgressController', templateUrl: 'files_upload/files_upload.html' 
+            },
+            { 
+                title: 'Start upload', state: 'start', url: '/start',
+                controller: 'FailStartController', templateUrl: 'files_start/files_start.html' 
             },{ 
                 title: 'Success upload', state: 'success', url: '/success',
                 controller: 'SuccessUploadController', templateUrl: 'files_success/files_success.html' 
