@@ -5,6 +5,46 @@ try {
   module = angular.module('pipFiles.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('fail/FileFail.html',
+    '<div class="pip-files pip-progress-files">\n' +
+    '  <div class="pip-body pip-scroll pip-progress-body"> \n' +
+    '    <div class="layout-row">\n' +
+    '        <div class="pip-progress-icon color-badge-bg">\n' +
+    '            <md-icon md-svg-icon="icons:cross"></md-icon>\n' +
+    '        </div>\n' +
+    '        <div class="pip-progress-content">\n' +
+    '                 <h3 class="pip-title">\n' +
+    '                Uploading {{vm.type}} failed with errors!\n' +
+    '            </h3>\n' +
+    '            <div class="color-secondary-text pip-subtitle">\n' +
+    '                {{vm.name}}\n' +
+    '            </div>\n' +
+    '            <div class="color-error pip-error">\n' +
+    '                 {{vm.error}}\n' +
+    '            </div>\n' +
+    '\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons && vm.buttons.length > 0">\n' +
+    '        <div>\n' +
+    '           <md-button class="md-accent" \n' +
+    '                       ng-repeat="fail in vm.buttons" ng-click="fail.click()">\n' +
+    '                {{::fail.title}}\n' +
+    '            </md-button> \n' +
+    '        </div>\n' +
+    '    </div>  \n' +
+    '</div>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipFiles.Templates');
+} catch (e) {
+  module = angular.module('pipFiles.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
   $templateCache.put('select/FileSelect.html',
     '<div class="pip-file-select">\n' +
     '      <form id="inp_form" class="pip-hidden-form">\n' +
@@ -80,14 +120,19 @@ module.run(['$templateCache', function($templateCache) {
     '        pip-name="vm.name" \n' +
     '        pip-type="vm.type" \n' +
     '        pip-buttons="vm.buttons"></pip-succes-upload>\n' +
+    '    <pip-fail-upload \n' +
+    '        ng-if="vm.state == \'fail\'"\n' +
+    '        pip-name="vm.name" \n' +
+    '        pip-type="vm.type" \n' +
+    '        pip-error="vm.error"\n' +
+    '        pip-buttons="vm.failButtons"></pip-fail-upload>\n' +
     '\n' +
-    '<div class="pip-files pip-progress-files" ng-if="vm.state == \'start\' || vm.state == \'fail\'" >\n' +
+    '<div class="pip-files pip-progress-files" ng-if="vm.state == \'start\'" >\n' +
     '  <div class="pip-body pip-scroll pip-progress-body"> \n' +
     '    <div class="layout-row">\n' +
     '        <div class="pip-progress-icon"\n' +
     '         ng-class="{\'color-badge-bg\': vm.state == \'fail\',\n' +
-    '                    \'bb-orange\': vm.state == \'start\',\n' +
-    '                    \'bb-green\': vm.state == \'upload\' }">\n' +
+    '                    \'bb-orange\': vm.state == \'start\' }">\n' +
     '            <md-icon md-svg-icon="icons:check" ng-if="vm.state == \'upload\'"></md-icon>\n' +
     '            <md-icon md-svg-icon="icons:play" ng-if="vm.state == \'start\'"></md-icon>\n' +
     '            <md-icon md-svg-icon="icons:cross" ng-if="vm.state == \'fail\'"></md-icon>\n' +
@@ -96,20 +141,9 @@ module.run(['$templateCache', function($templateCache) {
     '            <h3 class="pip-title" ng-if="vm.state == \'start\'">\n' +
     '                Uploading {{::vm.type}}\n' +
     '            </h3>\n' +
-    '            <h3 class="pip-title" ng-if="vm.state == \'upload\'">\n' +
-    '                Uploaded {{::vm.type}} successfully!\n' +
-    '            </h3>\n' +
-    '            <h3 class="pip-title" ng-if="vm.state == \'fail\'">\n' +
-    '                Uploading {{vm.type}} failed with errors!\n' +
-    '            </h3>\n' +
     '            <div class="color-secondary-text pip-subtitle">\n' +
     '                {{vm.name}}\n' +
     '            </div>\n' +
-    '            <div class="color-error pip-error"\n' +
-    '                 ng-if="vm.state == \'fail\'">\n' +
-    '                 {{vm.error}}\n' +
-    '            </div>\n' +
-    '\n' +
     '            <div ng-if="vm.state == \'start\'">\n' +
     '                <md-progress-linear md-mode="determinate" \n' +
     '                    class="md-accent" \n' +
@@ -126,10 +160,6 @@ module.run(['$templateCache', function($templateCache) {
     '  </div>\n' +
     '  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons">\n' +
     '        <div>\n' +
-    '            <md-button class="md-accent" ng-if="vm.state == \'fail\'"\n' +
-    '                       ng-repeat="fail in vm.failButtons" ng-click="fail.click()">\n' +
-    '                {{fail.title}}\n' +
-    '            </md-button>\n' +
     '            <md-button class="md-accent" ng-if="vm.state == \'start\'"\n' +
     '                       ng-repeat="start in vm.startButtons" ng-click="start.click()">\n' +
     '                {{start.title}}\n' +

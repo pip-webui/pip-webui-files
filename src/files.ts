@@ -2,6 +2,7 @@
 import {FileSelectController} from './select/FileSelectController';
 import {FileUploadController} from './upload/FileUploadController';
 import {FileSuccessController} from './success/FileSuccessController';
+import {FileFailController} from './fail/FileFailController';
 import {FileUploadService} from './service/FileUploadService';
 
 (() => {
@@ -70,12 +71,29 @@ import {FileUploadService} from './service/FileUploadService';
         };
     }
 
+     function fileFailDirective() {
+        return {
+            restrict: 'E',
+            replace: true,
+            controller: FileFailController,
+            controllerAs: 'vm',
+            scope: {
+                buttons: '=?pipButtons',
+                name: '=pipName',
+                type: '=?pipType',
+                error: '=pipError'
+            },
+            templateUrl: 'fail/FileFail.html'
+        };
+    }
+
     angular
         .module('pipFiles', [])
         .directive('fileModel', fileModelDirective)
         .directive('pipFileSelect', fileSelectDirective)
         .directive('pipFileUpload', fileUploadDirective)
         .directive('pipSuccesUpload', fileSuccessDirective)
+        .directive('pipFailUpload', fileFailDirective)
         .service('pipFileUpload', FileUploadService);
 
 
