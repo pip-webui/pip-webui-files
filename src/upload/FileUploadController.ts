@@ -3,6 +3,10 @@ import {
     IFileUploadService
 } from "../service/FileUploadService";
 
+import {
+    ButtonsUpload
+} from "../common/ButtonsUpload";
+
 export interface IFileUploadController {
     name: string;
     type: string;
@@ -20,8 +24,12 @@ export class FileUploadButtons {
 }
 
 export class FileUploadController implements IFileUploadController {
-    private _buttonFunction: FileUploadButtons;
-    
+    //private _buttonFunction: FileUploadButtons;
+    private _functions: FileUploadButtons;
+    public uploadButtons: ButtonsUpload[];
+    public failButtons: ButtonsUpload[];
+    public startButtons: ButtonsUpload[];
+
     public name: string;
     public type: string;
     public state: string;
@@ -33,9 +41,20 @@ export class FileUploadController implements IFileUploadController {
         $scope: ng.IScope
     ) {
         "ngInject";
+
+        this._functions = $scope['buttonFunction'];
         
         // Init parameters
-        this._buttonFunction = $scope['buttonFunction'] || new FileUploadButtons();
+        if (this._functions) {
+            this.uploadButtons = [];
+            this.failButtons = [
+                {title: 'Cancel', click: () => { this.onCancel()}},
+                {title: 'Retry', click: () => { this.onRetry()}}
+            ];
+            this.startButtons = [
+                {title: 'Abort', click: () => { this.onAbort() }}
+            ];
+        }
         this.buttons = $scope['buttons'] || false;
         this.type = $scope['type'] || 'file';
         this.name = $scope['name'];
@@ -57,15 +76,15 @@ export class FileUploadController implements IFileUploadController {
     }
 
     public onCancel(): void {
-        if (this._buttonFunction.cancel) this._buttonFunction.cancel();
+        if (this._functions.cancel) this._functions.cancel();
     }
 
     public onRetry(): void {
-        if (this._buttonFunction.retry) this._buttonFunction.retry();
+        if (this._functions.retry) this._functions.retry();
     }
 
     public onAbort() {
-        if (this._buttonFunction.abort) this._buttonFunction.abort();
+        if (this._functions.abort) this._functions.abort();
     }
 
 }

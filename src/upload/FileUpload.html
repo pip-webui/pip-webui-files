@@ -50,22 +50,21 @@
   </div>
   <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons">
         <div>
-            <md-button class="md-accent" 
-                       ng-click="vm.onCancel()" 
-                       ng-show="!vm.state || vm.state == 'fail'">
-                Cancel
+            <md-button class="md-accent" ng-if="vm.state == 'fail'"
+                       ng-repeat="fail in vm.failButtons" ng-click="fail.click()">
+                {{fail.title}}
+            </md-button>
+            <md-button class="md-accent" ng-if="vm.state == 'start'"
+                       ng-repeat="start in vm.startButtons" ng-click="start.click()">
+                {{start.title}}
             </md-button>
 
             <md-button class="md-accent" 
-                       ng-click="vm.onRetry()"
-                       ng-show="vm.state == 'fail'">
-                Retry
+                       ng-click="vm.onCancel()" 
+                       ng-show="!vm.state">
+                Cancel
             </md-button>
-            <md-button class="md-accent" 
-                       ng-click="vm.onAbort()"
-                       ng-show="vm.state == 'start'">
-                Abort
-            </md-button>
+
         </div>
     </div>  
 </div>

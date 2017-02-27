@@ -10,6 +10,17 @@
             $scope.progress = 0;
             $scope.state = 'start';
             $scope.state2 = 'start';
+            $scope.buttonFunctions = {
+                retry: () => {
+                    $scope.message = 'retry'
+                },
+                cancel: () => {
+                    $scope.message = 'cancel'
+                },
+                abort: () => {
+                    $scope.message = 'abort';
+                }
+            }
 
             $interval(() => {
                 if ($scope.state == 'start') {
