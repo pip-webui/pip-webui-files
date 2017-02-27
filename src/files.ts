@@ -4,6 +4,7 @@ import {FileUploadController} from './upload/FileUploadController';
 import {FileSuccessController} from './success/FileSuccessController';
 import {FileFailController} from './fail/FileFailController';
 import {FileUploadService} from './service/FileUploadService';
+import {FileStartController} from './start/FileStartController';
 
 (() => {
     function fileModelDirective($parse: any) {
@@ -87,6 +88,22 @@ import {FileUploadService} from './service/FileUploadService';
         };
     }
 
+    function fileStartDirective() {
+        return {
+            restrict: 'E',
+            replace: true,
+            controller: FileStartController,
+            controllerAs: 'vm',
+            scope: {
+                buttons: '=?pipButtons',
+                name: '=pipName',
+                type: '=?pipType',
+                progress: '=pipProgress'
+            },
+            templateUrl: 'start/FileStart.html'
+        };
+    }
+
     angular
         .module('pipFiles', [])
         .directive('fileModel', fileModelDirective)
@@ -94,6 +111,7 @@ import {FileUploadService} from './service/FileUploadService';
         .directive('pipFileUpload', fileUploadDirective)
         .directive('pipSuccesUpload', fileSuccessDirective)
         .directive('pipFailUpload', fileFailDirective)
+        .directive('pipStartUpload', fileStartDirective)
         .service('pipFileUpload', FileUploadService);
 
 

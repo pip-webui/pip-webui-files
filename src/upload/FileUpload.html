@@ -11,51 +11,10 @@
         pip-error="vm.error"
         pip-buttons="vm.failButtons"></pip-fail-upload>
 
-<div class="pip-files pip-progress-files" ng-if="vm.state == 'start'" >
-  <div class="pip-body pip-scroll pip-progress-body"> 
-    <div class="layout-row">
-        <div class="pip-progress-icon"
-         ng-class="{'color-badge-bg': vm.state == 'fail',
-                    'bb-orange': vm.state == 'start' }">
-            <md-icon md-svg-icon="icons:check" ng-if="vm.state == 'upload'"></md-icon>
-            <md-icon md-svg-icon="icons:play" ng-if="vm.state == 'start'"></md-icon>
-            <md-icon md-svg-icon="icons:cross" ng-if="vm.state == 'fail'"></md-icon>
-        </div>
-        <div class="pip-progress-content">
-            <h3 class="pip-title" ng-if="vm.state == 'start'">
-                Uploading {{::vm.type}}
-            </h3>
-            <div class="color-secondary-text pip-subtitle">
-                {{vm.name}}
-            </div>
-            <div ng-if="vm.state == 'start'">
-                <md-progress-linear md-mode="determinate" 
-                    class="md-accent" 
-                    value="{{vm.progress}}" 
-                    ng-if="vm.progress < 100">
-                </md-progress-linear>
-                <md-progress-linear md-mode="indeterminate" 
-                    class="md-accent" 
-                    ng-if="vm.progress == 100">
-                </md-progress-linear>
-            </div>
-        </div>
-    </div>
-  </div>
-  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons">
-        <div>
-            <md-button class="md-accent" ng-if="vm.state == 'start'"
-                       ng-repeat="start in vm.startButtons" ng-click="start.click()">
-                {{start.title}}
-            </md-button>
-
-            <md-button class="md-accent" 
-                       ng-click="vm.onCancel()" 
-                       ng-show="!vm.state">
-                Cancel
-            </md-button>
-
-        </div>
-    </div>  
-</div>
+<pip-start-upload 
+        ng-if="vm.state == 'start'"
+        pip-name="vm.name" 
+        pip-type="vm.type" 
+        pip-progress="vm.progress"
+        pip-buttons="vm.startButtons"></pip-start-upload>
 </div>
