@@ -11,6 +11,7 @@
         $httpBackend.whenGET(/^files_sample\//).passThrough();
         $httpBackend.whenGET(/^files_upload\//).passThrough();
         $httpBackend.whenGET(/^files_success\//).passThrough();
+        $httpBackend.whenGET(/^files_fail\//).passThrough();
         $httpBackend.whenGET(/^images\//).passThrough();
     });
 
