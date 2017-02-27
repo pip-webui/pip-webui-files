@@ -54,9 +54,12 @@ module.run(['$templateCache', function($templateCache) {
     '        </div>\n' +
     '    </div>\n' +
     '  </div>\n' +
-    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons">\n' +
+    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons && vm.buttons.length > 0">\n' +
     '        <div>\n' +
-    '            \n' +
+    '           <md-button class="md-accent" \n' +
+    '                       ng-repeat="start in vm.buttons" ng-click="start.click()">\n' +
+    '                {{start.title}}\n' +
+    '            </md-button> \n' +
     '        </div>\n' +
     '    </div>  \n' +
     '</div>');
@@ -123,22 +126,21 @@ module.run(['$templateCache', function($templateCache) {
     '  </div>\n' +
     '  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons">\n' +
     '        <div>\n' +
-    '            <md-button class="md-accent" \n' +
-    '                       ng-click="vm.onCancel()" \n' +
-    '                       ng-show="!vm.state || vm.state == \'fail\'">\n' +
-    '                Cancel\n' +
+    '            <md-button class="md-accent" ng-if="vm.state == \'fail\'"\n' +
+    '                       ng-repeat="fail in vm.failButtons" ng-click="fail.click()">\n' +
+    '                {{fail.title}}\n' +
+    '            </md-button>\n' +
+    '            <md-button class="md-accent" ng-if="vm.state == \'start\'"\n' +
+    '                       ng-repeat="start in vm.startButtons" ng-click="start.click()">\n' +
+    '                {{start.title}}\n' +
     '            </md-button>\n' +
     '\n' +
     '            <md-button class="md-accent" \n' +
-    '                       ng-click="vm.onRetry()"\n' +
-    '                       ng-show="vm.state == \'fail\'">\n' +
-    '                Retry\n' +
+    '                       ng-click="vm.onCancel()" \n' +
+    '                       ng-show="!vm.state">\n' +
+    '                Cancel\n' +
     '            </md-button>\n' +
-    '            <md-button class="md-accent" \n' +
-    '                       ng-click="vm.onAbort()"\n' +
-    '                       ng-show="vm.state == \'start\'">\n' +
-    '                Abort\n' +
-    '            </md-button>\n' +
+    '\n' +
     '        </div>\n' +
     '    </div>  \n' +
     '</div>\n' +

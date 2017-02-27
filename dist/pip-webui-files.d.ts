@@ -1,5 +1,10 @@
 declare module pip.files {
 
+export class ButtonsUpload {
+    title: string;
+    click: Function;
+}
+
 
 export interface IFileSelectController {
     localFile: any;
@@ -37,12 +42,12 @@ export class FileUploadService implements IFileUploadService {
 export interface IFileSuccessController {
     name: string;
     type: string;
-    buttons: boolean;
+    buttons: ButtonsUpload[];
 }
 export class FileSuccessController implements IFileSuccessController {
     name: string;
     type: string;
-    buttons: boolean;
+    buttons: ButtonsUpload[];
     constructor($scope: ng.IScope);
 }
 
@@ -61,7 +66,10 @@ export class FileUploadButtons {
     abort: Function;
 }
 export class FileUploadController implements IFileUploadController {
-    private _buttonFunction;
+    private _functions;
+    uploadButtons: ButtonsUpload[];
+    failButtons: ButtonsUpload[];
+    startButtons: ButtonsUpload[];
     name: string;
     type: string;
     state: string;

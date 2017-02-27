@@ -1,4 +1,13 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}(g.pip || (g.pip = {})).files = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var ButtonsUpload = (function () {
+    function ButtonsUpload() {
+    }
+    return ButtonsUpload;
+}());
+exports.ButtonsUpload = ButtonsUpload;
+},{}],2:[function(require,module,exports){
 (function () {
     'use strict';
     var thisModule = angular.module('pipFiles.Translate', []);
@@ -10,7 +19,7 @@
         };
     }]);
 })();
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileSelectController_1 = require("./select/FileSelectController");
@@ -86,7 +95,7 @@ var FileUploadService_1 = require("./service/FileUploadService");
         .directive('pipSuccesUpload', fileSuccessDirective)
         .service('pipFileUpload', FileUploadService_1.FileUploadService);
 })();
-},{"./select/FileSelectController":3,"./service/FileUploadService":4,"./success/FileSuccessController":5,"./upload/FileUploadController":6}],3:[function(require,module,exports){
+},{"./select/FileSelectController":4,"./service/FileUploadService":5,"./success/FileSuccessController":6,"./upload/FileUploadController":7}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileSelectController = (function () {
@@ -109,7 +118,7 @@ var FileSelectController = (function () {
     return FileSelectController;
 }());
 exports.FileSelectController = FileSelectController;
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileUploadState = (function () {
@@ -163,7 +172,7 @@ var FileUploadService = (function () {
     return FileUploadService;
 }());
 exports.FileUploadService = FileUploadService;
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileSuccessController = (function () {
@@ -172,12 +181,12 @@ var FileSuccessController = (function () {
         "ngInject";
         this.type = $scope['type'] || 'file';
         this.name = $scope['name'];
-        this.buttons = $scope['buttons'];
+        this.buttons = $scope['buttons'] || null;
     }
     return FileSuccessController;
 }());
 exports.FileSuccessController = FileSuccessController;
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileUploadButtons = (function () {
@@ -192,7 +201,17 @@ var FileUploadController = (function () {
         "ngInject";
         var _this = this;
         this.error = null;
-        this._buttonFunction = $scope['buttonFunction'] || new FileUploadButtons();
+        this._functions = $scope['buttonFunction'];
+        if (this._functions) {
+            this.uploadButtons = [];
+            this.failButtons = [
+                { title: 'Cancel', click: function () { _this.onCancel(); } },
+                { title: 'Retry', click: function () { _this.onRetry(); } }
+            ];
+            this.startButtons = [
+                { title: 'Abort', click: function () { _this.onAbort(); } }
+            ];
+        }
         this.buttons = $scope['buttons'] || false;
         this.type = $scope['type'] || 'file';
         this.name = $scope['name'];
@@ -210,21 +229,21 @@ var FileUploadController = (function () {
         });
     }
     FileUploadController.prototype.onCancel = function () {
-        if (this._buttonFunction.cancel)
-            this._buttonFunction.cancel();
+        if (this._functions.cancel)
+            this._functions.cancel();
     };
     FileUploadController.prototype.onRetry = function () {
-        if (this._buttonFunction.retry)
-            this._buttonFunction.retry();
+        if (this._functions.retry)
+            this._functions.retry();
     };
     FileUploadController.prototype.onAbort = function () {
-        if (this._buttonFunction.abort)
-            this._buttonFunction.abort();
+        if (this._functions.abort)
+            this._functions.abort();
     };
     return FileUploadController;
 }());
 exports.FileUploadController = FileUploadController;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 (function(module) {
 try {
   module = angular.module('pipFiles.Templates');
@@ -281,9 +300,12 @@ module.run(['$templateCache', function($templateCache) {
     '        </div>\n' +
     '    </div>\n' +
     '  </div>\n' +
-    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons">\n' +
+    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons && vm.buttons.length > 0">\n' +
     '        <div>\n' +
-    '            \n' +
+    '           <md-button class="md-accent" \n' +
+    '                       ng-repeat="start in vm.buttons" ng-click="start.click()">\n' +
+    '                {{start.title}}\n' +
+    '            </md-button> \n' +
     '        </div>\n' +
     '    </div>  \n' +
     '</div>');
@@ -350,22 +372,21 @@ module.run(['$templateCache', function($templateCache) {
     '  </div>\n' +
     '  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons">\n' +
     '        <div>\n' +
-    '            <md-button class="md-accent" \n' +
-    '                       ng-click="vm.onCancel()" \n' +
-    '                       ng-show="!vm.state || vm.state == \'fail\'">\n' +
-    '                Cancel\n' +
+    '            <md-button class="md-accent" ng-if="vm.state == \'fail\'"\n' +
+    '                       ng-repeat="fail in vm.failButtons" ng-click="fail.click()">\n' +
+    '                {{fail.title}}\n' +
+    '            </md-button>\n' +
+    '            <md-button class="md-accent" ng-if="vm.state == \'start\'"\n' +
+    '                       ng-repeat="start in vm.startButtons" ng-click="start.click()">\n' +
+    '                {{start.title}}\n' +
     '            </md-button>\n' +
     '\n' +
     '            <md-button class="md-accent" \n' +
-    '                       ng-click="vm.onRetry()"\n' +
-    '                       ng-show="vm.state == \'fail\'">\n' +
-    '                Retry\n' +
+    '                       ng-click="vm.onCancel()" \n' +
+    '                       ng-show="!vm.state">\n' +
+    '                Cancel\n' +
     '            </md-button>\n' +
-    '            <md-button class="md-accent" \n' +
-    '                       ng-click="vm.onAbort()"\n' +
-    '                       ng-show="vm.state == \'start\'">\n' +
-    '                Abort\n' +
-    '            </md-button>\n' +
+    '\n' +
     '        </div>\n' +
     '    </div>  \n' +
     '</div>\n' +
@@ -375,7 +396,7 @@ module.run(['$templateCache', function($templateCache) {
 
 
 
-},{}]},{},[7,1,2,3,4,5,6])(7)
+},{}]},{},[8,1,2,3,4,5,6,7])(8)
 });
 
 //# sourceMappingURL=pip-webui-files.js.map
