@@ -1,12 +1,5 @@
 declare module pip.themes {
 
-function configureBootBarnCoolTheme($mdThemingProvider: ng.material.IThemingProvider): void;
-
-function configureBootBarnMonochromeTheme($mdThemingProvider: ng.material.IThemingProvider): void;
-
-function configureBootBarnWarmTheme($mdThemingProvider: any): void;
-
-
 
 export let ThemeRootVar: string;
 export let ThemeChangedEvent: string;
@@ -19,6 +12,13 @@ export interface IThemeProvider extends IThemeService, ng.IServiceProvider {
     setRootVar: boolean;
     persist: boolean;
 }
+
+function configureBootBarnCoolTheme($mdThemingProvider: ng.material.IThemingProvider): void;
+
+function configureBootBarnMonochromeTheme($mdThemingProvider: ng.material.IThemingProvider): void;
+
+function configureBootBarnWarmTheme($mdThemingProvider: any): void;
+
 
 function configureDefaultAmberTheme($mdThemingProvider: ng.material.IThemingProvider): void;
 
