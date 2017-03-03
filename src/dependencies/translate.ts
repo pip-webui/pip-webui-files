@@ -5,18 +5,18 @@
  
 /* global angular */
 
-(function () {
+(() => {
     'use strict';
-
-    var thisModule = angular.module('pipFiles.Translate', []);
-
-    thisModule.filter('translate', function ($injector) {
-        var pipTranslate = $injector.has('pipTranslate') 
+    function filerTranslate($injector: angular.auto.IInjectorService) {
+        let pipTranslate: any = $injector.has('pipTranslate') 
             ? $injector.get('pipTranslate') : null;
 
-        return function (key) {
+        return (key: string) => {
             return pipTranslate  ? pipTranslate.translate(key) || key : key;
         }
-    });
+    }
+
+    angular.module('pipFiles.Translate', [])
+        .filter('translate', filerTranslate);
 
 })();

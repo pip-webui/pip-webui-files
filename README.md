@@ -21,7 +21,6 @@ Pip.WebUI.Files module provides controls to select files on local disk and uploa
     <img src="https://github.com/pip-webui/pip-webui-files/blob/master/doc/images/img-files-progress.png"/>
 </a>
 
-
 See online sample [here...](http://webui.pipdevs.com/pip-webui-files/index.html#/upload)
 
 ## Learn more about the module

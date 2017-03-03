@@ -13,29 +13,20 @@ export interface IFileUploadService {
 }
 
 export class FileUploadService implements IFileUploadService {
-    private _http: ng.IHttpService;
-
     public progress: number;
     public state: string;
     public error: string = null;
 
-    public constructor(
-        $http: ng.IHttpService
-    ) {
-        "ngInject";
-
-        this._http = $http;
-    }
+    public constructor( private $http: ng.IHttpService) {}
 
     public upload(url: string, file: any, callback?: (data: any, err: any) => void): void {
-        //console.log(file); 
-
-        let fd = new FormData();
+        
+        let fd: FormData = new FormData();
         fd.append('file', file);
         
         this.progress = 0;
         this.state = FileUploadState.Start;
-        this._http.post(url, fd, <any>{
+        this.$http.post(url, fd, <any>{
             uploadEventHandlers: {
                 progress: (e: any) => {
                     if (e.lengthComputable) {
