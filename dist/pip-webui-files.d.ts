@@ -45,7 +45,7 @@ export interface IFileUploadService {
     upload(url: string, file: any, transaction: any, callback?: (data: any, err: any) => void): void;
 }
 export class FileUploadService implements IFileUploadService {
-    private _http;
+    private $http;
     progress: number;
     state: string;
     error: string;
