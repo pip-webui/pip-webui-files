@@ -1,20 +1,20 @@
 <div>
     <pip-succes-upload 
-        ng-if="vm.state == 'upload'"
-        pip-name="vm.name" 
-        pip-type="vm.type" 
-        pip-buttons="vm.buttons"></pip-succes-upload>
+        ng-if="$ctrl.state == 'upload'"
+        pip-name="$ctrl.name" 
+        pip-type="$ctrl.type" 
+        pip-buttons="$ctrl.buttons"></pip-succes-upload>
     <pip-fail-upload 
-        ng-if="vm.state == 'fail'"
-        pip-name="vm.name" 
-        pip-type="vm.type" 
-        pip-error="vm.error"
-        pip-buttons="vm.failButtons"></pip-fail-upload>
+        ng-if="$ctrl.state == 'fail'"
+        pip-name="$ctrl.name" 
+        pip-type="$ctrl.type" 
+        pip-error="$ctrl.error"
+        pip-buttons="$ctrl.failButtons"></pip-fail-upload>
 
 <pip-start-upload 
-        ng-if="vm.state == 'start'"
-        pip-name="vm.name" 
-        pip-type="vm.type" 
-        pip-progress="vm.progress"
-        pip-buttons="vm.startButtons"></pip-start-upload>
+        ng-if="$ctrl.state == 'start'"
+        pip-name="$ctrl.name" 
+        pip-type="$ctrl.type" 
+        pip-progress="$ctrl.progress"
+        pip-buttons="$ctrl.startButtons"></pip-start-upload>
 </div>

@@ -255,8 +255,7 @@ var FileUploadController = (function () {
         "ngInject";
         var _this = this;
         this.error = null;
-        this._functions = $scope['buttonFunction'];
-        if (this._functions) {
+        if (this.buttonFunction) {
             this.uploadButtons = [];
             this.failButtons = [
                 { title: 'Cancel', click: function () { _this.onCancel(); } },
@@ -266,12 +265,6 @@ var FileUploadController = (function () {
                 { title: 'Abort', click: function () { _this.onAbort(); } }
             ];
         }
-        this.buttons = $scope['buttons'] || false;
-        this.type = $scope['type'] || 'file';
-        this.name = $scope['name'];
-        this.state = $scope['state'];
-        this.error = $scope['error'];
-        this.progress = $scope['progress'];
         $scope.$watch('state', function (state) {
             _this.state = state;
         });
@@ -283,16 +276,16 @@ var FileUploadController = (function () {
         });
     }
     FileUploadController.prototype.onCancel = function () {
-        if (this._functions.cancel)
-            this._functions.cancel();
+        if (this.buttonFunction.cancel)
+            this.buttonFunction.cancel();
     };
     FileUploadController.prototype.onRetry = function () {
-        if (this._functions.retry)
-            this._functions.retry();
+        if (this.buttonFunction.retry)
+            this.buttonFunction.retry();
     };
     FileUploadController.prototype.onAbort = function () {
-        if (this._functions.abort)
-            this._functions.abort();
+        if (this.buttonFunction.abort)
+            this.buttonFunction.abort();
     };
     return FileUploadController;
 }());
@@ -301,28 +294,29 @@ exports.FileUploadController = FileUploadController;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileUploadController_1 = require("./FileUploadController");
-(function () {
-    function fileUploadDirective() {
-        return {
-            restrict: 'E',
-            replace: true,
-            controller: FileUploadController_1.FileUploadController,
-            controllerAs: 'vm',
-            scope: {
-                buttonFunction: '=?pipButtonFunctions',
-                buttons: '=?pipButtons',
-                error: '=?pipError',
-                name: '=pipName',
-                state: '=pipState',
-                type: '=?pipType',
-                progress: '=pipProgress'
-            },
-            templateUrl: 'upload/FileUpload.html'
-        };
+var FileUploadBindings = {
+    buttonFunction: '=?pipButtonFunctions',
+    buttons: '=?pipButtons',
+    error: '=?pipError',
+    name: '<pipName',
+    state: '=pipState',
+    type: '=?pipType',
+    progress: '=pipProgress'
+};
+var FileUploadChanges = (function () {
+    function FileUploadChanges() {
     }
+    return FileUploadChanges;
+}());
+var fileUploadDirective = {
+    controller: FileUploadController_1.FileUploadController,
+    bindings: FileUploadBindings,
+    templateUrl: 'upload/FileUpload.html'
+};
+(function () {
     angular
         .module('pipFiles.FileUpload', [])
-        .directive('pipFileUpload', fileUploadDirective);
+        .component('pipFileUpload', fileUploadDirective);
 })();
 },{"./FileUploadController":10}],12:[function(require,module,exports){
 (function(module) {
@@ -381,7 +375,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('upload/FileUpload.html',
-    '<div><pip-succes-upload ng-if="vm.state == \'upload\'" pip-name="vm.name" pip-type="vm.type" pip-buttons="vm.buttons"></pip-succes-upload><pip-fail-upload ng-if="vm.state == \'fail\'" pip-name="vm.name" pip-type="vm.type" pip-error="vm.error" pip-buttons="vm.failButtons"></pip-fail-upload><pip-start-upload ng-if="vm.state == \'start\'" pip-name="vm.name" pip-type="vm.type" pip-progress="vm.progress" pip-buttons="vm.startButtons"></pip-start-upload></div>');
+    '<div><pip-succes-upload ng-if="$ctrl.state == \'upload\'" pip-name="$ctrl.name" pip-type="$ctrl.type" pip-buttons="$ctrl.buttons"></pip-succes-upload><pip-fail-upload ng-if="$ctrl.state == \'fail\'" pip-name="$ctrl.name" pip-type="$ctrl.type" pip-error="$ctrl.error" pip-buttons="$ctrl.failButtons"></pip-fail-upload><pip-start-upload ng-if="$ctrl.state == \'start\'" pip-name="$ctrl.name" pip-type="$ctrl.type" pip-progress="$ctrl.progress" pip-buttons="$ctrl.startButtons"></pip-start-upload></div>');
 }]);
 })();
 

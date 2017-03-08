@@ -163,23 +163,23 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('upload/FileUpload.html',
     '<div>\n' +
     '    <pip-succes-upload \n' +
-    '        ng-if="vm.state == \'upload\'"\n' +
-    '        pip-name="vm.name" \n' +
-    '        pip-type="vm.type" \n' +
-    '        pip-buttons="vm.buttons"></pip-succes-upload>\n' +
+    '        ng-if="$ctrl.state == \'upload\'"\n' +
+    '        pip-name="$ctrl.name" \n' +
+    '        pip-type="$ctrl.type" \n' +
+    '        pip-buttons="$ctrl.buttons"></pip-succes-upload>\n' +
     '    <pip-fail-upload \n' +
-    '        ng-if="vm.state == \'fail\'"\n' +
-    '        pip-name="vm.name" \n' +
-    '        pip-type="vm.type" \n' +
-    '        pip-error="vm.error"\n' +
-    '        pip-buttons="vm.failButtons"></pip-fail-upload>\n' +
+    '        ng-if="$ctrl.state == \'fail\'"\n' +
+    '        pip-name="$ctrl.name" \n' +
+    '        pip-type="$ctrl.type" \n' +
+    '        pip-error="$ctrl.error"\n' +
+    '        pip-buttons="$ctrl.failButtons"></pip-fail-upload>\n' +
     '\n' +
     '<pip-start-upload \n' +
-    '        ng-if="vm.state == \'start\'"\n' +
-    '        pip-name="vm.name" \n' +
-    '        pip-type="vm.type" \n' +
-    '        pip-progress="vm.progress"\n' +
-    '        pip-buttons="vm.startButtons"></pip-start-upload>\n' +
+    '        ng-if="$ctrl.state == \'start\'"\n' +
+    '        pip-name="$ctrl.name" \n' +
+    '        pip-type="$ctrl.type" \n' +
+    '        pip-progress="$ctrl.progress"\n' +
+    '        pip-buttons="$ctrl.startButtons"></pip-start-upload>\n' +
     '</div>');
 }]);
 })();

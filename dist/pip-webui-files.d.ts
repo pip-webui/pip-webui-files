@@ -102,7 +102,7 @@ export class FileUploadButtons {
     abort: Function;
 }
 export class FileUploadController implements IFileUploadController {
-    private _functions;
+    buttonFunction: FileUploadButtons;
     uploadButtons: ButtonsUpload[];
     failButtons: ButtonsUpload[];
     startButtons: ButtonsUpload[];

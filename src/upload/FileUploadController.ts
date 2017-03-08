@@ -25,7 +25,7 @@ export class FileUploadButtons {
 
 export class FileUploadController implements IFileUploadController {
     //private _buttonFunction: FileUploadButtons;
-    private _functions: FileUploadButtons;
+    public buttonFunction: FileUploadButtons;
     public uploadButtons: ButtonsUpload[];
     public failButtons: ButtonsUpload[];
     public startButtons: ButtonsUpload[];
@@ -42,10 +42,10 @@ export class FileUploadController implements IFileUploadController {
     ) {
         "ngInject";
 
-        this._functions = $scope['buttonFunction'];
+        //this.buttonFunction = $scope['buttonFunction'];
         
         // Init parameters
-        if (this._functions) {
+        if (this.buttonFunction) {
             this.uploadButtons = [];
             this.failButtons = [
                 {title: 'Cancel', click: () => { this.onCancel()}},
@@ -55,12 +55,6 @@ export class FileUploadController implements IFileUploadController {
                 {title: 'Abort', click: () => { this.onAbort() }}
             ];
         }
-        this.buttons = $scope['buttons'] || false;
-        this.type = $scope['type'] || 'file';
-        this.name = $scope['name'];
-        this.state = $scope['state'];
-        this.error = $scope['error'];
-        this.progress = $scope['progress'];
 
         $scope.$watch('state', (state: string) => {
             this.state = state;
@@ -76,15 +70,15 @@ export class FileUploadController implements IFileUploadController {
     }
 
     public onCancel(): void {
-        if (this._functions.cancel) this._functions.cancel();
+        if (this.buttonFunction.cancel) this.buttonFunction.cancel();
     }
 
     public onRetry(): void {
-        if (this._functions.retry) this._functions.retry();
+        if (this.buttonFunction.retry) this.buttonFunction.retry();
     }
 
     public onAbort() {
-        if (this._functions.abort) this._functions.abort();
+        if (this.buttonFunction.abort) this.buttonFunction.abort();
     }
 
 }

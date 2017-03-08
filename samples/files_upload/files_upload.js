@@ -10,6 +10,7 @@
             $scope.progress = 0;
             $scope.state = 'start';
             $scope.state2 = 'start';
+            $scope.name = 'New file';
             $scope.buttonFunctions = {
                 retry: () => {
                     $scope.message = 'retry'
