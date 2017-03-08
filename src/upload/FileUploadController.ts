@@ -28,7 +28,6 @@ export class FileUploadButtons {
 }
 
 export class FileUploadController implements IFileUploadController {
-    //private _buttonFunction: FileUploadButtons;
     public buttonFunction: FileUploadButtons;
     public uploadButtons: ButtonsUpload[];
     public failButtons: ButtonsUpload[];
@@ -41,12 +40,8 @@ export class FileUploadController implements IFileUploadController {
     public buttons: boolean;
     public error: string = null;
 
-    constructor(
-        $scope: ng.IScope
-    ) {
+    constructor( $scope: ng.IScope ) {
         "ngInject";
-
-        //this.buttonFunction = $scope['buttonFunction'];
         
         // Init parameters
         if (this.buttonFunction) {
