@@ -1,7 +1,7 @@
 
 import {FileUploadController, FileUploadButtons} from './FileUploadController';
 
-interface IFileUploadBindings {
+export interface IFileUploadBindings {
     [key: string]: any;
 
     buttonFunction: any,
@@ -15,15 +15,15 @@ interface IFileUploadBindings {
 
 const FileUploadBindings: IFileUploadBindings = {
     buttonFunction: '<?pipButtonFunctions',
-    buttons: '=?pipButtons',
-    error: '=?pipError',
+    buttons: '<?pipButtons',
+    error: '<?pipError',
     name: '<pipName',
-    state: '=pipState',
+    state: '<pipState',
     type: '<?pipType',
-    progress: '=pipProgress'
+    progress: '<pipProgress'
 }
 
-class FileUploadChanges implements ng.IOnChangesObject, IFileUploadBindings {
+export class FileUploadChanges implements ng.IOnChangesObject, IFileUploadBindings {
     [key: string]: ng.IChangesObject<any>;
     // Not one way bindings
 

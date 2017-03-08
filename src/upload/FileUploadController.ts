@@ -7,6 +7,10 @@ import {
     ButtonsUpload
 } from "../common/ButtonsUpload";
 
+import {
+    FileUploadChanges
+} from "./index";
+
 export interface IFileUploadController {
     name: string;
     type: string;
@@ -55,18 +59,22 @@ export class FileUploadController implements IFileUploadController {
                 {title: 'Abort', click: () => { this.onAbort() }}
             ];
         }
+    }
 
-        $scope.$watch('state', (state: string) => {
-            this.state = state;
-        })
+    
+    public $onChanges(changes: FileUploadChanges) {
+        if (changes.state) {
+            this.state = changes.state.currentValue;
+        }
 
-        $scope.$watch('error', (error: string) => {
-            this.error = error;
-        })
+        if (changes.progress) {
+            this.progress = changes.progress.currentValue;
+        }
 
-        $scope.$watch('progress', (progress: number) => {
-            this.progress = progress;
-        })
+        if (changes.error) {
+            this.error = changes.error.currentValue;
+        }
+
     }
 
     public onCancel(): void {

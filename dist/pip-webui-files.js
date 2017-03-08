@@ -265,16 +265,18 @@ var FileUploadController = (function () {
                 { title: 'Abort', click: function () { _this.onAbort(); } }
             ];
         }
-        $scope.$watch('state', function (state) {
-            _this.state = state;
-        });
-        $scope.$watch('error', function (error) {
-            _this.error = error;
-        });
-        $scope.$watch('progress', function (progress) {
-            _this.progress = progress;
-        });
     }
+    FileUploadController.prototype.$onChanges = function (changes) {
+        if (changes.state) {
+            this.state = changes.state.currentValue;
+        }
+        if (changes.progress) {
+            this.progress = changes.progress.currentValue;
+        }
+        if (changes.error) {
+            this.error = changes.error.currentValue;
+        }
+    };
     FileUploadController.prototype.onCancel = function () {
         if (this.buttonFunction.cancel)
             this.buttonFunction.cancel();
@@ -296,18 +298,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var FileUploadController_1 = require("./FileUploadController");
 var FileUploadBindings = {
     buttonFunction: '<?pipButtonFunctions',
-    buttons: '=?pipButtons',
-    error: '=?pipError',
+    buttons: '<?pipButtons',
+    error: '<?pipError',
     name: '<pipName',
-    state: '=pipState',
+    state: '<pipState',
     type: '<?pipType',
-    progress: '=pipProgress'
+    progress: '<pipProgress'
 };
 var FileUploadChanges = (function () {
     function FileUploadChanges() {
     }
     return FileUploadChanges;
 }());
+exports.FileUploadChanges = FileUploadChanges;
 var fileUploadDirective = {
     controller: FileUploadController_1.FileUploadController,
     bindings: FileUploadBindings,
