@@ -67,6 +67,7 @@ export class FileStartController implements IFileStartController {
     constructor($scope: ng.IScope);
 }
 
+
 export interface IFileSuccessController {
     name: string;
     type: string;

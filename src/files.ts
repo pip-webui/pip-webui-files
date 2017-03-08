@@ -2,10 +2,10 @@
 import {FileSelectController} from './select/FileSelectController';
 import {FileFailController} from './fail/FileFailController';
 import {FileUploadService} from './service/FileUploadService';
-import {FileStartController} from './start/FileStartController';
 
 import './success/index';
 import './upload/index';
+import './start/index';
 
 (() => {
     function fileModelDirective($parse: any) {
@@ -54,30 +54,15 @@ import './upload/index';
         };
     }
 
-    function fileStartDirective() {
-        return {
-            restrict: 'E',
-            replace: true,
-            controller: FileStartController,
-            controllerAs: 'vm',
-            scope: {
-                buttons: '=?pipButtons',
-                name: '=pipName',
-                type: '=?pipType',
-                progress: '=pipProgress'
-            },
-            templateUrl: 'start/FileStart.html'
-        };
-    }
 
     angular
-        .module('pipFiles', ['pipFiles.SuccessUpload', 'pipFiles.FileUpload'])
+        .module('pipFiles', ['pipFiles.SuccessUpload', 'pipFiles.FileUpload', 'pipFiles.StartUpload'])
         .directive('fileModel', fileModelDirective)
         .directive('pipFileSelect', fileSelectDirective)
         //.directive('pipFileUpload', fileUploadDirective)
         //.component('pipSuccesUpload', fileSuccessDirective)
         .directive('pipFailUpload', fileFailDirective)
-        .directive('pipStartUpload', fileStartDirective)
+        //.directive('pipStartUpload', fileStartDirective)
         .service('pipFileUpload', FileUploadService);
 
 

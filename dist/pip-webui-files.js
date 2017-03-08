@@ -46,9 +46,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var FileSelectController_1 = require("./select/FileSelectController");
 var FileFailController_1 = require("./fail/FileFailController");
 var FileUploadService_1 = require("./service/FileUploadService");
-var FileStartController_1 = require("./start/FileStartController");
 require("./success/index");
 require("./upload/index");
+require("./start/index");
 (function () {
     fileModelDirective.$inject = ['$parse'];
     function fileModelDirective($parse) {
@@ -93,30 +93,14 @@ require("./upload/index");
             templateUrl: 'fail/FileFail.html'
         };
     }
-    function fileStartDirective() {
-        return {
-            restrict: 'E',
-            replace: true,
-            controller: FileStartController_1.FileStartController,
-            controllerAs: 'vm',
-            scope: {
-                buttons: '=?pipButtons',
-                name: '=pipName',
-                type: '=?pipType',
-                progress: '=pipProgress'
-            },
-            templateUrl: 'start/FileStart.html'
-        };
-    }
     angular
-        .module('pipFiles', ['pipFiles.SuccessUpload', 'pipFiles.FileUpload'])
+        .module('pipFiles', ['pipFiles.SuccessUpload', 'pipFiles.FileUpload', 'pipFiles.StartUpload'])
         .directive('fileModel', fileModelDirective)
         .directive('pipFileSelect', fileSelectDirective)
         .directive('pipFailUpload', fileFailDirective)
-        .directive('pipStartUpload', fileStartDirective)
         .service('pipFileUpload', FileUploadService_1.FileUploadService);
 })();
-},{"./fail/FileFailController":3,"./select/FileSelectController":5,"./service/FileUploadService":6,"./start/FileStartController":7,"./success/index":9,"./upload/index":11}],5:[function(require,module,exports){
+},{"./fail/FileFailController":3,"./select/FileSelectController":5,"./service/FileUploadService":6,"./start/index":8,"./success/index":10,"./upload/index":12}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileSelectController = (function () {
@@ -210,6 +194,30 @@ exports.FileStartController = FileStartController;
 },{}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var FileStartController_1 = require("./FileStartController");
+(function () {
+    function fileStartDirective() {
+        return {
+            restrict: 'E',
+            replace: true,
+            controller: FileStartController_1.FileStartController,
+            controllerAs: 'vm',
+            scope: {
+                buttons: '=?pipButtons',
+                name: '=pipName',
+                type: '=?pipType',
+                progress: '=pipProgress'
+            },
+            templateUrl: 'start/FileStart.html'
+        };
+    }
+    angular
+        .module('pipFiles.StartUpload', [])
+        .directive('pipStartUpload', fileStartDirective);
+})();
+},{"./FileStartController":7}],9:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var FileSuccessController = (function () {
     function FileSuccessController() {
         this.type = 'file';
@@ -218,7 +226,7 @@ var FileSuccessController = (function () {
     return FileSuccessController;
 }());
 exports.FileSuccessController = FileSuccessController;
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileSuccessController_1 = require("./FileSuccessController");
@@ -240,7 +248,7 @@ var FileSuccessBindings = {
         .module('pipFiles.SuccessUpload', [])
         .component('pipSuccesUpload', fileSuccessDirective);
 })();
-},{"./FileSuccessController":8}],10:[function(require,module,exports){
+},{"./FileSuccessController":9}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileUploadButtons = (function () {
@@ -292,7 +300,7 @@ var FileUploadController = (function () {
     return FileUploadController;
 }());
 exports.FileUploadController = FileUploadController;
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileUploadController_1 = require("./FileUploadController");
@@ -321,7 +329,7 @@ var fileUploadDirective = {
         .module('pipFiles.FileUpload', [])
         .component('pipFileUpload', fileUploadDirective);
 })();
-},{"./FileUploadController":10}],12:[function(require,module,exports){
+},{"./FileUploadController":11}],13:[function(require,module,exports){
 (function(module) {
 try {
   module = angular.module('pipFiles.Templates');
@@ -384,7 +392,7 @@ module.run(['$templateCache', function($templateCache) {
 
 
 
-},{}]},{},[12,1,2,3,4,5,6,7,8,9,10,11])(12)
+},{}]},{},[13,1,2,3,4,5,6,7,8,9,10,11,12])(13)
 });
 
 //# sourceMappingURL=pip-webui-files.js.map
