@@ -45,10 +45,10 @@ exports.FileFailController = FileFailController;
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileSelectController_1 = require("./select/FileSelectController");
 var FileUploadController_1 = require("./upload/FileUploadController");
-var FileSuccessController_1 = require("./success/FileSuccessController");
 var FileFailController_1 = require("./fail/FileFailController");
 var FileUploadService_1 = require("./service/FileUploadService");
 var FileStartController_1 = require("./start/FileStartController");
+require("./success/index");
 (function () {
     fileModelDirective.$inject = ['$parse'];
     function fileModelDirective($parse) {
@@ -96,20 +96,6 @@ var FileStartController_1 = require("./start/FileStartController");
             templateUrl: 'upload/FileUpload.html'
         };
     }
-    function fileSuccessDirective() {
-        return {
-            restrict: 'E',
-            replace: true,
-            controller: FileSuccessController_1.FileSuccessController,
-            controllerAs: 'vm',
-            scope: {
-                buttons: '=?pipButtons',
-                name: '=pipName',
-                type: '=?pipType',
-            },
-            templateUrl: 'success/FileSuccess.html'
-        };
-    }
     function fileFailDirective() {
         return {
             restrict: 'E',
@@ -141,16 +127,15 @@ var FileStartController_1 = require("./start/FileStartController");
         };
     }
     angular
-        .module('pipFiles', [])
+        .module('pipFiles', ['pipFiles.SuccessUpload'])
         .directive('fileModel', fileModelDirective)
         .directive('pipFileSelect', fileSelectDirective)
         .directive('pipFileUpload', fileUploadDirective)
-        .directive('pipSuccesUpload', fileSuccessDirective)
         .directive('pipFailUpload', fileFailDirective)
         .directive('pipStartUpload', fileStartDirective)
         .service('pipFileUpload', FileUploadService_1.FileUploadService);
 })();
-},{"./fail/FileFailController":3,"./select/FileSelectController":5,"./service/FileUploadService":6,"./start/FileStartController":7,"./success/FileSuccessController":8,"./upload/FileUploadController":9}],5:[function(require,module,exports){
+},{"./fail/FileFailController":3,"./select/FileSelectController":5,"./service/FileUploadService":6,"./start/FileStartController":7,"./success/index":9,"./upload/FileUploadController":10}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileSelectController = (function () {
@@ -245,17 +230,36 @@ exports.FileStartController = FileStartController;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileSuccessController = (function () {
-    FileSuccessController.$inject = ['$scope'];
-    function FileSuccessController($scope) {
-        "ngInject";
-        this.type = $scope['type'] || 'file';
-        this.name = $scope['name'];
-        this.buttons = $scope['buttons'] || null;
+    function FileSuccessController() {
+        this.type = 'file';
     }
+    FileSuccessController.prototype.$onChanges = function (changes) { };
     return FileSuccessController;
 }());
 exports.FileSuccessController = FileSuccessController;
 },{}],9:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var FileSuccessController_1 = require("./FileSuccessController");
+var FileSuccessBindings = {
+    buttons: '=?pipButtons',
+    name: '=pipName',
+    type: '=?pipType',
+};
+(function () {
+    var fileSuccessDirective = {
+        restrict: 'E',
+        replace: true,
+        controller: FileSuccessController_1.FileSuccessController,
+        controllerAs: 'vm',
+        bindings: FileSuccessBindings,
+        templateUrl: 'success/FileSuccess.html'
+    };
+    angular
+        .module('pipFiles.SuccessUpload', [])
+        .component('pipSuccesUpload', fileSuccessDirective);
+})();
+},{"./FileSuccessController":8}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileUploadButtons = (function () {
@@ -312,7 +316,7 @@ var FileUploadController = (function () {
     return FileUploadController;
 }());
 exports.FileUploadController = FileUploadController;
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 (function(module) {
 try {
   module = angular.module('pipFiles.Templates');
@@ -321,7 +325,35 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('fail/FileFail.html',
-    '<div class="pip-files pip-progress-files"><div class="pip-body pip-scroll pip-progress-body"><div class="layout-row"><div class="pip-progress-icon color-badge-bg"><md-icon md-svg-icon="icons:cross"></md-icon></div><div class="pip-progress-content"><h3 class="pip-title">Uploading {{vm.type}} failed with errors!</h3><div class="color-secondary-text pip-subtitle">{{vm.name}}</div><div class="color-error pip-error">{{vm.error}}</div></div></div></div><div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons && vm.buttons.length > 0"><div><md-button class="md-accent" ng-repeat="fail in vm.buttons" ng-click="fail.click()">{{::fail.title}}</md-button></div></div></div>');
+    '<div class="pip-files pip-progress-files">\n' +
+    '  <div class="pip-body pip-scroll pip-progress-body"> \n' +
+    '    <div class="layout-row">\n' +
+    '        <div class="pip-progress-icon color-badge-bg">\n' +
+    '            <md-icon md-svg-icon="icons:cross"></md-icon>\n' +
+    '        </div>\n' +
+    '        <div class="pip-progress-content">\n' +
+    '                 <h3 class="pip-title">\n' +
+    '                Uploading {{vm.type}} failed with errors!\n' +
+    '            </h3>\n' +
+    '            <div class="color-secondary-text pip-subtitle">\n' +
+    '                {{vm.name}}\n' +
+    '            </div>\n' +
+    '            <div class="color-error pip-error">\n' +
+    '                 {{vm.error}}\n' +
+    '            </div>\n' +
+    '\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons && vm.buttons.length > 0">\n' +
+    '        <div>\n' +
+    '           <md-button class="md-accent" \n' +
+    '                       ng-repeat="fail in vm.buttons" ng-click="fail.click()">\n' +
+    '                {{::fail.title}}\n' +
+    '            </md-button> \n' +
+    '        </div>\n' +
+    '    </div>  \n' +
+    '</div>');
 }]);
 })();
 
@@ -333,7 +365,26 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('select/FileSelect.html',
-    '<div class="pip-file-select"><form id="inp_form" class="pip-hidden-form"><input type="file" file-model="vm.localFile" id="inp_file" ng-model="vm.localFile"></form><md-button class="md-raised md-accent pip-button" ng-click="vm.onUploadButtonClick()" ng-if="!vm.localFile">Choose File</md-button><div ng-if="vm.localFile.name" class="pip-file layout-row layout-align-start-center"><md-icon md-svg-icon="icons:document" class="pip-icon"></md-icon><div class="flex"><div class="text-body2 text-overflow">{{vm.localFile.name}}</div><div ng-if="vm.localFile.size" class="color-secondary-text">{{vm.localFile.size}}</div></div><md-button ng-click="vm.onDeleteButtonClick()" class="md-icon-button"><md-icon md-svg-icon="icons:cross-circle"></md-icon></md-button></div></div>');
+    '<div class="pip-file-select">\n' +
+    '      <form id="inp_form" class="pip-hidden-form">\n' +
+    '        <input type="file" file-model="vm.localFile" id="inp_file" ng-model="vm.localFile"></input>\n' +
+    '      </form>\n' +
+    '        <md-button class="md-raised md-accent pip-button"\n' +
+    '                   ng-click="vm.onUploadButtonClick()" \n' +
+    '                   ng-if="!vm.localFile">Choose File</md-button>\n' +
+    '        <div ng-if="vm.localFile.name" class="pip-file layout-row layout-align-start-center">\n' +
+    '          <md-icon md-svg-icon="icons:document" class="pip-icon"></md-icon>\n' +
+    '            <div class="flex">\n' +
+    '                <div class="text-body2 text-overflow">\n' +
+    '                    {{vm.localFile.name}}\n' +
+    '                </div>\n' +
+    '                <div ng-if="vm.localFile.size" class="color-secondary-text">{{vm.localFile.size}}</div>\n' +
+    '            </div>\n' +
+    '            <md-button ng-click="vm.onDeleteButtonClick()" class="md-icon-button">\n' +
+    '              <md-icon md-svg-icon="icons:cross-circle"></md-icon>\n' +
+    '            </md-button>\n' +
+    '        </div>\n' +
+    '</div>');
 }]);
 })();
 
@@ -345,7 +396,42 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('start/FileStart.html',
-    '<div class="pip-files pip-progress-files"><div class="pip-body pip-scroll pip-progress-body"><div class="layout-row"><div class="pip-progress-icon bb-orange"><md-icon md-svg-icon="icons:play"></md-icon></div><div class="pip-progress-content"><h3 class="pip-title">Uploading {{::vm.type}}</h3><div class="color-secondary-text pip-subtitle">{{vm.name}}</div><div><md-progress-linear md-mode="determinate" class="md-accent" value="{{vm.progress}}" ng-if="vm.progress < 100"></md-progress-linear><md-progress-linear md-mode="indeterminate" class="md-accent" ng-if="vm.progress == 100"></md-progress-linear></div></div></div></div><div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons"><div><md-button class="md-accent" ng-repeat="start in vm.buttons" ng-click="start.click()">{{start.title}}</md-button></div></div></div>');
+    '<div class="pip-files pip-progress-files">\n' +
+    '  <div class="pip-body pip-scroll pip-progress-body"> \n' +
+    '    <div class="layout-row">\n' +
+    '        <div class="pip-progress-icon bb-orange">\n' +
+    '            <md-icon md-svg-icon="icons:play"></md-icon>\n' +
+    '        </div>\n' +
+    '        <div class="pip-progress-content">\n' +
+    '            <h3 class="pip-title">\n' +
+    '                Uploading {{::vm.type}}\n' +
+    '            </h3>\n' +
+    '            <div class="color-secondary-text pip-subtitle">\n' +
+    '                {{vm.name}}\n' +
+    '            </div>\n' +
+    '            <div>\n' +
+    '                <md-progress-linear md-mode="determinate" \n' +
+    '                    class="md-accent" \n' +
+    '                    value="{{vm.progress}}" \n' +
+    '                    ng-if="vm.progress < 100">\n' +
+    '                </md-progress-linear>\n' +
+    '                <md-progress-linear md-mode="indeterminate" \n' +
+    '                    class="md-accent" \n' +
+    '                    ng-if="vm.progress == 100">\n' +
+    '                </md-progress-linear>\n' +
+    '            </div>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons">\n' +
+    '        <div>\n' +
+    '            <md-button class="md-accent" \n' +
+    '                       ng-repeat="start in vm.buttons" ng-click="start.click()">\n' +
+    '                {{start.title}}\n' +
+    '            </md-button>\n' +
+    '        </div>\n' +
+    '    </div>  \n' +
+    '</div>');
 }]);
 })();
 
@@ -357,7 +443,32 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('success/FileSuccess.html',
-    '<div class="pip-files pip-progress-files"><div class="pip-body pip-scroll pip-progress-body"><div class="layout-row"><div class="pip-progress-icon bb-green"><md-icon md-svg-icon="icons:check"></md-icon></div><div class="pip-progress-content"><h3 class="pip-title">Uploaded {{::vm.type}} successfully!</h3><div class="color-secondary-text pip-subtitle">{{vm.name}}</div></div></div></div><div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons && vm.buttons.length > 0"><div><md-button class="md-accent" ng-repeat="start in vm.buttons" ng-click="start.click()">{{start.title}}</md-button></div></div></div>');
+    '<div class="pip-files pip-progress-files">\n' +
+    '  <div class="pip-body pip-scroll pip-progress-body"> \n' +
+    '    <div class="layout-row">\n' +
+    '        <div class="pip-progress-icon bb-green">\n' +
+    '            <md-icon md-svg-icon="icons:check"></md-icon>\n' +
+    '        </div>\n' +
+    '        <div class="pip-progress-content">\n' +
+    '            <h3 class="pip-title">\n' +
+    '                Uploaded {{::vm.type}} successfully!\n' +
+    '            </h3>\n' +
+    '        \n' +
+    '            <div class="color-secondary-text pip-subtitle">\n' +
+    '                {{vm.name}}\n' +
+    '            </div>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons && vm.buttons.length > 0">\n' +
+    '        <div>\n' +
+    '           <md-button class="md-accent" \n' +
+    '                       ng-repeat="start in vm.buttons" ng-click="start.click()">\n' +
+    '                {{start.title}}\n' +
+    '            </md-button> \n' +
+    '        </div>\n' +
+    '    </div>  \n' +
+    '</div>');
 }]);
 })();
 
@@ -369,13 +480,32 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('upload/FileUpload.html',
-    '<div><pip-succes-upload ng-if="vm.state == \'upload\'" pip-name="vm.name" pip-type="vm.type" pip-buttons="vm.buttons"></pip-succes-upload><pip-fail-upload ng-if="vm.state == \'fail\'" pip-name="vm.name" pip-type="vm.type" pip-error="vm.error" pip-buttons="vm.failButtons"></pip-fail-upload><pip-start-upload ng-if="vm.state == \'start\'" pip-name="vm.name" pip-type="vm.type" pip-progress="vm.progress" pip-buttons="vm.startButtons"></pip-start-upload></div>');
+    '<div>\n' +
+    '    <pip-succes-upload \n' +
+    '        ng-if="vm.state == \'upload\'"\n' +
+    '        pip-name="vm.name" \n' +
+    '        pip-type="vm.type" \n' +
+    '        pip-buttons="vm.buttons"></pip-succes-upload>\n' +
+    '    <pip-fail-upload \n' +
+    '        ng-if="vm.state == \'fail\'"\n' +
+    '        pip-name="vm.name" \n' +
+    '        pip-type="vm.type" \n' +
+    '        pip-error="vm.error"\n' +
+    '        pip-buttons="vm.failButtons"></pip-fail-upload>\n' +
+    '\n' +
+    '<pip-start-upload \n' +
+    '        ng-if="vm.state == \'start\'"\n' +
+    '        pip-name="vm.name" \n' +
+    '        pip-type="vm.type" \n' +
+    '        pip-progress="vm.progress"\n' +
+    '        pip-buttons="vm.startButtons"></pip-start-upload>\n' +
+    '</div>');
 }]);
 })();
 
 
 
-},{}]},{},[10,1,2,3,4,5,6,7,8,9])(10)
+},{}]},{},[11,1,2,3,4,5,6,7,8,9,10])(11)
 });
 
 //# sourceMappingURL=pip-webui-files.js.map

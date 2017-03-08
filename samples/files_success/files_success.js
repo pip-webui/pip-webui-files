@@ -9,6 +9,7 @@
 
             $scope.progress = 0;
             $scope.state = 'upload';
+            $scope.name = 'Name';
 
             $scope.uploadButtons = [
                 {title: 'Ok', click: () => { $scope.message = 'ok' }}

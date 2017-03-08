@@ -3,24 +3,20 @@ import {
     ButtonsUpload
 } from "../common/ButtonsUpload";
 
+import { IFileSuccessBindings} from './index';
+
 export interface IFileSuccessController {
     name: string;
     type: string;
     buttons: ButtonsUpload[];
 }
 
-export class FileSuccessController implements IFileSuccessController {
+export class FileSuccessController implements IFileSuccessController, IFileSuccessBindings {
     public name: string;
-    public type: string;
+    public type: string = 'file';
     public buttons: ButtonsUpload[];
 
-    constructor($scope: ng.IScope) {
-        "ngInject";
-        
-        // Init parameters
-        this.type = $scope['type'] || 'file';
-        this.name = $scope['name'];
-        this.buttons = $scope['buttons'] || null;
-      
-    }
+    constructor() {}
+
+    public $onChanges(changes) {}
 }

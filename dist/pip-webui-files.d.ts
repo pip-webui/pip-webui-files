@@ -72,11 +72,19 @@ export interface IFileSuccessController {
     type: string;
     buttons: ButtonsUpload[];
 }
-export class FileSuccessController implements IFileSuccessController {
+export class FileSuccessController implements IFileSuccessController, IFileSuccessBindings {
     name: string;
     type: string;
     buttons: ButtonsUpload[];
-    constructor($scope: ng.IScope);
+    constructor();
+    $onChanges(changes: any): void;
+}
+
+export interface IFileSuccessBindings {
+    [key: string]: any;
+    type: any;
+    buttons: any;
+    name: any;
 }
 
 export interface IFileUploadController {
