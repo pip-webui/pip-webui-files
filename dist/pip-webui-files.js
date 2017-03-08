@@ -180,10 +180,7 @@ var FileStartController = (function () {
     function FileStartController($scope) {
         "ngInject";
         var _this = this;
-        this.type = $scope['type'] || 'file';
-        this.name = $scope['name'];
-        this.buttons = $scope['buttons'] || null;
-        this.progress = $scope['progress'] || null;
+        this.progress = 0;
         $scope.$watch('progress', function (progress) {
             _this.progress = progress;
         });
@@ -196,24 +193,22 @@ exports.FileStartController = FileStartController;
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileStartController_1 = require("./FileStartController");
 (function () {
-    function fileStartDirective() {
-        return {
-            restrict: 'E',
-            replace: true,
-            controller: FileStartController_1.FileStartController,
-            controllerAs: 'vm',
-            scope: {
-                buttons: '=?pipButtons',
-                name: '=pipName',
-                type: '=?pipType',
-                progress: '=pipProgress'
-            },
-            templateUrl: 'start/FileStart.html'
-        };
-    }
+    var fileStartDirective = {
+        restrict: 'E',
+        replace: true,
+        controller: FileStartController_1.FileStartController,
+        controllerAs: 'vm',
+        bindings: {
+            buttons: '=?pipButtons',
+            name: '=pipName',
+            type: '=?pipType',
+            progress: '=?pipProgress'
+        },
+        templateUrl: 'start/FileStart.html'
+    };
     angular
         .module('pipFiles.StartUpload', [])
-        .directive('pipStartUpload', fileStartDirective);
+        .component('pipStartUpload', fileStartDirective);
 })();
 },{"./FileStartController":7}],9:[function(require,module,exports){
 "use strict";

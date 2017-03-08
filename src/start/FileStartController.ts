@@ -12,7 +12,7 @@ export interface IFileStartController {
 
 export class FileStartController implements IFileStartController {
     public name: string;
-    public progress: number;
+    public progress: number = 0;
     public type: string;
     public buttons: ButtonsUpload[];
 
@@ -20,10 +20,6 @@ export class FileStartController implements IFileStartController {
         "ngInject";
         
         // Init parameters
-        this.type = $scope['type'] || 'file';
-        this.name = $scope['name'];
-        this.buttons = $scope['buttons'] || null;
-        this.progress = $scope['progress'] || null;
       
         $scope.$watch('progress', (progress: number) => {
             this.progress = progress;

@@ -3,25 +3,23 @@ import {FileStartController} from './FileStartController';
 
 (() => {
  
-    function fileStartDirective() {
-        return {
-            restrict: 'E',
-            replace: true,
-            controller: FileStartController,
-            controllerAs: 'vm',
-            scope: {
-                buttons: '=?pipButtons',
-                name: '=pipName',
-                type: '=?pipType',
-                progress: '=pipProgress'
-            },
-            templateUrl: 'start/FileStart.html'
-        };
-    }
+    const fileStartDirective = {
+        restrict: 'E',
+        replace: true,
+        controller: FileStartController,
+        controllerAs: 'vm',
+        bindings: {
+            buttons: '=?pipButtons',
+            name: '=pipName',
+            type: '=?pipType',
+            progress: '=?pipProgress'
+        },
+        templateUrl: 'start/FileStart.html'
+    };
 
     angular
         .module('pipFiles.StartUpload', [])
-        .directive('pipStartUpload', fileStartDirective)
+        .component('pipStartUpload', fileStartDirective)
 
 
 })();
