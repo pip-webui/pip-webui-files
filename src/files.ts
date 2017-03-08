@@ -59,10 +59,7 @@ import './start/index';
         .module('pipFiles', ['pipFiles.SuccessUpload', 'pipFiles.FileUpload', 'pipFiles.StartUpload'])
         .directive('fileModel', fileModelDirective)
         .directive('pipFileSelect', fileSelectDirective)
-        //.directive('pipFileUpload', fileUploadDirective)
-        //.component('pipSuccesUpload', fileSuccessDirective)
         .directive('pipFailUpload', fileFailDirective)
-        //.directive('pipStartUpload', fileStartDirective)
         .service('pipFileUpload', FileUploadService);
 
 
