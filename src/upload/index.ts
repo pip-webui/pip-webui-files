@@ -14,12 +14,12 @@ interface IFileUploadBindings {
 }
 
 const FileUploadBindings: IFileUploadBindings = {
-    buttonFunction: '=?pipButtonFunctions',
+    buttonFunction: '<?pipButtonFunctions',
     buttons: '=?pipButtons',
     error: '=?pipError',
     name: '<pipName',
     state: '=pipState',
-    type: '=?pipType',
+    type: '<?pipType',
     progress: '=pipProgress'
 }
 

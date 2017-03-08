@@ -295,12 +295,12 @@ exports.FileUploadController = FileUploadController;
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileUploadController_1 = require("./FileUploadController");
 var FileUploadBindings = {
-    buttonFunction: '=?pipButtonFunctions',
+    buttonFunction: '<?pipButtonFunctions',
     buttons: '=?pipButtons',
     error: '=?pipError',
     name: '<pipName',
     state: '=pipState',
-    type: '=?pipType',
+    type: '<?pipType',
     progress: '=pipProgress'
 };
 var FileUploadChanges = (function () {
