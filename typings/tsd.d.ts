@@ -4,4 +4,4 @@
 /// <reference path="angular-ui-router/angular-ui-router.d.ts" />
 /// <reference path="angular-material/angular-material.d.ts" />
 /// <reference path="core-js/core-js.d.ts" />
-/// <reference path="../lib/pip-webui-services.d.ts" />
+/// <reference path="../../pip-webui-services/dist/pip-webui-services.d.ts" />

@@ -7,7 +7,6 @@ function configureBootBarnMonochromeTheme($mdThemingProvider: ng.material.IThemi
 function configureBootBarnWarmTheme($mdThemingProvider: any): void;
 
 
-
 export let ThemeRootVar: string;
 export let ThemeChangedEvent: string;
 export let ThemeResetPage: string;
@@ -19,6 +18,7 @@ export interface IThemeProvider extends IThemeService, ng.IServiceProvider {
     setRootVar: boolean;
     persist: boolean;
 }
+
 
 function configureDefaultAmberTheme($mdThemingProvider: ng.material.IThemingProvider): void;
 
