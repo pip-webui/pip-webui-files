@@ -5,7 +5,6 @@ export class ButtonsUpload {
     click: Function;
 }
 
-
 export interface IFileFailController {
     name: string;
     type: string;
@@ -20,17 +19,6 @@ export class FileFailController implements IFileFailController {
     constructor($scope: ng.IScope);
 }
 
-export interface IFileSelectController {
-    localFile: any;
-    onUploadButtonClick(): void;
-    onDeleteButtonClick(): void;
-}
-export class FileSelectController implements IFileSelectController {
-    localFile: any;
-    constructor($scope: ng.IScope);
-    onUploadButtonClick(): void;
-    onDeleteButtonClick(): void;
-}
 
 export class FileUploadState {
     static All: string[];
@@ -51,6 +39,18 @@ export class FileUploadService implements IFileUploadService {
     error: string;
     constructor($http: ng.IHttpService);
     upload(url: string, file: any, callback?: (data: any, err: any) => void): void;
+}
+
+export interface IFileSelectController {
+    localFile: any;
+    onUploadButtonClick(): void;
+    onDeleteButtonClick(): void;
+}
+export class FileSelectController implements IFileSelectController {
+    localFile: any;
+    constructor($scope: ng.IScope);
+    onUploadButtonClick(): void;
+    onDeleteButtonClick(): void;
 }
 
 export interface IFileStartController {
