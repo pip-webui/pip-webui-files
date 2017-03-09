@@ -1,24 +1,10 @@
 declare module pip.files {
 
+
 export class ButtonsUpload {
     title: string;
     click: Function;
 }
-
-export interface IFileFailController {
-    name: string;
-    type: string;
-    error: string;
-    buttons: ButtonsUpload[];
-}
-export class FileFailController implements IFileFailController {
-    name: string;
-    type: string;
-    error: string;
-    buttons: ButtonsUpload[];
-    constructor($scope: ng.IScope);
-}
-
 
 export interface IFileSelectController {
     localFile: any;
@@ -53,20 +39,19 @@ export class FileUploadService implements IFileUploadService {
     upload(url: string, file: any, callback?: (data: any, err: any) => void): void;
 }
 
-export interface IFileStartController {
+export interface IFileFailController {
     name: string;
     type: string;
-    progress: number;
+    error: string;
     buttons: ButtonsUpload[];
 }
-export class FileStartController implements IFileStartController {
+export class FileFailController implements IFileFailController {
     name: string;
-    progress: number;
     type: string;
+    error: string;
     buttons: ButtonsUpload[];
     constructor($scope: ng.IScope);
 }
-
 
 export interface IFileSuccessController {
     name: string;
@@ -140,6 +125,21 @@ export class FileUploadChanges implements ng.IOnChangesObject, IFileUploadBindin
     type: ng.IChangesObject<string>;
     progress: ng.IChangesObject<number>;
 }
+
+export interface IFileStartController {
+    name: string;
+    type: string;
+    progress: number;
+    buttons: ButtonsUpload[];
+}
+export class FileStartController implements IFileStartController {
+    name: string;
+    progress: number;
+    type: string;
+    buttons: ButtonsUpload[];
+    constructor($scope: ng.IScope);
+}
+
 
 }
 
