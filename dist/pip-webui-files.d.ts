@@ -1,6 +1,5 @@
 declare module pip.files {
 
-
 export class ButtonsUpload {
     title: string;
     click: Function;
@@ -20,6 +19,7 @@ export class FileFailController implements IFileFailController {
     constructor($scope: ng.IScope);
 }
 
+
 export interface IFileSelectController {
     localFile: any;
     onUploadButtonClick(): void;
@@ -31,21 +31,6 @@ export class FileSelectController implements IFileSelectController {
     onUploadButtonClick(): void;
     onDeleteButtonClick(): void;
 }
-
-export interface IFileStartController {
-    name: string;
-    type: string;
-    progress: number;
-    buttons: ButtonsUpload[];
-}
-export class FileStartController implements IFileStartController {
-    name: string;
-    progress: number;
-    type: string;
-    buttons: ButtonsUpload[];
-    constructor($scope: ng.IScope);
-}
-
 
 export class FileUploadState {
     static All: string[];
@@ -68,25 +53,20 @@ export class FileUploadService implements IFileUploadService {
     upload(url: string, file: any, callback?: (data: any, err: any) => void): void;
 }
 
-export interface IFileSuccessController {
+export interface IFileStartController {
     name: string;
     type: string;
+    progress: number;
     buttons: ButtonsUpload[];
 }
-export class FileSuccessController implements IFileSuccessController, IFileSuccessBindings {
+export class FileStartController implements IFileStartController {
     name: string;
+    progress: number;
     type: string;
     buttons: ButtonsUpload[];
-    constructor();
-    $onChanges(changes: any): void;
+    constructor($scope: ng.IScope);
 }
 
-export interface IFileSuccessBindings {
-    [key: string]: any;
-    type: any;
-    buttons: any;
-    name: any;
-}
 
 export interface IFileUploadController {
     name: string;
@@ -139,6 +119,26 @@ export class FileUploadChanges implements ng.IOnChangesObject, IFileUploadBindin
     state: ng.IChangesObject<string>;
     type: ng.IChangesObject<string>;
     progress: ng.IChangesObject<number>;
+}
+
+export interface IFileSuccessController {
+    name: string;
+    type: string;
+    buttons: ButtonsUpload[];
+}
+export class FileSuccessController implements IFileSuccessController, IFileSuccessBindings {
+    name: string;
+    type: string;
+    buttons: ButtonsUpload[];
+    constructor();
+    $onChanges(changes: any): void;
+}
+
+export interface IFileSuccessBindings {
+    [key: string]: any;
+    type: any;
+    buttons: any;
+    name: any;
 }
 
 }
