@@ -5,7 +5,6 @@ export class ButtonsUpload {
     click: Function;
 }
 
-
 export interface IFileFailController {
     name: string;
     type: string;
@@ -19,6 +18,7 @@ export class FileFailController implements IFileFailController {
     buttons: ButtonsUpload[];
     constructor($scope: ng.IScope);
 }
+
 
 export interface IFileSelectController {
     localFile: any;
