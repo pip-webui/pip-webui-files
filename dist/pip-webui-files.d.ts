@@ -6,6 +6,20 @@ export class ButtonsUpload {
     click: Function;
 }
 
+export interface IFileFailController {
+    name: string;
+    type: string;
+    error: string;
+    buttons: ButtonsUpload[];
+}
+export class FileFailController implements IFileFailController {
+    name: string;
+    type: string;
+    error: string;
+    buttons: ButtonsUpload[];
+    constructor($scope: ng.IScope);
+}
+
 export interface IFileSelectController {
     localFile: any;
     onUploadButtonClick(): void;
@@ -17,6 +31,21 @@ export class FileSelectController implements IFileSelectController {
     onUploadButtonClick(): void;
     onDeleteButtonClick(): void;
 }
+
+export interface IFileStartController {
+    name: string;
+    type: string;
+    progress: number;
+    buttons: ButtonsUpload[];
+}
+export class FileStartController implements IFileStartController {
+    name: string;
+    progress: number;
+    type: string;
+    buttons: ButtonsUpload[];
+    constructor($scope: ng.IScope);
+}
+
 
 export class FileUploadState {
     static All: string[];
@@ -37,20 +66,6 @@ export class FileUploadService implements IFileUploadService {
     error: string;
     constructor($http: ng.IHttpService);
     upload(url: string, file: any, callback?: (data: any, err: any) => void): void;
-}
-
-export interface IFileFailController {
-    name: string;
-    type: string;
-    error: string;
-    buttons: ButtonsUpload[];
-}
-export class FileFailController implements IFileFailController {
-    name: string;
-    type: string;
-    error: string;
-    buttons: ButtonsUpload[];
-    constructor($scope: ng.IScope);
 }
 
 export interface IFileSuccessController {
@@ -125,21 +140,6 @@ export class FileUploadChanges implements ng.IOnChangesObject, IFileUploadBindin
     type: ng.IChangesObject<string>;
     progress: ng.IChangesObject<number>;
 }
-
-export interface IFileStartController {
-    name: string;
-    type: string;
-    progress: number;
-    buttons: ButtonsUpload[];
-}
-export class FileStartController implements IFileStartController {
-    name: string;
-    progress: number;
-    type: string;
-    buttons: ButtonsUpload[];
-    constructor($scope: ng.IScope);
-}
-
 
 }
 
