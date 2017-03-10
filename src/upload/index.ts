@@ -25,7 +25,6 @@ const FileUploadBindings: IFileUploadBindings = {
 
 export class FileUploadChanges implements ng.IOnChangesObject, IFileUploadBindings {
     [key: string]: ng.IChangesObject<any>;
-    // Not one way bindings
 
     buttonFunction: ng.IChangesObject<FileUploadButtons>;
     buttons: ng.IChangesObject<boolean>;
@@ -34,10 +33,6 @@ export class FileUploadChanges implements ng.IOnChangesObject, IFileUploadBindin
     state: ng.IChangesObject<string>;
     type: ng.IChangesObject<string>;
     progress: ng.IChangesObject<number>;
-    //currentButtonValue: any;
-    //currentButton: any;
-    //change: ng.IChangesObject<() => ng.IPromise<void>>;
-    // One way bindings
 }
 
 const fileUploadDirective = {

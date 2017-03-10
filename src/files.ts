@@ -48,7 +48,7 @@ import './fail/index';
         ])
         .directive('fileModel', fileModelDirective)
         .directive('pipFileSelect', fileSelectDirective)
-       // .directive('pipFailUpload', fileFailDirective)
+       //.directive('pipFailUpload', fileFailDirective)
         .service('pipFileUpload', FileUploadService);
 
 
