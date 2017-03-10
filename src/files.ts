@@ -1,11 +1,11 @@
 ﻿
 import {FileSelectController} from './select/FileSelectController';
-import {FileFailController} from './fail/FileFailController';
 import {FileUploadService} from './service/FileUploadService';
 
 import './success/index';
 import './upload/index';
 import './start/index';
+import './fail/index';
 
 (() => {
     function fileModelDirective($parse: any) {
@@ -38,28 +38,17 @@ import './start/index';
             templateUrl: 'select/FileSelect.html'
         };
     }
-     function fileFailDirective() {
-        return {
-            restrict: 'E',
-            replace: true,
-            controller: FileFailController,
-            controllerAs: 'vm',
-            scope: {
-                buttons: '=?pipButtons',
-                name: '=pipName',
-                type: '=?pipType',
-                error: '=pipError'
-            },
-            templateUrl: 'fail/FileFail.html'
-        };
-    }
-
 
     angular
-        .module('pipFiles', ['pipFiles.SuccessUpload', 'pipFiles.FileUpload', 'pipFiles.StartUpload'])
+        .module('pipFiles', [
+            'pipFiles.SuccessUpload',
+            'pipFiles.FileUpload',
+            'pipFiles.StartUpload',
+            'pipFiles.FailUpload'
+        ])
         .directive('fileModel', fileModelDirective)
         .directive('pipFileSelect', fileSelectDirective)
-        .directive('pipFailUpload', fileFailDirective)
+       // .directive('pipFailUpload', fileFailDirective)
         .service('pipFileUpload', FileUploadService);
 
 

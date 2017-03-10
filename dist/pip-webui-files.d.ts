@@ -5,6 +5,7 @@ export class ButtonsUpload {
     click: Function;
 }
 
+
 export interface IFileFailController {
     name: string;
     type: string;
