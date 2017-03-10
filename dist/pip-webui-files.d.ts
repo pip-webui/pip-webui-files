@@ -12,7 +12,7 @@ export interface IFileFailController {
     error: string;
     buttons: ButtonsUpload[];
 }
-export class FileFailController implements IFileFailController {
+export class FileFailController implements IFileFailController, IFileFailBindings {
     name: string;
     type: string;
     error: string;
@@ -20,6 +20,20 @@ export class FileFailController implements IFileFailController {
     constructor($scope: ng.IScope);
 }
 
+export interface IFileFailBindings {
+    [key: string]: any;
+    buttons: any;
+    name: any;
+    type: any;
+    error: any;
+}
+export class FileFailChanges implements ng.IOnChangesObject, IFileFailBindings {
+    [key: string]: ng.IChangesObject<any>;
+    buttons: ng.IChangesObject<ButtonsUpload[]>;
+    error: ng.IChangesObject<string>;
+    name: ng.IChangesObject<string>;
+    type: ng.IChangesObject<string>;
+}
 
 export interface IFileSelectController {
     localFile: any;

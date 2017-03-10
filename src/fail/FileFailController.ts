@@ -3,6 +3,11 @@ import {
     ButtonsUpload
 } from "../common/ButtonsUpload";
 
+import {
+    FileFailChanges,
+    IFileFailBindings
+} from "./index";
+
 export interface IFileFailController {
     name: string;
     type: string;
@@ -10,7 +15,7 @@ export interface IFileFailController {
     buttons: ButtonsUpload[];
 }
 
-export class FileFailController implements IFileFailController {
+export class FileFailController implements IFileFailController, IFileFailBindings {
     public name: string;
     public type: string;
     public error: string;
@@ -20,14 +25,9 @@ export class FileFailController implements IFileFailController {
         "ngInject";
         
         // Init parameters
-        this.type = $scope['type'] || 'file';
-        this.name = $scope['name'];
-        this.buttons = $scope['buttons'] || null;
-        this.error = $scope['error'] || null;
         
         $scope.$watch('error', (error: string) => {
             this.error = error;
         })
-      
     }
 }

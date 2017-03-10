@@ -14,22 +14,22 @@ module.run(['$templateCache', function($templateCache) {
     '        </div>\n' +
     '        <div class="pip-progress-content">\n' +
     '                 <h3 class="pip-title">\n' +
-    '                Uploading {{vm.type}} failed with errors!\n' +
+    '                Uploading {{$ctrl.type}} failed with errors!\n' +
     '            </h3>\n' +
     '            <div class="color-secondary-text pip-subtitle">\n' +
-    '                {{vm.name}}\n' +
+    '                {{$ctrl.name}}\n' +
     '            </div>\n' +
     '            <div class="color-error pip-error">\n' +
-    '                 {{vm.error}}\n' +
+    '                 {{$ctrl.error}}\n' +
     '            </div>\n' +
     '\n' +
     '        </div>\n' +
     '    </div>\n' +
     '  </div>\n' +
-    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons && vm.buttons.length > 0">\n' +
+    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="$ctrl.buttons && $ctrl.buttons.length > 0">\n' +
     '        <div>\n' +
     '           <md-button class="md-accent" \n' +
-    '                       ng-repeat="fail in vm.buttons" ng-click="fail.click()">\n' +
+    '                       ng-repeat="fail in $ctrl.buttons" ng-click="fail.click()">\n' +
     '                {{::fail.title}}\n' +
     '            </md-button> \n' +
     '        </div>\n' +
