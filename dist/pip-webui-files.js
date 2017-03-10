@@ -7,6 +7,7 @@ var ButtonsUpload = (function () {
     return ButtonsUpload;
 }());
 exports.ButtonsUpload = ButtonsUpload;
+
 },{}],2:[function(require,module,exports){
 (function () {
     'use strict';
@@ -21,6 +22,7 @@ exports.ButtonsUpload = ButtonsUpload;
     angular.module('pipFiles.Translate', [])
         .filter('translate', filerTranslate);
 })();
+
 },{}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -36,6 +38,7 @@ var FileFailController = (function () {
     return FileFailController;
 }());
 exports.FileFailController = FileFailController;
+
 },{}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -62,6 +65,7 @@ var fileFailComponent = {
         .module('pipFiles.FailUpload', [])
         .component('pipFailUpload', fileFailComponent);
 })();
+
 },{"./FileFailController":3}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -111,6 +115,7 @@ require("./fail/index");
         .directive('pipFileSelect', fileSelectDirective)
         .service('pipFileUpload', FileUploadService_1.FileUploadService);
 })();
+
 },{"./fail/index":4,"./select/FileSelectController":6,"./service/FileUploadService":7,"./start/index":9,"./success/index":11,"./upload/index":13}],6:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -134,6 +139,7 @@ var FileSelectController = (function () {
     return FileSelectController;
 }());
 exports.FileSelectController = FileSelectController;
+
 },{}],7:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -183,6 +189,7 @@ var FileUploadService = (function () {
     return FileUploadService;
 }());
 exports.FileUploadService = FileUploadService;
+
 },{}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -199,6 +206,7 @@ var FileStartController = (function () {
     return FileStartController;
 }());
 exports.FileStartController = FileStartController;
+
 },{}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -221,6 +229,7 @@ var FileStartController_1 = require("./FileStartController");
         .module('pipFiles.StartUpload', [])
         .component('pipStartUpload', fileStartDirective);
 })();
+
 },{"./FileStartController":8}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -232,6 +241,7 @@ var FileSuccessController = (function () {
     return FileSuccessController;
 }());
 exports.FileSuccessController = FileSuccessController;
+
 },{}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -254,6 +264,7 @@ var FileSuccessBindings = {
         .module('pipFiles.SuccessUpload', [])
         .component('pipSuccesUpload', fileSuccessDirective);
 })();
+
 },{"./FileSuccessController":10}],12:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -306,6 +317,7 @@ var FileUploadController = (function () {
     return FileUploadController;
 }());
 exports.FileUploadController = FileUploadController;
+
 },{}],13:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -335,6 +347,7 @@ var fileUploadDirective = {
         .module('pipFiles.FileUpload', [])
         .component('pipFileUpload', fileUploadDirective);
 })();
+
 },{"./FileUploadController":12}],14:[function(require,module,exports){
 (function(module) {
 try {
