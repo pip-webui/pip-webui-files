@@ -1,5 +1,4 @@
-
-(() => {
+{
     function fileModelLink(scope, element, attrs, $parse) {
         let model = $parse(attrs.fileModel);
         let modelSetter = model.assign;
@@ -22,10 +21,7 @@
         };
     }
 
-
     angular
         .module('pipFiles.Model', [])
         .directive('fileModel', fileModelDirective)
-
-
-})();
+}

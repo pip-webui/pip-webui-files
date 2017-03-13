@@ -1,8 +1,4 @@
-
-import {
-    ButtonsUpload
-} from "../common/ButtonsUpload";
-
+import { ButtonsUpload } from "../common/ButtonsUpload";
 
 interface IFileFailBindings {
     [key: string]: any;
@@ -54,19 +50,12 @@ class FileFailController implements IFileFailController, IFileFailBindings {
     }
 }
 
+const fileFailComponent: ng.IComponentOptions = {
+    controller: FileFailController,
+    bindings: FileFailBindings,
+    templateUrl: 'fail/FileFail.html'
+};
 
-
-(() => {
-
-    const fileFailComponent: ng.IComponentOptions = {
-        controller: FileFailController,
-        bindings: FileFailBindings,
-        templateUrl: 'fail/FileFail.html'
-    };
-
-    angular
-        .module('pipFiles.FailUpload', [])
-        .component('pipFailUpload', fileFailComponent)
-
-
-})();
+angular
+    .module('pipFiles.FailUpload', [])
+    .component('pipFailUpload', fileFailComponent)

@@ -1,5 +1,4 @@
-
-(() => {
+{
 
     interface IFileSelectController {
         localFile: any;
@@ -56,5 +55,4 @@
         .module('pipFiles.Select', [])
         .component('pipFileSelect', fileSelectDirective)
 
-
-})();
+}

@@ -1,7 +1,4 @@
-
-import {
-    ButtonsUpload
-} from "../common/ButtonsUpload";
+import { ButtonsUpload } from "../common/ButtonsUpload";
 
 interface IFileSuccessBindings {
     [key: string]: any;
@@ -15,8 +12,7 @@ const FileSuccessBindings: IFileSuccessBindings = {
     buttons: '=?pipButtons',
     name: '=pipName',
     type: '=?pipType',
-};
-
+}
 
 interface IFileSuccessController {
     name: string;
@@ -34,22 +30,16 @@ class FileSuccessController implements IFileSuccessController, IFileSuccessBindi
     public $onChanges(changes) {}
 }
 
-
-(() => {
- 
-     const fileSuccessDirective = {
-            restrict: 'E',
-            replace: true,
-            controller: FileSuccessController,
-            controllerAs: 'vm',
-            bindings: FileSuccessBindings,
-            templateUrl: 'success/FileSuccess.html'
-    }
+const fileSuccessDirective = {
+    restrict: 'E',
+    replace: true,
+    controller: FileSuccessController,
+    controllerAs: 'vm',
+    bindings: FileSuccessBindings,
+    templateUrl: 'success/FileSuccess.html'
+}
 
 
-    angular
-        .module('pipFiles.SuccessUpload', [])
-        .component('pipSuccesUpload', fileSuccessDirective)
-
-
-})();
+angular
+    .module('pipFiles.SuccessUpload', [])
+    .component('pipSuccesUpload', fileSuccessDirective)

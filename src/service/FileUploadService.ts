@@ -3,55 +3,48 @@ import { IFileUploadService } from './IFileUploadService';
 
 class FileUploadService implements IFileUploadService {
 
-    public constructor(private $http: ng.IHttpService) { }
+    public constructor(private $http: ng.IHttpService) {
+        "ngInject";
+    }
 
-    public upload(
-           url: string,
-           file: any, 
-           callback?: (data: any, err: any) => void, 
-           changeProgress?: (progress: number) => void, 
-           changeState?: (state: string) => void ): void {
+    public upload(file: any, url: string,
+        resultCallback?: (data: any, err: any) => void,
+        progressCallback?: (state: FileUploadState, progress: number) => void
+    ): void {
 
         let fd: FormData = new FormData();
         fd.append('file', file);
 
-        if (changeProgress) {
-            changeProgress(0);
-        }
-        if (changeState) { 
-            changeState(FileUploadState.Start);
-        }
+        if (progressCallback)
+            progressCallback(FileUploadState.Uploading, 0);
 
         this.$http.post(url, fd, <any>{
             uploadEventHandlers: {
                 progress: (e: any) => {
-                    if (e.lengthComputable && changeProgress) {
-                       changeProgress((e.loaded / e.total) * 100);
+                    if (e.lengthComputable && progressCallback) {
+                        progressCallback(FileUploadState.Uploading, (e.loaded / e.total) * 100);
                     }
                 }
             },
             headers: { 'Content-Type': undefined }
         })
-            .success((response: any) => {
-                changeState(FileUploadState.Upload);
+        .success((response: any) => {
+            if (progressCallback)
+                progressCallback(FileUploadState.Completed, 100);
 
-                if (callback) callback(response, null);
-            })
-            .error((response: any) => {
-                changeState(FileUploadState.Fail);
+            if (resultCallback)
+                resultCallback(response, null);
+        })
+        .error((response: any) => {
+            if (progressCallback)
+                progressCallback(FileUploadState.Failed, 0);
 
-                if (callback) callback(null, response.Error || response);
-            });
+            if (resultCallback)
+                resultCallback(null, response.Error || response);
+        });
     }
 }
 
-
-(() => {
-
-
-    angular
-        .module('pipFiles.Service', [])
-        .service('pipFileUpload', FileUploadService);
-
-
-})();
+angular
+    .module('pipFiles.Service', [])
+    .service('pipFileUpload', FileUploadService);

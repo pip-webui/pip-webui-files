@@ -1,11 +1,5 @@
-
-import {
-    IFileUploadService
-} from "../service/IFileUploadService";
-
-import {
-    ButtonsUpload
-} from "../common/ButtonsUpload";
+import { IFileUploadService } from "../service/IFileUploadService";
+import { ButtonsUpload } from "../common/ButtonsUpload";
 
 class FileUploadButtons {
     retry: Function;
@@ -71,21 +65,21 @@ class FileUploadController implements IFileUploadController, IFileUploadBindings
     public buttons: boolean;
     public error: string = null;
 
-    constructor( $scope: ng.IScope ) {}
-    
+    constructor($scope: ng.IScope) { }
+
     public $onInit() {
-         if (this.buttons) {
+        if (this.buttons) {
             this.uploadButtons = [];
             this.failButtons = [
-                {title: 'Cancel', click: () => { this.onCancel()}},
-                {title: 'Retry', click: () => { this.onRetry()}}
+                { title: 'Cancel', click: () => { this.onCancel() } },
+                { title: 'Retry', click: () => { this.onRetry() } }
             ];
             this.startButtons = [
-                {title: 'Abort', click: () => { this.onAbort() }}
+                { title: 'Abort', click: () => { this.onAbort() } }
             ];
         }
     }
-    
+
     public $onChanges(changes: FileUploadChanges) {
         if (changes.state) {
             this.state = changes.state.currentValue;
@@ -115,17 +109,13 @@ class FileUploadController implements IFileUploadController, IFileUploadBindings
 
 }
 
-
 const fileUploadDirective = {
     controller: FileUploadController,
     bindings: FileUploadBindings,
     templateUrl: 'upload/FileUpload.html'
 };
 
-(() => {
 
-    angular
-        .module('pipFiles.FileUpload', [])
-        .component('pipFileUpload', fileUploadDirective)
-       
-})();
+angular
+    .module('pipFiles.FileUpload', [])
+    .component('pipFileUpload', fileUploadDirective)

@@ -1,7 +1,4 @@
-
-import {
-    ButtonsUpload
-} from "../common/ButtonsUpload";
+import { ButtonsUpload } from "../common/ButtonsUpload";
 
 interface IFileStartBindings {
     [key: string]: any;
@@ -54,18 +51,12 @@ class FileStartController implements IFileStartController {
 
 }
 
+const fileStartDirective = {
+    controller: FileStartController,
+    bindings: FileStartBindings,
+    templateUrl: 'start/FileStart.html'
+};
 
-(() => {
-
-    const fileStartDirective = {
-        controller: FileStartController,
-        bindings: FileStartBindings,
-        templateUrl: 'start/FileStart.html'
-    };
-
-    angular
-        .module('pipFiles.StartUpload', [])
-        .component('pipStartUpload', fileStartDirective)
-
-
-})();
+angular
+    .module('pipFiles.StartUpload', [])
+    .component('pipStartUpload', fileStartDirective)
