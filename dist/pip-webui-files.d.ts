@@ -5,19 +5,6 @@ export class ButtonsUpload {
     click: Function;
 }
 
-export interface IFileFailController {
-    name: string;
-    type: string;
-    error: string;
-    buttons: ButtonsUpload[];
-}
-export class FileFailController implements IFileFailController, IFileFailBindings {
-    name: string;
-    type: string;
-    error: string;
-    buttons: ButtonsUpload[];
-    constructor($scope: ng.IScope);
-}
 
 export interface IFileFailBindings {
     [key: string]: any;
@@ -26,14 +13,6 @@ export interface IFileFailBindings {
     type: any;
     error: any;
 }
-export class FileFailChanges implements ng.IOnChangesObject, IFileFailBindings {
-    [key: string]: ng.IChangesObject<any>;
-    buttons: ng.IChangesObject<ButtonsUpload[]>;
-    error: ng.IChangesObject<string>;
-    name: ng.IChangesObject<string>;
-    type: ng.IChangesObject<string>;
-}
-
 
 export interface IFileSelectController {
     localFile: any;
@@ -46,21 +25,6 @@ export class FileSelectController implements IFileSelectController {
     onUploadButtonClick(): void;
     onDeleteButtonClick(): void;
 }
-
-export interface IFileStartController {
-    name: string;
-    type: string;
-    progress: number;
-    buttons: ButtonsUpload[];
-}
-export class FileStartController implements IFileStartController {
-    name: string;
-    progress: number;
-    type: string;
-    buttons: ButtonsUpload[];
-    constructor($scope: ng.IScope);
-}
-
 
 export class FileUploadState {
     static All: string[];
@@ -83,17 +47,12 @@ export class FileUploadService implements IFileUploadService {
     upload(url: string, file: any, callback?: (data: any, err: any) => void): void;
 }
 
-export interface IFileSuccessController {
-    name: string;
-    type: string;
-    buttons: ButtonsUpload[];
-}
-export class FileSuccessController implements IFileSuccessController, IFileSuccessBindings {
-    name: string;
-    type: string;
-    buttons: ButtonsUpload[];
-    constructor();
-    $onChanges(changes: any): void;
+export interface IFileStartBindings {
+    [key: string]: any;
+    type: any;
+    buttons: any;
+    name: any;
+    progress: any;
 }
 
 export interface IFileSuccessBindings {
@@ -101,38 +60,6 @@ export interface IFileSuccessBindings {
     type: any;
     buttons: any;
     name: any;
-}
-
-export interface IFileUploadController {
-    name: string;
-    type: string;
-    state: string;
-    progress: number;
-    onCancel(): void;
-    onRetry(): void;
-    onAbort(): void;
-}
-export class FileUploadButtons {
-    retry: Function;
-    cancel: Function;
-    abort: Function;
-}
-export class FileUploadController implements IFileUploadController {
-    buttonFunction: FileUploadButtons;
-    uploadButtons: ButtonsUpload[];
-    failButtons: ButtonsUpload[];
-    startButtons: ButtonsUpload[];
-    name: string;
-    type: string;
-    state: string;
-    progress: number;
-    buttons: boolean;
-    error: string;
-    constructor($scope: ng.IScope);
-    $onChanges(changes: FileUploadChanges): void;
-    onCancel(): void;
-    onRetry(): void;
-    onAbort(): void;
 }
 
 export interface IFileUploadBindings {
@@ -144,16 +71,6 @@ export interface IFileUploadBindings {
     state: any;
     type: any;
     progress: any;
-}
-export class FileUploadChanges implements ng.IOnChangesObject, IFileUploadBindings {
-    [key: string]: ng.IChangesObject<any>;
-    buttonFunction: ng.IChangesObject<FileUploadButtons>;
-    buttons: ng.IChangesObject<boolean>;
-    error: ng.IChangesObject<string>;
-    name: ng.IChangesObject<string>;
-    state: ng.IChangesObject<string>;
-    type: ng.IChangesObject<string>;
-    progress: ng.IChangesObject<number>;
 }
 
 }

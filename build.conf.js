@@ -1,7 +1,7 @@
 module.exports = {
     module: {
         name: 'pipFiles',
-        styles: 'files',
+        styles: 'index',
         export: 'pip.files',
         standalone: 'pip.files'
     },
