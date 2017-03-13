@@ -163,19 +163,19 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('upload/FileUpload.html',
     '<div>\n' +
     '    <pip-succes-upload \n' +
-    '            ng-if="$ctrl.state == \'upload\' && (!$ctrl.buttons || $ctrl.uploadButtons)"\n' +
+    '            ng-if="$ctrl.state == 1 && (!$ctrl.buttons || $ctrl.uploadButtons)"\n' +
     '            pip-name="$ctrl.name" \n' +
     '            pip-type="$ctrl.type" \n' +
-    '            pip-buttons="$ctrl.uploadButtons"></pip-succes-upload>\n' +
+    '            pip-buttons="$ctrl.buttons"></pip-succes-upload>\n' +
     '    <pip-fail-upload \n' +
-    '            ng-if="$ctrl.state == \'fail\'"\n' +
+    '            ng-if="$ctrl.state == 2"\n' +
     '            pip-name="$ctrl.name" \n' +
     '            pip-type="$ctrl.type" \n' +
     '            pip-error="$ctrl.error"\n' +
     '            pip-buttons="$ctrl.failButtons"></pip-fail-upload>\n' +
     '\n' +
     '    <pip-start-upload \n' +
-    '            ng-if="$ctrl.state == \'start\'"\n' +
+    '            ng-if="$ctrl.state == 0"\n' +
     '            pip-name="$ctrl.name" \n' +
     '            pip-type="$ctrl.type" \n' +
     '            pip-progress="$ctrl.progress"\n' +

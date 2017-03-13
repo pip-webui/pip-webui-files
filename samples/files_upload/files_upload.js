@@ -8,8 +8,8 @@
         function ($scope,$interval,  $timeout, $injector, pipTransaction) {
 
             $scope.progress = 0;
-            $scope.state = 'start';
-            $scope.state2 = 'start';
+            $scope.state = 0;
+            $scope.state2 = 0;
             $scope.name = 'New file';
             $scope.buttonFunctions = {
                 retry: () => {
@@ -24,20 +24,20 @@
             }
 
             $interval(() => {
-                if ($scope.state == 'start') {
-                    $scope.state = 'upload';
+                if ($scope.state == 0) {
+                    $scope.state = 1;
                     $scope.progress = 0;
                 } else {
-                    $scope.state = 'start';
+                    $scope.state = 0;
                     $scope.progress = 0;
                 }
 
-                $scope.state2 = $scope.state2 == 'start' ? 'fail': 'start';
-                $scope.error = $scope.state2 == 'fail' ? 'Error string': null;
+                $scope.state2 = $scope.state2 == 0 ? 2 : 0;
+                $scope.error = $scope.state2 == 1 ? 'Error string': null;
             }, 2000);
 
             $interval(() => {
-                if ($scope.state == 'start') {
+                if ($scope.state == 0) {
                     if ($scope.progress < 100) {
                         $scope.progress += 20;
                     }

@@ -10,15 +10,14 @@ export class ButtonsUpload {
 
 
 
-export class FileUploadState {
-    static All: string[];
-    static Start: string;
-    static Upload: string;
-    static Fail: string;
+export enum FileUploadState {
+    Uploading = 0,
+    Completed = 1,
+    Failed = 2,
 }
 
 export interface IFileUploadService {
-    upload(url: string, file: any, callback?: (data: any, err: any) => void, changeProgress?: (progress: number) => void, changeState?: (state: string) => void): void;
+    upload(file: any, url: string, resultCallback?: (data: any, err: any) => void, progressCallback?: (state: FileUploadState, progress: number) => void): any;
 }
 
 

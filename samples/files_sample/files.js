@@ -37,8 +37,8 @@
                 $scope.transaction.begin('start');
 
                 pipFileUpload.upload(
-                    uploadUrl,
                     $scope.localFile,
+                    uploadUrl,
                     (data, err) => {
                         if (data) {
                             $scope.message = data;
@@ -49,10 +49,9 @@
                             $scope.transaction.end('');
                         }
                     },
-                    (progress) => {
+                    (state, progress) => {
+                        console.log(state, progress)
                         $scope.progress = progress;
-                    },
-                    (state) => {
                         $scope.state = state;
                     }
                 );
@@ -68,7 +67,7 @@
 
             $scope.cancel = () => {
                 $scope.message = 'stop';
-                pipFileUpload.state = null;
+                $scope.state = null;
             }
 
             $scope.abort = () => {
