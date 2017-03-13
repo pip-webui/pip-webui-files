@@ -102,17 +102,21 @@ require("./select/FileSelect");
 })();
 },{}],6:[function(require,module,exports){
 (function () {
+    var FileSelectBindings = {
+        localFile: '<pipLocalFile',
+        change: '<pipChange'
+    };
     var FileSelectController = (function () {
         FileSelectController.$inject = ['$scope'];
         function FileSelectController($scope) {
             "ngInject";
+            var _this = this;
+            $scope.$watch('$ctrl.localFile', function (item) {
+                if (_this.change) {
+                    _this.change(_this.localFile);
+                }
+            });
         }
-        FileSelectController.prototype.$onChanges = function (change) {
-            console.log('ccc', change);
-            if (change.localFile && this.change) {
-                this.change(this.localFile);
-            }
-        };
         FileSelectController.prototype.onUploadButtonClick = function () {
             $('#inp_file').click();
         };
@@ -126,10 +130,7 @@ require("./select/FileSelect");
     var fileSelectDirective = {
         restrict: 'E',
         replace: true,
-        bindings: {
-            localFile: '<pipLocalFile',
-            change: '<pipChange'
-        },
+        bindings: FileSelectBindings,
         controller: FileSelectController,
         templateUrl: 'select/FileSelect.html'
     };

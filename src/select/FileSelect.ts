@@ -7,6 +7,18 @@
         onDeleteButtonClick(): void;
     }
 
+    interface IFileSelectBindings {
+        [key: string]: any;
+
+        localFile: any,
+        change: any
+    }
+
+    const FileSelectBindings: IFileSelectBindings = {
+        localFile: '<pipLocalFile',
+        change: '<pipChange'
+    }
+
     class FileSelectController implements IFileSelectController {
         public localFile: any;
         public change: Function;
@@ -35,10 +47,7 @@
     const fileSelectDirective = {
         restrict: 'E',
         replace: true,
-        bindings: {
-            localFile: '<pipLocalFile',
-            change: '<pipChange'
-        },
+        bindings: FileSelectBindings,
         controller: FileSelectController,
         templateUrl: 'select/FileSelect.html'
     }
