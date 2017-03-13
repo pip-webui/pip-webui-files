@@ -1,7 +1,7 @@
 
 import {
     IFileUploadService
-} from "../service/FileUploadService";
+} from "../service/IFileUploadService";
 
 import {
     ButtonsUpload
@@ -23,7 +23,7 @@ interface IFileUploadController {
     onAbort(): void;
 }
 
-export interface IFileUploadBindings {
+interface IFileUploadBindings {
     [key: string]: any;
 
     buttonFunction: any,

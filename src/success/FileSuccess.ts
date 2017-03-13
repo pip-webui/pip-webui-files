@@ -3,7 +3,7 @@ import {
     ButtonsUpload
 } from "../common/ButtonsUpload";
 
-export interface IFileSuccessBindings {
+interface IFileSuccessBindings {
     [key: string]: any;
 
     type: any

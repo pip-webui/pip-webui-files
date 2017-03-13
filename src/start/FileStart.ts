@@ -3,7 +3,7 @@ import {
     ButtonsUpload
 } from "../common/ButtonsUpload";
 
-export interface IFileStartBindings {
+interface IFileStartBindings {
     [key: string]: any;
 
     type: any
@@ -43,9 +43,9 @@ class FileStartController implements IFileStartController {
     public type: string;
     public buttons: ButtonsUpload[];
 
-    constructor() {}
+    constructor() { }
 
-     public $onChanges(changes: FileStartChanges) {
+    public $onChanges(changes: FileStartChanges) {
         if (changes.progress) {
             this.progress = changes.progress.currentValue;
         }
@@ -56,7 +56,7 @@ class FileStartController implements IFileStartController {
 
 
 (() => {
- 
+
     const fileStartDirective = {
         controller: FileStartController,
         bindings: FileStartBindings,

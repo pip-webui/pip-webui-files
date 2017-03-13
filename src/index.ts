@@ -1,6 +1,5 @@
 ﻿
-import {FileUploadService} from './service/FileUploadService';
-
+import './service/FileUploadService';
 import './model/FileModel';
 import './success/FileSuccess';
 import './upload/FileUpload';
@@ -10,9 +9,9 @@ import './select/FileSelect';
 
 (() => {
 
-
     angular
         .module('pipFiles', [
+            'pipFiles.Service',
             'pipFiles.Model',
             'pipFiles.SuccessUpload',
             'pipFiles.FileUpload',
@@ -20,7 +19,4 @@ import './select/FileSelect';
             'pipFiles.FailUpload',
             'pipFiles.Select'
         ])
-        .service('pipFileUpload', FileUploadService);
-
-
 })();

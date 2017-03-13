@@ -59,7 +59,7 @@ var FileFailController = (function () {
 },{}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var FileUploadService_1 = require("./service/FileUploadService");
+require("./service/FileUploadService");
 require("./model/FileModel");
 require("./success/FileSuccess");
 require("./upload/FileUpload");
@@ -69,16 +69,16 @@ require("./select/FileSelect");
 (function () {
     angular
         .module('pipFiles', [
+        'pipFiles.Service',
         'pipFiles.Model',
         'pipFiles.SuccessUpload',
         'pipFiles.FileUpload',
         'pipFiles.StartUpload',
         'pipFiles.FailUpload',
         'pipFiles.Select'
-    ])
-        .service('pipFileUpload', FileUploadService_1.FileUploadService);
+    ]);
 })();
-},{"./fail/FileFail":3,"./model/FileModel":5,"./select/FileSelect":6,"./service/FileUploadService":7,"./start/FileStart":8,"./success/FileSuccess":9,"./upload/FileUpload":10}],5:[function(require,module,exports){
+},{"./fail/FileFail":3,"./model/FileModel":5,"./select/FileSelect":6,"./service/FileUploadService":7,"./start/FileStart":10,"./success/FileSuccess":11,"./upload/FileUpload":12}],5:[function(require,module,exports){
 (function () {
     fileModelDirective.$inject = ['$parse'];
     function fileModelDirective($parse) {
@@ -101,26 +101,26 @@ require("./select/FileSelect");
         .directive('fileModel', fileModelDirective);
 })();
 },{}],6:[function(require,module,exports){
-var FileSelectController = (function () {
-    FileSelectController.$inject = ['$scope'];
-    function FileSelectController($scope) {
-        "ngInject";
-        $scope.$watch('$ctrl.localFile', function (item) {
-            console.log('aa', item);
-            console.log($scope);
-        });
-    }
-    FileSelectController.prototype.onUploadButtonClick = function () {
-        $('#inp_file').click();
-    };
-    FileSelectController.prototype.onDeleteButtonClick = function () {
-        this.localFile = null;
-        var forml = document.getElementById('inp_form');
-        forml.reset();
-    };
-    return FileSelectController;
-}());
 (function () {
+    var FileSelectController = (function () {
+        FileSelectController.$inject = ['$scope'];
+        function FileSelectController($scope) {
+            "ngInject";
+            $scope.$watch('$ctrl.localFile', function (item) {
+                console.log('aa', item);
+                console.log($scope);
+            });
+        }
+        FileSelectController.prototype.onUploadButtonClick = function () {
+            $('#inp_file').click();
+        };
+        FileSelectController.prototype.onDeleteButtonClick = function () {
+            this.localFile = null;
+            var forml = document.getElementById('inp_form');
+            forml.reset();
+        };
+        return FileSelectController;
+    }());
     var fileSelectDirective = {
         restrict: 'E',
         replace: true,
@@ -137,17 +137,9 @@ var FileSelectController = (function () {
 },{}],7:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var FileUploadState = (function () {
-    function FileUploadState() {
-    }
-    return FileUploadState;
-}());
-FileUploadState.All = ['start', 'upload', 'fail'];
-FileUploadState.Start = 'start';
-FileUploadState.Upload = 'upload';
-FileUploadState.Fail = 'fail';
-exports.FileUploadState = FileUploadState;
+var FileUploadState_1 = require("./FileUploadState");
 var FileUploadService = (function () {
+    FileUploadService.$inject = ['$http'];
     function FileUploadService($http) {
         this.$http = $http;
         this.error = null;
@@ -157,7 +149,7 @@ var FileUploadService = (function () {
         var fd = new FormData();
         fd.append('file', file);
         this.progress = 0;
-        this.state = FileUploadState.Start;
+        this.state = FileUploadState_1.FileUploadState.Start;
         this.$http.post(url, fd, {
             uploadEventHandlers: {
                 progress: function (e) {
@@ -169,12 +161,12 @@ var FileUploadService = (function () {
             headers: { 'Content-Type': undefined }
         })
             .success(function (response) {
-            _this.state = FileUploadState.Upload;
+            _this.state = FileUploadState_1.FileUploadState.Upload;
             if (callback)
                 callback(response, null);
         })
             .error(function (response) {
-            _this.state = FileUploadState.Fail;
+            _this.state = FileUploadState_1.FileUploadState.Fail;
             _this.error = response.Error || response;
             if (callback)
                 callback(null, response);
@@ -182,8 +174,28 @@ var FileUploadService = (function () {
     };
     return FileUploadService;
 }());
-exports.FileUploadService = FileUploadService;
-},{}],8:[function(require,module,exports){
+(function () {
+    angular
+        .module('pipFiles.Service', [])
+        .service('pipFileUpload', FileUploadService);
+})();
+},{"./FileUploadState":8}],8:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var FileUploadState = (function () {
+    function FileUploadState() {
+    }
+    return FileUploadState;
+}());
+FileUploadState.All = ['start', 'upload', 'fail'];
+FileUploadState.Start = 'start';
+FileUploadState.Upload = 'upload';
+FileUploadState.Fail = 'fail';
+exports.FileUploadState = FileUploadState;
+},{}],9:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+},{}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileStartBindings = {
@@ -218,7 +230,7 @@ var FileStartController = (function () {
         .module('pipFiles.StartUpload', [])
         .component('pipStartUpload', fileStartDirective);
 })();
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileSuccessBindings = {
@@ -246,7 +258,7 @@ var FileSuccessController = (function () {
         .module('pipFiles.SuccessUpload', [])
         .component('pipSuccesUpload', fileSuccessDirective);
 })();
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileUploadButtons = (function () {
@@ -320,7 +332,7 @@ var fileUploadDirective = {
         .module('pipFiles.FileUpload', [])
         .component('pipFileUpload', fileUploadDirective);
 })();
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 (function(module) {
 try {
   module = angular.module('pipFiles.Templates');
@@ -383,7 +395,7 @@ module.run(['$templateCache', function($templateCache) {
 
 
 
-},{}]},{},[11,1,2,3,4,5,6,7,8,9,10])(11)
+},{}]},{},[13,1,2,3,4,5,6,7,8,9,10,11,12])(13)
 });
 
 //# sourceMappingURL=pip-webui-files.js.map
