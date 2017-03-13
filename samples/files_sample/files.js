@@ -21,6 +21,9 @@
 
             $scope.transaction = pipTransaction.create('upload file');
             $scope.localFile = null;
+            $scope.setFile = (file) => {
+                $scope.localFile = file;
+            }
             $scope.onOk = () => {
                 console.log($scope);
                  if ($scope.localFile == null) {

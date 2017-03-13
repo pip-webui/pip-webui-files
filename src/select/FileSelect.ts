@@ -9,16 +9,14 @@
 
     class FileSelectController implements IFileSelectController {
         public localFile: any;
+        public change: Function;
 
         constructor($scope: ng.IScope) {
             "ngInject";
-            /*this.localFile = $scope['localFile'];
-             */
             $scope.$watch('$ctrl.localFile', (item) => {
-                //this.localFile = item;
-                console.log('aa', item);
-                //$scope['localFile'] = item;
-                console.log($scope);
+                if (this.change) {
+                    this.change(this.localFile);
+                }
             })
         }
 
@@ -38,7 +36,8 @@
         restrict: 'E',
         replace: true,
         bindings: {
-            localFile: '='
+            localFile: '<pipLocalFile',
+            change: '<pipChange'
         },
         controller: FileSelectController,
         templateUrl: 'select/FileSelect.html'
