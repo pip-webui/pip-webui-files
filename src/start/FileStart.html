@@ -6,29 +6,29 @@
         </div>
         <div class="pip-progress-content">
             <h3 class="pip-title">
-                Uploading {{::vm.type}}
+                Uploading {{::$ctrl.type}}
             </h3>
             <div class="color-secondary-text pip-subtitle">
-                {{vm.name}}
+                {{$ctrl.name}}
             </div>
             <div>
                 <md-progress-linear md-mode="determinate" 
                     class="md-accent" 
-                    value="{{vm.progress}}" 
-                    ng-if="vm.progress < 100">
+                    value="{{$ctrl.progress}}" 
+                    ng-if="$ctrl.progress < 100">
                 </md-progress-linear>
                 <md-progress-linear md-mode="indeterminate" 
                     class="md-accent" 
-                    ng-if="vm.progress == 100">
+                    ng-if="$ctrl.progress == 100">
                 </md-progress-linear>
             </div>
         </div>
     </div>
   </div>
-  <div class="pip-footer layout-row layout-align-end-center" ng-if="vm.buttons">
+  <div class="pip-footer layout-row layout-align-end-center" ng-if="$ctrl.buttons">
         <div>
             <md-button class="md-accent" 
-                       ng-repeat="start in vm.buttons" ng-click="start.click()">
+                       ng-repeat="start in $ctrl.buttons" ng-click="start.click()">
                 {{start.title}}
             </md-button>
         </div>

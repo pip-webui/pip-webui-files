@@ -3,6 +3,33 @@ import {
     ButtonsUpload
 } from "../common/ButtonsUpload";
 
+export interface IFileStartBindings {
+    [key: string]: any;
+
+    type: any
+    buttons: any,
+    name: any,
+    progress: any
+}
+
+const FileStartBindings: IFileStartBindings = {
+    buttons: '<?pipButtons',
+    name: '<pipName',
+    type: '<?pipType',
+    progress: '<?pipProgress'
+};
+
+
+class FileStartChanges implements ng.IOnChangesObject, IFileStartBindings {
+    [key: string]: ng.IChangesObject<any>;
+
+    buttons: ng.IChangesObject<ButtonsUpload[]>;
+    name: ng.IChangesObject<string>;
+    type: ng.IChangesObject<string>;
+    progress: ng.IChangesObject<number>;
+}
+
+
 interface IFileStartController {
     name: string;
     type: string;
@@ -17,32 +44,21 @@ class FileStartController implements IFileStartController {
     public buttons: ButtonsUpload[];
 
     constructor() {}
+
+     public $onChanges(changes: FileStartChanges) {
+        if (changes.progress) {
+            this.progress = changes.progress.currentValue;
+        }
+
+    }
+
 }
 
-
-export interface IFileStartBindings {
-    [key: string]: any;
-
-    type: any
-    buttons: any,
-    name: any,
-    progress: any
-}
-
-const FileStartBindings: IFileStartBindings = {
-    buttons: '=?pipButtons',
-    name: '=pipName',
-    type: '=?pipType',
-    progress: '=?pipProgress'
-};
 
 (() => {
  
     const fileStartDirective = {
-        restrict: 'E',
-        replace: true,
         controller: FileStartController,
-        controllerAs: 'vm',
         bindings: FileStartBindings,
         templateUrl: 'start/FileStart.html'
     };

@@ -29,13 +29,6 @@ class FileFailChanges implements ng.IOnChangesObject, IFileFailBindings {
     type: ng.IChangesObject<string>;
 }
 
-const fileFailComponent: ng.IComponentOptions = {
-    controller: FileFailController,
-    bindings: FileFailBindings,
-    templateUrl: 'fail/FileFail.html'
-};
-
-
 
 interface IFileFailController {
     name: string;
@@ -64,6 +57,12 @@ class FileFailController implements IFileFailController, IFileFailBindings {
 
 
 (() => {
+
+    const fileFailComponent: ng.IComponentOptions = {
+        controller: FileFailController,
+        bindings: FileFailBindings,
+        templateUrl: 'fail/FileFail.html'
+    };
 
     angular
         .module('pipFiles.FailUpload', [])

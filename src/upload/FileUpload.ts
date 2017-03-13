@@ -7,6 +7,11 @@ import {
     ButtonsUpload
 } from "../common/ButtonsUpload";
 
+class FileUploadButtons {
+    retry: Function;
+    cancel: Function;
+    abort: Function;
+}
 
 interface IFileUploadController {
     name: string;
@@ -17,7 +22,6 @@ interface IFileUploadController {
     onRetry(): void;
     onAbort(): void;
 }
-
 
 export interface IFileUploadBindings {
     [key: string]: any;
@@ -53,19 +57,8 @@ class FileUploadChanges implements ng.IOnChangesObject, IFileUploadBindings {
     progress: ng.IChangesObject<number>;
 }
 
-const fileUploadDirective = {
-    controller: FileUploadController,
-    bindings: FileUploadBindings,
-    templateUrl: 'upload/FileUpload.html'
-};
 
-class FileUploadButtons {
-    retry: Function;
-    cancel: Function;
-    abort: Function;
-}
-
-class FileUploadController implements IFileUploadController {
+class FileUploadController implements IFileUploadController, IFileUploadBindings {
     public buttonFunction: FileUploadButtons;
     public uploadButtons: ButtonsUpload[];
     public failButtons: ButtonsUpload[];
@@ -78,11 +71,10 @@ class FileUploadController implements IFileUploadController {
     public buttons: boolean;
     public error: string = null;
 
-    constructor( $scope: ng.IScope ) {
-        "ngInject";
-        
-        // Init parameters
-        if (this.buttonFunction) {
+    constructor( $scope: ng.IScope ) {}
+    
+    public $onInit() {
+         if (this.buttons) {
             this.uploadButtons = [];
             this.failButtons = [
                 {title: 'Cancel', click: () => { this.onCancel()}},
@@ -93,7 +85,6 @@ class FileUploadController implements IFileUploadController {
             ];
         }
     }
-
     
     public $onChanges(changes: FileUploadChanges) {
         if (changes.state) {
@@ -124,6 +115,12 @@ class FileUploadController implements IFileUploadController {
 
 }
 
+
+const fileUploadDirective = {
+    controller: FileUploadController,
+    bindings: FileUploadBindings,
+    templateUrl: 'upload/FileUpload.html'
+};
 
 (() => {
 
