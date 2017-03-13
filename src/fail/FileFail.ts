@@ -4,7 +4,7 @@ import {
 } from "../common/ButtonsUpload";
 
 
-export interface IFileFailBindings {
+interface IFileFailBindings {
     [key: string]: any;
 
     buttons: any,

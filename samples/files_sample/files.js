@@ -20,9 +20,12 @@
         function ($scope, $timeout, $injector, pipFileUpload, pipTransaction) {
 
             $scope.transaction = pipTransaction.create('upload file');
+            $scope.localFile = null;
             $scope.onOk = () => {
+                console.log($scope);
                  if ($scope.localFile == null) {
                     $scope.message = 'File empty';
+                    return;
                 }
                 const uploadUrl = "https://test";
                 $scope.transaction.begin('start');

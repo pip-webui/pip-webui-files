@@ -6,20 +6,14 @@ export class ButtonsUpload {
 }
 
 
-export interface IFileFailBindings {
-    [key: string]: any;
-    buttons: any;
-    name: any;
-    type: any;
-    error: any;
-}
 
-export interface IFileSelectController {
+
+interface IFileSelectController {
     localFile: any;
     onUploadButtonClick(): void;
     onDeleteButtonClick(): void;
 }
-export class FileSelectController implements IFileSelectController {
+class FileSelectController implements IFileSelectController {
     localFile: any;
     constructor($scope: ng.IScope);
     onUploadButtonClick(): void;
