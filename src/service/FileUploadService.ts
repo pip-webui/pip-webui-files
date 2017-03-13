@@ -2,39 +2,45 @@ import { FileUploadState } from './FileUploadState';
 import { IFileUploadService } from './IFileUploadService';
 
 class FileUploadService implements IFileUploadService {
-    public progress: number;
-    public state: string;
-    public error: string = null;
 
     public constructor(private $http: ng.IHttpService) { }
 
-    public upload(url: string, file: any, callback?: (data: any, err: any) => void): void {
+    public upload(
+           url: string,
+           file: any, 
+           callback?: (data: any, err: any) => void, 
+           changeProgress?: (progress: number) => void, 
+           changeState?: (state: string) => void ): void {
 
         let fd: FormData = new FormData();
         fd.append('file', file);
 
-        this.progress = 0;
-        this.state = FileUploadState.Start;
+        if (changeProgress) {
+            changeProgress(0);
+        }
+        if (changeState) { 
+            changeState(FileUploadState.Start);
+        }
+
         this.$http.post(url, fd, <any>{
             uploadEventHandlers: {
                 progress: (e: any) => {
-                    if (e.lengthComputable) {
-                        this.progress = (e.loaded / e.total) * 100;
+                    if (e.lengthComputable && changeProgress) {
+                       changeProgress((e.loaded / e.total) * 100);
                     }
                 }
             },
             headers: { 'Content-Type': undefined }
         })
             .success((response: any) => {
-                this.state = FileUploadState.Upload;
+                changeState(FileUploadState.Upload);
 
                 if (callback) callback(response, null);
             })
             .error((response: any) => {
-                this.state = FileUploadState.Fail;
-                this.error = response.Error || response;
+                changeState(FileUploadState.Fail);
 
-                if (callback) callback(null, response);
+                if (callback) callback(null, response.Error || response);
             });
     }
 }

@@ -21,6 +21,9 @@
 
             $scope.transaction = pipTransaction.create('upload file');
             $scope.localFile = null;
+            $scope.progress = 0;
+            $scope.state = null;
+
             $scope.setFile = (file) => {
                 $scope.localFile = file;
             }
@@ -41,19 +44,26 @@
                             $scope.message = data;
                             $scope.transaction.end('a');
                         } else {
+                            $scope.error = err;
                             $scope.message = err;
                             $scope.transaction.end('');
                         }
+                    },
+                    (progress) => {
+                        $scope.progress = progress;
+                    },
+                    (state) => {
+                        $scope.state = state;
                     }
                 );
             }
 
             $scope.onGlobalProgress = () => {
-                return pipFileUpload.state;
+                return $scope.state;
             }
 
             $scope.onLocalProgress = () => {
-                return pipFileUpload.progress;
+                return $scope.progress;
             }
 
             $scope.cancel = () => {

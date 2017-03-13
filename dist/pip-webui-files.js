@@ -149,34 +149,35 @@ var FileUploadService = (function () {
     FileUploadService.$inject = ['$http'];
     function FileUploadService($http) {
         this.$http = $http;
-        this.error = null;
     }
-    FileUploadService.prototype.upload = function (url, file, callback) {
-        var _this = this;
+    FileUploadService.prototype.upload = function (url, file, callback, changeProgress, changeState) {
         var fd = new FormData();
         fd.append('file', file);
-        this.progress = 0;
-        this.state = FileUploadState_1.FileUploadState.Start;
+        if (changeProgress) {
+            changeProgress(0);
+        }
+        if (changeState) {
+            changeState(FileUploadState_1.FileUploadState.Start);
+        }
         this.$http.post(url, fd, {
             uploadEventHandlers: {
                 progress: function (e) {
-                    if (e.lengthComputable) {
-                        _this.progress = (e.loaded / e.total) * 100;
+                    if (e.lengthComputable && changeProgress) {
+                        changeProgress((e.loaded / e.total) * 100);
                     }
                 }
             },
             headers: { 'Content-Type': undefined }
         })
             .success(function (response) {
-            _this.state = FileUploadState_1.FileUploadState.Upload;
+            changeState(FileUploadState_1.FileUploadState.Upload);
             if (callback)
                 callback(response, null);
         })
             .error(function (response) {
-            _this.state = FileUploadState_1.FileUploadState.Fail;
-            _this.error = response.Error || response;
+            changeState(FileUploadState_1.FileUploadState.Fail);
             if (callback)
-                callback(null, response);
+                callback(null, response.Error || response);
         });
     };
     return FileUploadService;
