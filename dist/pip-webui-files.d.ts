@@ -10,6 +10,7 @@ export class ButtonsUpload {
 
 
 
+
 export class FileUploadState {
     static All: string[];
     static Start: string;
@@ -23,7 +24,6 @@ export interface IFileUploadService {
     error: string;
     upload(url: string, file: any, transaction: any, callback?: (data: any, err: any) => void): void;
 }
-
 
 
 

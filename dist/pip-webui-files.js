@@ -81,18 +81,21 @@ require("./select/FileSelect");
 },{"./fail/FileFail":3,"./model/FileModel":5,"./select/FileSelect":6,"./service/FileUploadService":7,"./start/FileStart":10,"./success/FileSuccess":11,"./upload/FileUpload":12}],5:[function(require,module,exports){
 (function () {
     fileModelDirective.$inject = ['$parse'];
+    function fileModelLink(scope, element, attrs, $parse) {
+        var model = $parse(attrs.fileModel);
+        var modelSetter = model.assign;
+        element.bind('change', function () {
+            scope.$apply(function () {
+                modelSetter(scope, element[0].files[0]);
+            });
+        });
+    }
     function fileModelDirective($parse) {
         "ngInject";
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
-                var model = $parse(attrs.fileModel);
-                var modelSetter = model.assign;
-                element.bind('change', function () {
-                    scope.$apply(function () {
-                        modelSetter(scope, element[0].files[0]);
-                    });
-                });
+                fileModelLink(scope, element, attrs, $parse);
             }
         };
     }
