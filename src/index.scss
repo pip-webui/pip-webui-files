@@ -1,10 +1,10 @@
 ﻿// @file Composition of dialog CSS styles
 // @copyright Digital Living Software Corp. 2014-2016
 
-@import "css_light/css_light";
+@import "css_light/CssLight";
 
-@import "upload/upload";
-@import "select/select";
+@import "upload/FileUpload";
+@import "select/FileSelect";
 
 .pip-files {
     .pip-footer {

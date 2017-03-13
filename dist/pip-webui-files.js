@@ -105,11 +105,8 @@ var FileSelectController = (function () {
     FileSelectController.$inject = ['$scope'];
     function FileSelectController($scope) {
         "ngInject";
-        var _this = this;
         $scope.$watch('$ctrl.localFile', function (item) {
-            _this.localFile = item;
             console.log('aa', item);
-            $scope['localFile'] = item;
             console.log($scope);
         });
     }
