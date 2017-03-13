@@ -10,6 +10,7 @@ export class ButtonsUpload {
 
 
 
+
 export enum FileUploadState {
     Uploading = 0,
     Completed = 1,
@@ -19,7 +20,6 @@ export enum FileUploadState {
 export interface IFileUploadService {
     upload(file: any, url: string, resultCallback?: (data: any, err: any) => void, progressCallback?: (state: FileUploadState, progress: number) => void): any;
 }
-
 
 
 
