@@ -1,7 +1,7 @@
 declare module pip.services {
 
-export let CurrentState: any;
-export let PreviousState: any;
+export let StateVar: string;
+export let PrevStateVar: string;
 
 
 let RedirectedStates: any;
