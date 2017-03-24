@@ -2,10 +2,11 @@ declare module pip.layouts {
 
 
 
-export let AuxPanelChangedEvent: string;
-export let AuxPanelStateChangedEvent: string;
-export let OpenAuxPanelEvent: string;
-export let CloseAuxPanelEvent: string;
+
+export const AuxPanelChangedEvent = "pipAuxPanelChanged";
+export const AuxPanelStateChangedEvent = "pipAuxPanelStateChanged";
+export const OpenAuxPanelEvent = "pipOpenAuxPanel";
+export const CloseAuxPanelEvent = "pipCloseAuxPanel";
 export class AuxPanelConfig {
     parts: any;
     classes: string[];
@@ -39,6 +40,14 @@ export interface IAuxPanelProvider extends ng.IServiceProvider {
 }
 
 
+
+
+
+
+
+
+export const MainResizedEvent = "pipMainResized";
+export const LayoutResizedEvent = "pipLayoutResized";
 export class MediaBreakpoints {
     constructor(xs: number, sm: number, md: number, lg: number);
     xs: number;
@@ -59,10 +68,6 @@ export class MediaBreakpointStatuses {
     'xl': boolean;
     update(breakpoints: MediaBreakpoints, width: number): void;
 }
-export let MainResizedEvent: string;
-export let LayoutResizedEvent: string;
-export let MainBreakpoints: MediaBreakpoints;
-export let MainBreakpointStatuses: MediaBreakpointStatuses;
 export interface IMediaService {
     (breakpoint: string): boolean;
     breakpoints: MediaBreakpoints;
@@ -72,15 +77,12 @@ export interface IMediaProvider extends ng.IServiceProvider {
     breakpoints: MediaBreakpoints;
 }
 
+
+export let MainBreakpoints: MediaBreakpoints;
+export let MainBreakpointStatuses: MediaBreakpointStatuses;
+
 export function addResizeListener(element: any, listener: any): void;
 export function removeResizeListener(element: any, listener: any): void;
-
-
-
-
-
-
-
 
 }
 
