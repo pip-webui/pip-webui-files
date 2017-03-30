@@ -40,6 +40,12 @@ export interface IAuxPanelProvider extends ng.IServiceProvider {
 }
 
 
+
+
+
+
+
+
 export const MainResizedEvent = "pipMainResized";
 export const LayoutResizedEvent = "pipLayoutResized";
 export class MediaBreakpoints {
@@ -71,17 +77,11 @@ export interface IMediaProvider extends ng.IServiceProvider {
     breakpoints: MediaBreakpoints;
 }
 
-
 export let MainBreakpoints: MediaBreakpoints;
-export let MainBreakpointStatuses: MediaBreakpointStatuses;
+export const MainBreakpointStatuses: MediaBreakpointStatuses;
 
 export function addResizeListener(element: any, listener: any): void;
 export function removeResizeListener(element: any, listener: any): void;
-
-
-
-
-
 
 
 }
