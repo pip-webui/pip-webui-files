@@ -163,6 +163,9 @@ export interface ICodes {
 export interface IFormat {
     sample(value: string, maxLength: number): string;
     sprintf(message: string, ...args: any[]): string;
+    filterToString(filter: any): string;
+    arrayToString(array: string[]): string;
+    enumToArray(obj: any): any[];
 }
 
 
