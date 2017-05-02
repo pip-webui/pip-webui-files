@@ -9,6 +9,12 @@ export class ButtonsUpload {
 
 
 
+export class MultiuploadResult {
+    index: number;
+    data: any;
+    error: any;
+    id: string;
+}
 
 export enum FileUploadState {
     Uploading = 0,
