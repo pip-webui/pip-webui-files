@@ -1,5 +1,6 @@
 ﻿
 import './service/FileUploadService';
+import './service/MultiuploadResult';
 import './model/FileModel';
 import './success/FileSuccess';
 import './upload/FileUpload';

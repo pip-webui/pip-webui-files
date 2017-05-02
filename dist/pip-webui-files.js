@@ -5721,6 +5721,7 @@ angular
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require("./service/FileUploadService");
+require("./service/MultiuploadResult");
 require("./model/FileModel");
 require("./success/FileSuccess");
 require("./upload/FileUpload");
@@ -5737,7 +5738,7 @@ angular
     'pipFiles.FailUpload',
     'pipFiles.Select'
 ]);
-},{"./fail/FileFail":5,"./model/FileModel":7,"./select/FileSelect":8,"./service/FileUploadService":9,"./start/FileStart":12,"./success/FileSuccess":13,"./upload/FileUpload":14}],7:[function(require,module,exports){
+},{"./fail/FileFail":5,"./model/FileModel":7,"./select/FileSelect":8,"./service/FileUploadService":9,"./service/MultiuploadResult":12,"./start/FileStart":13,"./success/FileSuccess":14,"./upload/FileUpload":15}],7:[function(require,module,exports){
 {
     fileModelDirective.$inject = ['$parse'];
     function fileModelLink(scope, element, attrs, $parse) {
@@ -5805,12 +5806,6 @@ angular
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileUploadState_1 = require("./FileUploadState");
 var async = require('async');
-var MultiuploadResult = (function () {
-    function MultiuploadResult() {
-    }
-    return MultiuploadResult;
-}());
-exports.MultiuploadResult = MultiuploadResult;
 var FileUploadService = (function () {
     FileUploadService.$inject = ['$http', '$q'];
     function FileUploadService($http, $q) {
@@ -5933,6 +5928,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 },{}],12:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var MultiuploadResult = (function () {
+    function MultiuploadResult() {
+    }
+    return MultiuploadResult;
+}());
+exports.MultiuploadResult = MultiuploadResult;
+},{}],13:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var FileStartBindings = {
     buttons: '<?pipButtons',
     name: '<pipName',
@@ -5963,7 +5967,7 @@ var fileStartDirective = {
 angular
     .module('pipFiles.StartUpload', [])
     .component('pipStartUpload', fileStartDirective);
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileSuccessBindings = {
@@ -5989,7 +5993,7 @@ var fileSuccessDirective = {
 angular
     .module('pipFiles.SuccessUpload', [])
     .component('pipSuccesUpload', fileSuccessDirective);
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FileUploadButtons = (function () {
@@ -6061,7 +6065,7 @@ var fileUploadDirective = {
 angular
     .module('pipFiles.FileUpload', [])
     .component('pipFileUpload', fileUploadDirective);
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 (function(module) {
 try {
   module = angular.module('pipFiles.Templates');
@@ -6250,7 +6254,7 @@ module.run(['$templateCache', function($templateCache) {
 
 
 
-},{}]},{},[15,3,4,5,6,7,8,9,10,11,12,13,14])(15)
+},{}]},{},[16,3,4,5,6,7,8,9,10,11,12,13,14,15])(16)
 });
 
 //# sourceMappingURL=pip-webui-files.js.map

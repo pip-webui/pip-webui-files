@@ -1,15 +1,9 @@
 import { FileUploadState } from './FileUploadState';
 import { IFileUploadService } from './IFileUploadService';
+import { MultiuploadResult } from './MultiuploadResult';
 
 let async = require('async');
 
-
-export class MultiuploadResult {
-    public index: number; // elemtnt index into upload collection
-    public data: any;
-    public error: any;
-    public id: string; // value of identificated field
-}
 
 class FileUploadService implements IFileUploadService {
 
