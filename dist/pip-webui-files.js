@@ -6144,6 +6144,53 @@ try {
   module = angular.module('pipFiles.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('start/FileStart.html',
+    '<div class="pip-files pip-progress-files">\n' +
+    '  <div class="pip-body pip-scroll pip-progress-body"> \n' +
+    '    <div class="layout-row">\n' +
+    '        <div class="pip-progress-icon bb-orange">\n' +
+    '            <md-icon md-svg-icon="icons:play"></md-icon>\n' +
+    '        </div>\n' +
+    '        <div class="pip-progress-content">\n' +
+    '            <h3 class="pip-title">\n' +
+    '                Uploading {{::$ctrl.type}}\n' +
+    '            </h3>\n' +
+    '            <div class="color-secondary-text pip-subtitle">\n' +
+    '                {{$ctrl.name}}\n' +
+    '            </div>\n' +
+    '            <div>\n' +
+    '                <md-progress-linear md-mode="determinate" \n' +
+    '                    class="md-accent" \n' +
+    '                    value="{{$ctrl.progress}}" \n' +
+    '                    ng-if="$ctrl.progress < 100">\n' +
+    '                </md-progress-linear>\n' +
+    '                <md-progress-linear md-mode="indeterminate" \n' +
+    '                    class="md-accent" \n' +
+    '                    ng-if="$ctrl.progress == 100">\n' +
+    '                </md-progress-linear>\n' +
+    '            </div>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="$ctrl.buttons">\n' +
+    '        <div>\n' +
+    '            <md-button class="md-accent" \n' +
+    '                       ng-repeat="start in $ctrl.buttons" ng-click="start.click()">\n' +
+    '                {{start.title}}\n' +
+    '            </md-button>\n' +
+    '        </div>\n' +
+    '    </div>  \n' +
+    '</div>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipFiles.Templates');
+} catch (e) {
+  module = angular.module('pipFiles.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
   $templateCache.put('success/FileSuccess.html',
     '<div class="pip-files pip-progress-files">\n' +
     '  <div class="pip-body pip-scroll pip-progress-body"> \n' +
@@ -6201,53 +6248,6 @@ module.run(['$templateCache', function($templateCache) {
     '            pip-type="$ctrl.type" \n' +
     '            pip-progress="$ctrl.progress"\n' +
     '            pip-buttons="$ctrl.startButtons"></pip-start-upload>\n' +
-    '</div>');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipFiles.Templates');
-} catch (e) {
-  module = angular.module('pipFiles.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('start/FileStart.html',
-    '<div class="pip-files pip-progress-files">\n' +
-    '  <div class="pip-body pip-scroll pip-progress-body"> \n' +
-    '    <div class="layout-row">\n' +
-    '        <div class="pip-progress-icon bb-orange">\n' +
-    '            <md-icon md-svg-icon="icons:play"></md-icon>\n' +
-    '        </div>\n' +
-    '        <div class="pip-progress-content">\n' +
-    '            <h3 class="pip-title">\n' +
-    '                Uploading {{::$ctrl.type}}\n' +
-    '            </h3>\n' +
-    '            <div class="color-secondary-text pip-subtitle">\n' +
-    '                {{$ctrl.name}}\n' +
-    '            </div>\n' +
-    '            <div>\n' +
-    '                <md-progress-linear md-mode="determinate" \n' +
-    '                    class="md-accent" \n' +
-    '                    value="{{$ctrl.progress}}" \n' +
-    '                    ng-if="$ctrl.progress < 100">\n' +
-    '                </md-progress-linear>\n' +
-    '                <md-progress-linear md-mode="indeterminate" \n' +
-    '                    class="md-accent" \n' +
-    '                    ng-if="$ctrl.progress == 100">\n' +
-    '                </md-progress-linear>\n' +
-    '            </div>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '  </div>\n' +
-    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="$ctrl.buttons">\n' +
-    '        <div>\n' +
-    '            <md-button class="md-accent" \n' +
-    '                       ng-repeat="start in $ctrl.buttons" ng-click="start.click()">\n' +
-    '                {{start.title}}\n' +
-    '            </md-button>\n' +
-    '        </div>\n' +
-    '    </div>  \n' +
     '</div>');
 }]);
 })();
