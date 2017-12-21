@@ -54,7 +54,7 @@ class FileStartController implements IFileStartController {
 const fileStartDirective = {
     controller: FileStartController,
     bindings: FileStartBindings,
-    templateUrl: 'start/FileStart.html'
+    templateUrl: 'file_start/FileStart.html'
 };
 
 angular

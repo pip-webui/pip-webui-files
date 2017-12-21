@@ -53,7 +53,7 @@ class FileFailController implements IFileFailController, IFileFailBindings {
 const fileFailComponent: ng.IComponentOptions = {
     controller: FileFailController,
     bindings: FileFailBindings,
-    templateUrl: 'fail/FileFail.html'
+    templateUrl: 'file_fail/FileFail.html'
 };
 
 angular

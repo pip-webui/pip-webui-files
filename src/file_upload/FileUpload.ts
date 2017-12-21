@@ -112,7 +112,7 @@ class FileUploadController implements IFileUploadController, IFileUploadBindings
 const fileUploadDirective = {
     controller: FileUploadController,
     bindings: FileUploadBindings,
-    templateUrl: 'upload/FileUpload.html'
+    templateUrl: 'file_upload/FileUpload.html'
 };
 
 

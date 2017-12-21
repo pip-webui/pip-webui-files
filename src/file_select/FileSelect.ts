@@ -48,7 +48,7 @@
         replace: true,
         bindings: FileSelectBindings,
         controller: FileSelectController,
-        templateUrl: 'select/FileSelect.html'
+        templateUrl: 'file_select/FileSelect.html'
     }
 
     angular

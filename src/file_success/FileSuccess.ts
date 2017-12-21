@@ -36,7 +36,7 @@ const fileSuccessDirective = {
     controller: FileSuccessController,
     controllerAs: 'vm',
     bindings: FileSuccessBindings,
-    templateUrl: 'success/FileSuccess.html'
+    templateUrl: 'file_success/FileSuccess.html'
 }
 
 
