@@ -1,10 +1,10 @@
 declare module pip.files {
 
+
 export class ButtonsUpload {
     title: string;
     click: Function;
 }
-
 
 
 
