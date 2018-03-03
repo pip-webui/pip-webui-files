@@ -5,46 +5,6 @@ try {
   module = angular.module('pipFiles.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('file_fail/FileFail.html',
-    '<div class="pip-files pip-progress-files">\n' +
-    '  <div class="pip-body pip-scroll pip-progress-body"> \n' +
-    '    <div class="layout-row">\n' +
-    '        <div class="pip-progress-icon color-badge-bg">\n' +
-    '            <md-icon md-svg-icon="icons:cross"></md-icon>\n' +
-    '        </div>\n' +
-    '        <div class="pip-progress-content">\n' +
-    '                 <h3 class="pip-title">\n' +
-    '                Uploading {{$ctrl.type}} failed with errors!\n' +
-    '            </h3>\n' +
-    '            <div class="color-secondary-text pip-subtitle">\n' +
-    '                {{$ctrl.name}}\n' +
-    '            </div>\n' +
-    '            <div class="color-error pip-error">\n' +
-    '                 {{$ctrl.error}}\n' +
-    '            </div>\n' +
-    '\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '  </div>\n' +
-    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="$ctrl.buttons && $ctrl.buttons.length > 0">\n' +
-    '        <div>\n' +
-    '           <md-button class="md-accent" \n' +
-    '                       ng-repeat="fail in $ctrl.buttons" ng-click="fail.click()">\n' +
-    '                {{::fail.title}}\n' +
-    '            </md-button> \n' +
-    '        </div>\n' +
-    '    </div>  \n' +
-    '</div>');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipFiles.Templates');
-} catch (e) {
-  module = angular.module('pipFiles.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
   $templateCache.put('file_select/FileSelect.html',
     '<div class="pip-file-select">\n' +
     '      <form id="inp_form" class="pip-hidden-form">\n' +
@@ -110,6 +70,46 @@ module.run(['$templateCache', function($templateCache) {
     '                       ng-repeat="start in $ctrl.buttons" ng-click="start.click()">\n' +
     '                {{start.title}}\n' +
     '            </md-button>\n' +
+    '        </div>\n' +
+    '    </div>  \n' +
+    '</div>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipFiles.Templates');
+} catch (e) {
+  module = angular.module('pipFiles.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('file_fail/FileFail.html',
+    '<div class="pip-files pip-progress-files">\n' +
+    '  <div class="pip-body pip-scroll pip-progress-body"> \n' +
+    '    <div class="layout-row">\n' +
+    '        <div class="pip-progress-icon color-badge-bg">\n' +
+    '            <md-icon md-svg-icon="icons:cross"></md-icon>\n' +
+    '        </div>\n' +
+    '        <div class="pip-progress-content">\n' +
+    '                 <h3 class="pip-title">\n' +
+    '                Uploading {{$ctrl.type}} failed with errors!\n' +
+    '            </h3>\n' +
+    '            <div class="color-secondary-text pip-subtitle">\n' +
+    '                {{$ctrl.name}}\n' +
+    '            </div>\n' +
+    '            <div class="color-error pip-error">\n' +
+    '                 {{$ctrl.error}}\n' +
+    '            </div>\n' +
+    '\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '  <div class="pip-footer layout-row layout-align-end-center" ng-if="$ctrl.buttons && $ctrl.buttons.length > 0">\n' +
+    '        <div>\n' +
+    '           <md-button class="md-accent" \n' +
+    '                       ng-repeat="fail in $ctrl.buttons" ng-click="fail.click()">\n' +
+    '                {{::fail.title}}\n' +
+    '            </md-button> \n' +
     '        </div>\n' +
     '    </div>  \n' +
     '</div>');
